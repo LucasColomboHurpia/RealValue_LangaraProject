@@ -113,7 +113,7 @@ const getDataFromMarketPosts = async (array) => {
   });
 
   app.get("/api", (req, res) => { //just for texting, on localhost/api 
-    res.json({ "item information": [marketPosts] })
+    res.json({ "item information": [marketPosts] }) //maybe change this?
   });
 
 
