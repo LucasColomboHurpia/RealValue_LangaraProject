@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import './pageStyles/searchResults.css';
 
 //RUN ON PORT 3000
-//cd Client
 //cd client-side
 //npm start
 
