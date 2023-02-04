@@ -13,7 +13,7 @@ function Header() {
             <a href="#">Search Properties </a>
           </li>
           <li>
-            <a href="#">My List</a>
+            <a href="/savedLists">My List</a>
           </li>
           <li>
             <a href="#">Profile</a>

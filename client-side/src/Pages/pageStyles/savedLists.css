@@ -1,0 +1,100 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.savedListsContainer{
+    margin: auto;
+    width: 85vw;
+
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.List{
+    margin-top: 50px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.List::-webkit-scrollbar {
+    display: none;
+  }
+
+.savedListTitle{
+    font-size:xx-large;
+    font-weight: bold;
+
+}
+
+.ListContainer{
+    margin-top: 30px;
+
+}
+
+.List{
+    overflow: scroll;
+    overflow-y: hidden; /* Hide vertical scrollbar */
+}
+
+.listTitle{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.SeeAllButton{
+float: right;
+font-weight: normal;
+font-size:medium;
+text-decoration: underline;
+margin-right: 30px;
+
+}
+
+.cardContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    min-width: 800px;
+
+}
+
+.listCard{
+    width: 32%;
+    height: 200px;
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    overflow: hidden;
+    min-width: 250px;
+
+}
+
+.imageList{
+    background-color: rgb(218, 214, 214);
+    height: 70%;
+}
+
+.favoriteIcon{
+    float: right;
+    margin-top: 5px;
+    margin-right: 25px;
+}
+
+.infoList{
+    font-size: small;
+    background-color:grey;
+    height: 30%;
+    padding-left: 5%;
+    color: white;
+    padding-top: 5px;
+    font-weight: bold;
+}
+.listPrice{
+    padding-top: 1px;
+}
+.listArea{
+    font-weight:normal;
+}
+.listAddress{
+    padding-top: 2px;
+    font-weight:normal;
+    font-size: smaller;
+}
