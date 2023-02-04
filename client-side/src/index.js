@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from './Components/Header';
 import MainPage from './Pages/MainPage'
+import SavedListPage from './Pages/SavedLists'
 import SearchResults from './Pages/searchResults'
 
 
@@ -20,6 +21,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/searchResults" element={<SearchResults />} />
+        <Route path="/savedLists" element={<SavedListPage />} />
         <Route path="/" element={<MainPage />} />
       </Routes>
     </Router>
