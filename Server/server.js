@@ -3,9 +3,17 @@ const searchPageQuery = require('./scraper');
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT; 
 
 app.listen(PORT, () => { 
-    searchPageQuery();
+    //searchPageQuery();
     console.log(`server started on port ${PORT}`)
 });
+
+
+app.get("/scrapper", async (req, res) => { //just for texting, on localhost/api 
+
+  const input = req.query.input;
+  const result = await searchPageQuery(input); 
+  res.json({ "query": result}) 
+    });
