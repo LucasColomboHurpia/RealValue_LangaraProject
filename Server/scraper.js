@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const parseTexts = require('./parseText');
 
 //RUN ON PORT 5000
 //cd Server
@@ -12,6 +13,8 @@ let gatheredLinks = [];
 const websites = [
   { //REW
     query: 'https://www.rew.ca/properties/search/results?initial_search_method=single_field&query=',
+    inputParse: parseTexts.parseTextREW,
+    active: true,
     postLinks: { //XPATHS to post links
       link1: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[1]/article/div/div[1]/a',
       link2: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[2]/article[1]/div/div[1]/a',
@@ -29,76 +32,71 @@ const websites = [
       post_Source: 'https://www.rew.ca/',
     }
   },
-/*   { //
-    query: '',
+  { //
+    query: 'https://www.point2homes.com/CA/Real-Estate-Listings/BC.html?location=oakridge+vancouver&search_mode=location&page=1&SelectedView=listings&location_changed=true&ajax=1',
+    inputParse: parseTexts.parseTextPoint2Homes,
+    active: false,
     postLinks: { //XPATHS to post links
-      link1: '',
-      link2: '',
-      link3: '',
-      link4: '',
-      link5: '',
+      link1: '/html/body/div[2]/div[4]/div/div/div/div[1]/div[1]/div[3]/div[1]/ul/li[1]/article/div/div[1]/div/ul/li/div[2]/div/ul/li[1]/a',
+      link2: '/html/body/div[2]/div[4]/div/div/div/div[1]/div[1]/div[3]/div[1]/ul/li[2]/article/div/div[1]/div/ul/li/div[2]/div/ul/li[1]/a',
+      link3: '/html/body/div[2]/div[4]/div/div/div/div[1]/div[1]/div[3]/div[1]/ul/li[3]/article/div/div[1]/div/ul/li/div[2]/div/ul/li[1]/a',
+      link4: '/html/body/div[2]/div[4]/div/div/div/div[1]/div[1]/div[3]/div[1]/ul/li[4]/article/div/div[1]/div/ul/li/div[2]/div/ul/li[1]/a',
+      link5: '/html/body/div[2]/div[4]/div/div/div/div[1]/div[1]/div[3]/div[1]/ul/li[5]/article/div/div[1]/div/ul/li/div[2]/div/ul/li[1]/a',
     },
     postProperties: { //XPATHS to post properties
-      post_IMG: '',
-      post_Price: '',
-      post_Adress1: '',
+      post_IMG: '/html/body/div[4]/div[1]/div[2]/div[1]/div[2]/div[1]/div/div/ul/li[1]/a/img',
+      post_Price: '/html/body/div[4]/div[1]/div[2]/div[1]/div[3]/div/div[1]/div[1]/div[1]/div[1]/span/span',
+      post_Adress1: '/html/body/div[4]/div[1]/div[2]/div[1]/div[1]/div/div[1]/h1/div',
       post_Adress2: '',
-      post_Area: '',
-      post_PropertyType: '',
+      post_Area: '/html/body/div[4]/div[1]/div[2]/div[1]/div[3]/div/div[1]/div[2]/ul/li[3]/strong',
+      post_PropertyType: '/html/body/div[4]/div[1]/div[2]/div[1]/div[5]/div[1]/div[2]/div/dl[1]/dd',
     }
-  }, */
+  },
 ]
 
 const searchPageQuery = async (input) => {
 
   let websitesResults = []
 
-  let parsedText = parseText(input)
-
-  console.log('the Input is: ' + parsedText)
-
   let n = 0;
 
   let searchPosts;
 
   await Promise.all(websites.map(async (webSource) => {
-    console.log('Scrapping data from, ', webSource.query)
 
-    searchPosts = await searchFromQuery(parsedText, n);
+    if (webSource.active) {
+      console.log('Scrapping data from, ', webSource.query)
+
+      let parsedQuery = webSource.inputParse(input)
+
+      searchPosts = await searchFromQuery(parsedQuery, n);
+    }
     n++;
   }))
 
-    searchPosts.forEach(post => {
-      websitesResults.push(post)
-    })
-  
-    console.log('______________________websitesResults______________________ ');
-    console.log(websitesResults);
-  
-    return websitesResults
-  
+  searchPosts.forEach(post => {
+    websitesResults.push(post)
+  })
+
+  console.log('______________________websitesResults______________________ ');
+  console.log(websitesResults);
+
+  return websitesResults
+
 }
 
-//------------------------------------------------------------------------------------------
-
-//parses/clean up texts
-const parseText = (text) => {
-  let n = 25;
-  const outputString = text.replace(/\s/g, "+").substring(0, n);//removes spaces for + signs and limitis string to n
-  return outputString + ' vancouver';
-}
 
 //---------------------------------------------------------------------//
 //----------------SCRAPPING FUNCTIONS ------------------//
 
-const searchFromQuery = async (text, n) => {
+const searchFromQuery = async (query, n) => {
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  await page.goto(`${websites[n].query}${text}`); //link being scrapped
+  await page.goto(`${query}`); //link being scrapped
 
-  console.log('page query is ', `https://www.rew.ca/properties/search/results?initial_search_method=single_field&query=${text}`)
+  console.log('page query is ', `${query}`)
 
   console.log('looking for link...');
 
@@ -136,7 +134,7 @@ const getDataFromMarketPosts = async (arrayOfLinks, n) => {
 
   await Promise.all(arrayOfLinks.map(async (link) => {
     console.log('Scrapping data... ')
-    
+
     post = await dataScrapp(link, n)
     marketPosts.push(post);
   }));
