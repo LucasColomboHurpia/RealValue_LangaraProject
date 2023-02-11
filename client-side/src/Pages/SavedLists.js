@@ -37,6 +37,7 @@ function Header() {
                 <div className='listAddress'>Vancouver, BC</div>
               </div>
             </div>
+            
             <div className='listCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>

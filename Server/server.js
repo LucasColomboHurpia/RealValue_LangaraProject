@@ -3,7 +3,7 @@ const searchPageQuery = require('./scraper');
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
-const PORT = process.env.PORT; 
+const PORT = 5000; 
 
 app.listen(PORT, () => { 
     //searchPageQuery();

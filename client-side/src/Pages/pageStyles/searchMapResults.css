@@ -1,0 +1,119 @@
+body{
+    overflow: hidden;
+}
+
+.pageContainer{
+    background-color: rgb(189, 189, 189);
+    display: grid;
+    grid-template-columns: 40vw auto;
+    height: 100vh;
+}
+
+.menuContainer{
+    background-color: rgb(241, 241, 241);
+    overflow-y: scroll;
+}
+.menuContainer::-webkit-scrollbar {
+    width: 20px;
+  }
+
+.filtersContainer{
+    background-color: rgb(233, 232, 232);
+    height: 80px;
+    display: grid;
+    grid-template-columns: 20% 25% 25% 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.FilterDropdown{
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    margin-left: 10px;
+    background-color: rgb(209, 209, 209);
+}
+
+.FilterTitle{
+    padding-left: 10px;
+    font-weight: bold;
+
+}
+
+.searchBarContainer{
+    height: 90px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.searchBarForm{
+    width: 95%;
+    display: flex;
+}
+
+.searchBar{
+    border: 0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 95%;
+    height: 25px;
+    background-color: rgb(235, 232, 232);
+    font-size:smaller;
+}
+
+.searchBarSubmit{
+    background-color: rgb(226, 226, 226);
+    border: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transform: translateX(-90%);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggleButtonContainer{
+    margin-left: 3%;
+    background-color: rgb(201, 201, 201);
+    width: fit-content;
+    display: flex;
+    border-radius: 55px;
+
+}
+
+.toggle{
+    padding: 8px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-size: smaller;
+    font-weight: 700;
+    cursor: pointer;
+}
+.toggleListings{
+    border-radius: 55px;
+    background-color: rgb(224, 224, 224);
+}
+
+.seeAllButton{
+    float: right;
+    transform: translateY(-120%);
+    padding-right: 10px;
+    font-size: smaller;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.listContainer{
+    height: 100%;
+    margin-top: 25px;
+}
+
+.postListings{
+    display: grid;
+    grid-template-columns: auto auto;
+}
