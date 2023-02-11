@@ -6,10 +6,9 @@ import './pageStyles/searchResults.css';
 //cd client-side
 //npm start
 
-function SearchResults() {
+function SearchResults(props) {
 
   const [backendData, setBackendData] = useState([{}]);
-
   console.log(backendData)
 
   //----------------------------------------
