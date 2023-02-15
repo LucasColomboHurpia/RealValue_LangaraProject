@@ -1,0 +1,49 @@
+.listCard{
+    width: 93%;
+    height: 230px;
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.imageListContainer{
+    background-color: rgb(218, 214, 214);
+    height: 70%;
+    z-index: 0;
+    overflow: hidden;
+}
+.imgList{
+    object-fit: cover;
+    width: 100%;
+
+}
+
+.favoriteIcon{
+    float: right;
+    margin-top: 5px;
+    margin-right: 25px;
+}
+
+.infoList{
+    font-size: small;
+    background-color:grey;
+    height: 30%;
+    padding-left: 5%;
+    color: white;
+    padding-top: 5px;
+    font-weight: bold;
+    z-index: 5;
+}
+.listPrice{
+    padding-top: 1px;
+}
+.listArea{
+    font-weight:normal;
+}
+.listAddress{
+    padding-top: 2px;
+    font-weight:normal;
+    font-size: smaller;
+}

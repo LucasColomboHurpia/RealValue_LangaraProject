@@ -21,6 +21,7 @@ const websites = [
       link3: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[2]/article[2]/div/div[1]/a',
       link4: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[2]/article[3]/div/div[1]/a',
       link5: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[2]/article[4]/div/div[1]/a',
+      link6: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[2]/article[4]/div/div[1]/a'
     },
     postProperties: { //XPATHS to post properties
       post_IMG: '/html/body/section/section/div[1]/div[1]/section/div/div/div/div/div/div/div[2]/ul/li[2]/div/img',
@@ -142,7 +143,6 @@ const getDataFromMarketPosts = async (arrayOfLinks, n) => {
   let finalResults = marketPosts;
   marketPosts = [];
 
-  console.log('marketPosts ', finalResults)
   return finalResults
 
 };

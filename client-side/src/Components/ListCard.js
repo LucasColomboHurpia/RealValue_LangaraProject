@@ -1,22 +1,24 @@
-import { React } from "react";
-import './ComponentStyles/CityCard.css';
+import React, { useEffect, useState } from 'react'
+import './ComponentStyles/listcard.css'
 
-const ListCard = (props) => {
 
+
+function ListCard(props) {
+
+  
     return (
         <div className='listCard'>
-            <div className='imageList'>
-                <img src={props.property.image} alt={props.property.image} className='imagePost' key={(Math.random())}></img>
-                <div className='favoriteIcon'></div>
-            </div>
-                <div className='infoList'>
-                <div className='listPrice'>{`$${props.property.price}`}</div>
-                <div className='listArea'>{props.property.type}</div>
-                <div className='listAddress'>{props.property.address}</div>
-            </div>
+        <div className='imageListContainer'>
+          <img alt='property' className='imgList' src={props.property.image}></img>
         </div>
-        
+        <div className='infoList'>
+          <div className='listPrice'>{props.property.price}</div>
+          <div className='listArea'>{props.property.area}</div>
+          <div className='listAddress'>{props.property.adress1}</div>
+        </div>
+      </div>
     )
-}
-
-export default ListCard;
+  }
+  
+  export default ListCard
+  
