@@ -5,30 +5,28 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from './Components/Header';
-import MainPage from './Pages/MainPage';
-import SavedListPage from './Pages/SavedLists';
-import SearchResults from './Pages/searchResults';
-import SearchMapResults from './Pages/SearchMapResults';
+import MainPage from './Pages/MainPage'
+import SavedListPage from './Pages/SavedLists'
+import SearchResults from './Pages/SearchResults'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-  <React.StrictMode>
+  <>
 
   <Header/>
 
     <Router>
       <Routes>
-        <Route path="/searchResultsTest" element={<SearchResults />} />
-        <Route path="/searchResults" element={<SearchMapResults />}/>
+        <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
         <Route path="/savedLists" element={<SavedListPage />} />
         <Route path="/" element={<MainPage />} />
       </Routes>
     </Router>
 
-  </React.StrictMode>
+  </>
 );
 
 
