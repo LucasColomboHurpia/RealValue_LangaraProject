@@ -1,5 +1,5 @@
 import { React } from "react";
-import './ComponentStyles/cityCard.css';
+import './ComponentStyles/cityCards.css';
 
 const CityCard = (props) => {
 
