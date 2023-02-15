@@ -58,6 +58,7 @@ const websites = [
 const searchPageQuery = async (input) => {
 
   let websitesResults = []
+  gatheredLinks = [];
 
   let n = 0;
 
