@@ -1,7 +1,7 @@
 import './pageStyles/savedLists.css';
 import React, { useState } from 'react';
 
-function Header() {
+function SavedListPage() {
 
   return (
     <div className='savedListsContainer'>
@@ -16,7 +16,7 @@ function Header() {
 
           <div className='cardContainer'>
 
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -27,7 +27,7 @@ function Header() {
               </div>
             </div>
 
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -38,7 +38,7 @@ function Header() {
               </div>
             </div>
             
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -60,7 +60,7 @@ function Header() {
 
           <div className='cardContainer'>
 
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -71,7 +71,7 @@ function Header() {
               </div>
             </div>
 
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -81,7 +81,7 @@ function Header() {
                 <div className='listAddress'>Vancouver, BC</div>
               </div>
             </div>
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -103,7 +103,7 @@ function Header() {
 
           <div className='cardContainer'>
 
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -114,7 +114,7 @@ function Header() {
               </div>
             </div>
 
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -124,7 +124,7 @@ function Header() {
                 <div className='listAddress'>Vancouver, BC</div>
               </div>
             </div>
-            <div className='listCard'>
+            <div className='savedListCard'>
               <div className='imageList'>
                 <div className='favoriteIcon'></div>
               </div>
@@ -144,4 +144,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default SavedListPage;
