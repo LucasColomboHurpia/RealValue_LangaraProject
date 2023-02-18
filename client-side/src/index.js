@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from './Components/Header';
+import Footer  from './Components/Footer';  
 import MainPage from './Pages/MainPage';
 import SavedListPage from './Pages/SavedLists';
 import SearchResults from './Pages/searchResults';
@@ -27,8 +28,11 @@ root.render(
         <Route path="/" element={<MainPage />} />
       </Routes>
     </Router>
+    
+    <Footer/>
 
   </React.StrictMode>
+  
 );
 
 
