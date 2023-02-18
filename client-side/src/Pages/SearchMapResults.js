@@ -2,7 +2,7 @@ import './pageStyles/searchMapResults.css';
 import React, {useRef, useEffect, useState } from 'react'
 import ListCard from '../Components/ListCard'
 
-import '@tomtom-international/web-sdk-maps/dist/maps.css'
+import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import tomtom from '@tomtom-international/web-sdk-maps';
 
 import PostModal from '../Components/PostModal';

@@ -5,9 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from './Components/Header';
-import MainPage from './Pages/MainPage'
-import SavedListPage from './Pages/SavedLists'
-import SearchResults from './Pages/searchResults'
+import Footer  from './Components/Footer';  
+import MainPage from './Pages/MainPage';
+import SavedListPage from './Pages/SavedLists';
+import SearchResults from './Pages/searchResults';
+
 import SearchMapResults from './Pages/SearchMapResults';
 
 
@@ -27,6 +29,8 @@ root.render(
         <Route path="/" element={<MainPage />} />
       </Routes>
     </Router>
+    
+    <Footer/>
 
   </>
 );
