@@ -1,11 +1,22 @@
 import './pageStyles/searchMapResults.css';
 import React, {useRef, useEffect, useState } from 'react'
 import ListCard from '../Components/ListCard'
+
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import tomtom from '@tomtom-international/web-sdk-maps';
 
+import PostModal from '../Components/PostModal';
+
+
 function SearchMapResults() {
 
+  //------------------------------------------------------------
+  //MODAL
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => setIsOpen(!isOpen);
+
+  //------------------------------------------------------------
+  //DATA FROM BACK END
   const [backendData, setBackendData] = useState([{}]);
   console.log(backendData);
 
@@ -50,6 +61,8 @@ function SearchMapResults() {
   //------------------------------------------------------------
 
   return (
+    <>
+    <PostModal toggleModal={toggleModal} isOpen={isOpen}/>
     <div className='pageContainer'>
       <div className='menuContainer'>
         <div className='filtersContainer '>
@@ -94,11 +107,11 @@ function SearchMapResults() {
           <div className='postListings'>
 
             {(backendData[0].price === undefined) ?
-              (<p>Try to search something!</p>)
+              (<p onClick={toggleModal} >Try to search something!</p>)
               :
               (backendData.map((item, i) => (
                 <>
-                  <ListCard property={item} />
+                  <ListCard onClick={toggleModal} property={item} />
                 </>
               ))
               )}
@@ -110,6 +123,7 @@ function SearchMapResults() {
       <div ref={mapContainer} style={{ height: "100vh" }} />
       </div>
     </div>
+    </>
   )
 }
 

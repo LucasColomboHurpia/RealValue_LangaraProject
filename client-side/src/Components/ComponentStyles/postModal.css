@@ -1,0 +1,160 @@
+.postModalContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+.postModal {
+    width: 95vw;
+    height: 95vh;
+    border-radius: 25px;
+    background-color: aliceblue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: grid;
+    grid-template-columns: 60% auto;
+    overflow: hidden;
+}
+
+.infoSection-postModal {
+    background-color: rgb(238, 238, 238);
+    overflow-y: scroll;
+    padding-top: 10%;
+    padding-bottom: 3%;
+    padding-left: 5%;
+    padding-right: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.infoSection-postModal::-webkit-scrollbar {
+    width: 10px;
+}
+.infoSection-postModal::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.infoSection-postModal::-webkit-scrollbar-thumb {
+    background: #888;
+}
+.infoSection-postModal ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.price-postModal{
+    font-weight: bolder;
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+}
+
+.infoSection1-postModal{
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding-bottom: 10px;
+}
+
+.infoSection2-postModal{
+    padding-bottom: 20px;
+}
+
+.map-postModal{
+    width: 100%;
+    height: 50%;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: #dadada;
+}
+
+.infoSection3-postModal{
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.sourceLink-postModal{
+    padding-top: 40px;
+}
+
+.infoTitle-postModal{
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.info3-postModal{
+    text-align: center;
+    padding-top: 5px;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.sourceLink-postModal{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-left: 25px;
+}
+
+/* --------------------------------------- */
+
+.saveToList-postModal{
+    background-color: #dfdfdf;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    width: fit-content;
+    padding: 15px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    border-radius: 10px;
+}
+.saveToList-icon-postModal{
+    padding-left: 30px;
+}
+.saveToList-Text-postModal{
+    font-size: 0.8rem;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.pictureSection-postModal{
+    display: grid;
+    padding: 15px;
+    grid-template-columns: auto;
+    grid-template-rows: 10%;
+}
+
+.mainImage-postModal{
+    background-color: #cecece;
+    width: 95%;
+    border-radius: 25px;
+}
+
+.imageGallery-postModal{
+    margin-top: 10px;
+    width: 95%;
+    display: grid;
+    grid-template-rows: 50% auto;
+    grid-template-columns: 50% auto;
+    grid-gap: 10px;
+}
+
+.image-postModal{
+    background-color: #e2e0e0;
+
+    border-radius: 20px;
+}
+
+/* ------------------------ */
+
+.closePostModal{
+    font-family: sans-serif;
+    position: absolute;
+    cursor: pointer;
+    left: 97%;
+    top: 2%;
+    font-size: x-large;
+}
+
+.hide{
+    display: none;
+}
