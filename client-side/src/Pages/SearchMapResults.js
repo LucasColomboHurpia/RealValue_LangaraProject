@@ -1,16 +1,37 @@
 import './pageStyles/searchMapResults.css';
 import React, {useRef, useEffect, useState } from 'react'
 import ListCard from '../Components/ListCard'
+
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import tomtom from '@tomtom-international/web-sdk-maps';
 
-function SearchMapResults() {
+import PostModal from '../Components/PostModal';
 
+
+function SearchMapResults() {
+  //------------------------------------------------------------
+  //Loading Icon
+  const [loadingTemplate, setloading] = useState('Try to search something!');
+  const changeLoading = (arg) => setloading(arg);
+
+  //------------------------------------------------------------
+  //MODAL
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => setIsOpen(!isOpen);
+
+  const [activeProperty, setProperty] = useState({});
+  function setNewProperty (Property) {
+    console.log(Property)
+    setProperty(Property)
+  };
+
+  //------------------------------------------------------------
+  //DATA FROM BACK END
   const [backendData, setBackendData] = useState([{}]);
   console.log(backendData);
 
   //------------------------------------------------------------
-
+  //MAP
   const mapContainer = useRef();
 
   const [mapLongitude, setMapLongitude] = useState(-121.91599);
@@ -37,6 +58,7 @@ function SearchMapResults() {
   //form
   const handleSubmit = async (event) => {
     event.preventDefault();
+    changeLoading('Loading...');
     try {
       const response = await fetch(`/scrapper?input=${input}`);
       const data = await response.json();
@@ -50,6 +72,8 @@ function SearchMapResults() {
   //------------------------------------------------------------
 
   return (
+    <>
+    <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
     <div className='pageContainer'>
       <div className='menuContainer'>
         <div className='filtersContainer '>
@@ -94,11 +118,11 @@ function SearchMapResults() {
           <div className='postListings'>
 
             {(backendData[0].price === undefined) ?
-              (<p>Try to search something!</p>)
+              (<p>{loadingTemplate}</p>)
               :
               (backendData.map((item, i) => (
-                <>
-                  <ListCard property={item} />
+                < >
+                  <ListCard toggleModal={toggleModal} setNewProperty={setNewProperty} property={item} />
                 </>
               ))
               )}
@@ -110,6 +134,7 @@ function SearchMapResults() {
       <div ref={mapContainer} style={{ height: "100vh" }} />
       </div>
     </div>
+    </>
   )
 }
 

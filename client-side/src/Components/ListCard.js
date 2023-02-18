@@ -5,9 +5,13 @@ import './ComponentStyles/listcard.css'
 
 function ListCard(props) {
 
+  const handleClick = () => {
+    props.setNewProperty(props.property);
+    props.toggleModal();
+  };
   
     return (
-        <div className='listCard'>
+        <div className='listCard' onClick={handleClick}>
         <div className='imageListContainer'>
           <img alt='property' className='imgList' src={props.property.image}></img>
         </div>

@@ -5,7 +5,7 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(true);
   return (
     <header className="header">
-    <div>[ICON]</div>
+    <div > <a href="/">[LOGO]</a></div>
 
      <nav className="navbar menuDesktop">
         <ul>
