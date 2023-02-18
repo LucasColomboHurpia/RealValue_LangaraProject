@@ -18,7 +18,7 @@ function SearchResults(props) {
     const [backendData, setBackendData] = useState([]);
     const [mapLongitude, setMapLongitude] = useState(-121.91599);
     const [mapLatitude, setMapLatitude] = useState(37.36765);
-    const [mapZoom, setMapZoom] = useState(10);
+    const [mapZoom, setMapZoom] = useState(12);
     const [map, setMap] = useState({});
 
     const getScrapperData = async () => {

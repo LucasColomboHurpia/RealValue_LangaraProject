@@ -24,6 +24,7 @@
 .result-left {
     background-color: white;
     flex: 0 0 50%;
+    height: 100vh;
 }
 
 .result-card {
@@ -124,11 +125,12 @@
     padding: 20px;
     outline: none;
     background-color: #F5F3F3;
+    box-sizing: border-box;
 }
 
 .search-icon {
     position: absolute;
-    right: -50px;
+    right: -12px;
     top: 50%;
     transform: translate(-50%, -50%);
     height: 51px;
