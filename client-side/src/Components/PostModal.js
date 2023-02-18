@@ -1,7 +1,34 @@
-import React, { useState } from 'react';
+import React, {useRef, useEffect, useState } from 'react'
 import './ComponentStyles/postModal.css';
 
+import '@tomtom-international/web-sdk-maps/dist/maps.css'
+import tomtom from '@tomtom-international/web-sdk-maps';
+
 function PostModal({toggleModal, isOpen, property}) {
+
+  //------------------------------------------------------------
+  //MAP
+  const mapContainer = useRef();
+
+  const [mapLongitude, setMapLongitude] = useState(-121.91599);
+  const [mapLatitude, setMapLatitude] = useState(37.36765);
+  const [mapZoom, setMapZoom] = useState(13);
+  const [map, setMap] = useState({});
+
+  useEffect(() => {
+    console.log(tomtom)
+    let map = tomtom.map({
+      key: "SAs8GubigOjo4UwoTk7tG4sXMPosF8uU",
+      source: "vector",
+      container: mapContainer.current,
+      center: [-123.12816828788911,49.27892695457111], //49.27892695457111, -123.12816828788911
+      zoom: 12
+    });
+    return () => {
+      map.remove();
+    };
+    }, []);
+  //------------------------------------------------------------
 
     return (
         <div className={isOpen?'postModalContainer':'hide'}>
@@ -10,23 +37,25 @@ function PostModal({toggleModal, isOpen, property}) {
                 <div className='infoSection-postModal'>
                     <div className='price-postModal'>{property.price}</div>
                     <div className='infoSection1-postModal'>{property.area}</div>
-                    <div className='infoSection2-postModal'>{property.adress1}</div>
-                    <div className='map-postModal'>map?</div>
+                    <div className='infoSection2-postModal'>{property.adress1}, {property.adress2}</div>
+                    <div className='map-postModal'>
+                    <div ref={mapContainer} style={{ height: "100%" }} />
+                    </div>
                     <div className='infoSection3-postModal'>
                         <div className='3info1-postModal'>
-                            <div className='infoTitle-postModal'>Land to building ratio</div>
-                            <div className='info3-postModal'>Info</div>
+                            <div className='infoTitle-postModal'>Property Type</div>
+                            <div className='info3-postModal'>{property.type}</div>
                         </div>
                         <div className='3info2-postModal'>
                             <div className='infoTitle-postModal'>Value per sqft</div>
-                            <div className='info3-postModal'>Info</div>
+                            <div className='info3-postModal'>{property.ratio}</div>
                         </div>
                         <div className='3info3-postModal'>
                             <div className='infoTitle-postModal'>Building age</div>
-                            <div className='info3-postModal'>Info</div>
+                            <div className='info3-postModal'>{property.age}</div>
                         </div>
                     </div>
-                    <div className='sourceLink-postModal'><a href={property.link}>Go to website</a></div>
+                    <div className='sourceLink-postModal'><a href={property.link}>Go to source</a></div>
                 </div>
                 <div className='pictureSection-postModal'>
                     <div className='save-postModal'>
@@ -36,7 +65,7 @@ function PostModal({toggleModal, isOpen, property}) {
                         </div>
                     </div>
                     <div className='mainImage-postModal'>
-                        <img src={property.image}></img>
+                        <img src={property.image} className='imgPostModal'></img>
                     </div>
                     <div className='imageGallery-postModal'>
                         <div className='image-postModal'></div>

@@ -27,7 +27,7 @@ function SearchMapResults() {
   console.log(backendData);
 
   //------------------------------------------------------------
-
+  //MAP
   const mapContainer = useRef();
 
   const [mapLongitude, setMapLongitude] = useState(-121.91599);

@@ -31,6 +31,9 @@ const websites = [
       post_Area: '/html/body/section/section/div[1]/div[1]/div[1]/div[1]/ul/li[3]',
       post_PropertyType: '//*[@id="property-details"]/div/div[2]/section[3]/div[2]',
       post_Source: 'https://www.rew.ca/',
+      post_PropertyAge: 'html/body/section/section/div[1]/div[1]/main/div[2]/div[1]/div[2]/section[4]/div[2]',
+      post_Ratio: 'N/A',
+      calculateRatio: true
     }
   },
   { //
@@ -159,6 +162,10 @@ const dataScrapp = async (link, n) => {
     adress1: undefined,
     adress2: undefined,
     area: undefined,
+    link: undefined,
+    type: 'N/A',
+    age: 'N/A',
+    ratio: 'N/A'
   }
 
   await page.goto(link); //link being scrapped
@@ -177,7 +184,7 @@ const dataScrapp = async (link, n) => {
     let txt = await scrappPrice.getProperty('textContent');
     let rawTxt = await txt.jsonValue();
     marketPost.price = rawTxt;
-  } else { console.log("oh no, page not compatible!") }
+  } else { console.log("oh no, element not compatible!") }
 
   //get post Adress (part 1)
   const [scrappAdress1] = await page.$x(`${websites[n].postProperties.post_Adress1}`); //xpath
@@ -185,7 +192,7 @@ const dataScrapp = async (link, n) => {
     let adress = await scrappAdress1.getProperty('textContent');
     let rawAdress = await adress.jsonValue();
     marketPost.adress1 = rawAdress;
-  } else { console.log("oh no, page not compatible!") }
+  } else { console.log("oh no, element not compatible!") }
 
   //get post Adress (part 2)
   const [scrappAdress2] = await page.$x(`${websites[n].postProperties.post_Adress2}`); //xpath
@@ -193,7 +200,7 @@ const dataScrapp = async (link, n) => {
     let adress2 = await scrappAdress2.getProperty('textContent');
     let rawAdress2 = await adress2.jsonValue();
     marketPost.adress2 = rawAdress2;
-  } else { console.log("oh no, page not compatible!") }
+  } else { console.log("oh no, element not compatible!") }
 
   //get post Area
   const [scrappArea] = await page.$x(`${websites[n].postProperties.post_Area}`); //xpath
@@ -201,7 +208,40 @@ const dataScrapp = async (link, n) => {
     let area = await scrappArea.getProperty('textContent');
     let rawArea = await area.jsonValue();
     marketPost.area = rawArea;
-  } else { console.log("oh no, page not compatible!") }
+  } else { console.log("oh no, element not compatible!") }
+
+  //get post link
+    marketPost.link = link;
+
+  //get post age
+  const [scrappAge] = await page.$x(`${websites[n].postProperties.post_PropertyAge}`); //xpath
+  if (scrappAge != undefined) {
+    let age = await scrappAge.getProperty('textContent');
+    let rawAge = await age.jsonValue();
+    marketPost.age = rawAge;
+  } else { console.log("oh no, element not compatible!") }
+
+  //get post type
+  const [scrappType] = await page.$x(`${websites[n].postProperties.post_PropertyType}`); //xpath
+  if (scrappType != undefined) {
+    let type = await scrappType.getProperty('textContent');
+    let rawType = await type.jsonValue();
+    marketPost.type = rawType;
+  } else { console.log("oh no, element not compatible!") }
+
+  //Ratio
+  if (websites[n].postProperties.calculateRatio) {
+    const strPrice = marketPost.price;
+    const numPrice = parseInt(strPrice.replace(/[$,]/g, ''), 10);
+
+    const strArea = marketPost.area;
+    const numArea = parseInt(strArea.replace(/\D/g, ''), 10);
+
+    const calculatedRatio = numPrice / numArea;
+    const roundedRatio = parseFloat(calculatedRatio.toFixed(2));
+
+    marketPost.ratio = roundedRatio;
+  }
 
   await browser.close();
 
