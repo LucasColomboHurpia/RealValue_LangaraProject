@@ -4,8 +4,13 @@
     border-top-right-radius: 35px;
     border-top-left-radius: 35px;
     overflow: hidden;
-    margin: auto;
     margin-top: 15px;
+    flex: 0 0 50%;
+}
+
+.listCard-container {
+    display: flex;
+    justify-content: flex-start;
 }
 
 .imageListContainer{
