@@ -9,6 +9,10 @@ import PostModal from '../Components/PostModal';
 
 
 function SearchMapResults() {
+  //------------------------------------------------------------
+  //Loading Icon
+  const [loadingTemplate, setloading] = useState('Try to search something!');
+  const changeLoading = (arg) => setloading(arg);
 
   //------------------------------------------------------------
   //MODAL
@@ -54,6 +58,7 @@ function SearchMapResults() {
   //form
   const handleSubmit = async (event) => {
     event.preventDefault();
+    changeLoading('Loading...');
     try {
       const response = await fetch(`/scrapper?input=${input}`);
       const data = await response.json();
@@ -113,7 +118,7 @@ function SearchMapResults() {
           <div className='postListings'>
 
             {(backendData[0].price === undefined) ?
-              (<p onClick={toggleModal} >Try to search something!</p>)
+              (<p>{loadingTemplate}</p>)
               :
               (backendData.map((item, i) => (
                 < >
