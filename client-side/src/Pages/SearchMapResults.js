@@ -15,6 +15,12 @@ function SearchMapResults() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
 
+  const [activeProperty, setProperty] = useState({});
+  function setNewProperty (Property) {
+    console.log(Property)
+    setProperty(Property)
+  };
+
   //------------------------------------------------------------
   //DATA FROM BACK END
   const [backendData, setBackendData] = useState([{}]);
@@ -62,7 +68,7 @@ function SearchMapResults() {
 
   return (
     <>
-    <PostModal toggleModal={toggleModal} isOpen={isOpen}/>
+    <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
     <div className='pageContainer'>
       <div className='menuContainer'>
         <div className='filtersContainer '>
@@ -110,8 +116,8 @@ function SearchMapResults() {
               (<p onClick={toggleModal} >Try to search something!</p>)
               :
               (backendData.map((item, i) => (
-                <>
-                  <ListCard onClick={toggleModal} property={item} />
+                < >
+                  <ListCard toggleModal={toggleModal} setNewProperty={setNewProperty} property={item} />
                 </>
               ))
               )}

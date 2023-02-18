@@ -71,7 +71,7 @@
 }
 
 .sourceLink-postModal{
-    padding-top: 40px;
+    padding-top: 15px;
 }
 
 .infoTitle-postModal{
@@ -121,11 +121,14 @@
     padding: 15px;
     grid-template-columns: auto;
     grid-template-rows: 10%;
+
 }
 
 .mainImage-postModal{
     background-color: #cecece;
     width: 95%;
+    overflow: hidden;
+    height: 95%;
     border-radius: 25px;
 }
 
@@ -140,7 +143,7 @@
 
 .image-postModal{
     background-color: #e2e0e0;
-
+    overflow: hidden;
     border-radius: 20px;
 }
 
