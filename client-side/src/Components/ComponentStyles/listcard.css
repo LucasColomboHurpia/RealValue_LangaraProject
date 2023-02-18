@@ -6,6 +6,7 @@
     overflow: hidden;
     margin: auto;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 .imageListContainer{
@@ -17,7 +18,7 @@
 .imgList{
     object-fit: cover;
     width: 100%;
-
+    height: 100%;
 }
 
 .favoriteIcon{

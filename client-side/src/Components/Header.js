@@ -5,12 +5,12 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(true);
   return (
     <header className="header">
-    <div>[ICON]</div>
+    <div > <a href="/">[LOGO]</a></div>
 
      <nav className="navbar menuDesktop">
         <ul>
           <li>
-            <a href="#">Search Properties </a>
+            <a href="/searchResults">Search Properties </a>
           </li>
           <li>
             <a href="/savedLists">My List</a>
