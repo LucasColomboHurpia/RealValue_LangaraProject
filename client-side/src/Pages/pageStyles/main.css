@@ -33,6 +33,7 @@
     font-size: 18px;
     padding: 30px;
     outline: none;
+    box-sizing: border-box;
 }
 
 .search-icon {
