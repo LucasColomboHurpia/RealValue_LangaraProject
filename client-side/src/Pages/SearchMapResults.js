@@ -1,90 +1,64 @@
 import './pageStyles/searchMapResults.css';
 import React, {useRef, useEffect, useState } from 'react'
 import ListCard from '../Components/ListCard'
-import '@tomtom-international/web-sdk-maps/dist/maps.css'
-import tt from '@tomtom-international/web-sdk-maps';
+
+import '@tomtom-international/web-sdk-maps/dist/maps.css';
+import tomtom from '@tomtom-international/web-sdk-maps';
+
+import PostModal from '../Components/PostModal';
+
 
 function SearchMapResults() {
-    const mapContainer = useRef();
+  //------------------------------------------------------------
+  //Loading Icon
+  const [loadingTemplate, setloading] = useState('Try to search something!');
+  const changeLoading = (arg) => setloading(arg);
 
+  //------------------------------------------------------------
+  //MODAL
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => setIsOpen(!isOpen);
 
-    const [backendData, setBackendData] = useState([{}])
-    const [geoCodes, setGeoCodes] = useState([]);
-    //------------------------------------------------------------
-    const [mapLongitude, setMapLongitude] = useState(-121.91599);
-    const [mapLatitude, setMapLatitude] = useState(37.36765);
-    const [mapZoom, setMapZoom] = useState(13);
-    const [map, setMap] = useState({});
+  const [activeProperty, setProperty] = useState({});
+  function setNewProperty (Property) {
+    console.log(Property)
+    setProperty(Property)
+  };
 
-    const getGeoCode = async (queries) => {
-        const batchItems = {"batchItems": queries};
-        const geoCodeURL = `https://api.tomtom.com/search/2/batch.json?key=${process.env.REACT_APP_MAP_API_KEY}`;
-        const response = await fetch(geoCodeURL, {
-            method: "POST",
-            body: JSON.stringify(batchItems),
-            headers: {
-                "content-type": "application/json;charset=utf-8"
-            }
-        });
-        const data = await response.json();
-        const geo = data.batchItems.map(item => {
-            return item.response.results[0].position
-        });
-        setGeoCodes(geo);
-    }
+  //------------------------------------------------------------
+  //DATA FROM BACK END
+  const [backendData, setBackendData] = useState([{}]);
+  console.log(backendData);
 
-    useEffect(() => {
-        if(backendData.length !== 0) {
-            const queries = backendData.map((data) => {
-                const fullAddress = `${data.adress1} ${data.adress2}`;
-                const query = {"query": `/geocode/${fullAddress}.json`}
-                return query;
-            })
+  //------------------------------------------------------------
+  //MAP
+  const mapContainer = useRef();
 
-            getGeoCode(queries);
-        }
+  const [mapLongitude, setMapLongitude] = useState(-121.91599);
+  const [mapLatitude, setMapLatitude] = useState(37.36765);
+  const [mapZoom, setMapZoom] = useState(13);
+  const [map, setMap] = useState({});
 
-
-    }, [backendData]);
-
-    useEffect(() => {
-
-        if(geoCodes && geoCodes.length !== 0) {
-            let map = tt.map({
-                key: process.env.REACT_APP_MAP_API_KEY,
-                container: mapContainer.current,
-                center: [geoCodes[0].lon, geoCodes[0].lat],
-                zoom: mapZoom
-            });
-            setMap(map);
-            return () => map.remove();
-        }
-    }, [geoCodes]);
-
-    useEffect(() => {
-
-        if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
-            geoCodes.forEach(geoCode => {
-                new tt.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map)
-                var popupOffsets = {
-                    top: [0, 0],
-                    bottom: [0, -70],
-                    "bottom-right": [0, -70],
-                    "bottom-left": [0, -70],
-                    left: [25, -35],
-                    right: [-25, -35],
-                }
-                new tt.Popup(popupOffsets);
-            })
-        }
-    }, [map, geoCodes]);
-
+  useEffect(() => {
+    console.log(tomtom)
+    let map = tomtom.map({
+      key: "SAs8GubigOjo4UwoTk7tG4sXMPosF8uU",
+      source: "vector",
+      container: mapContainer.current,
+      center: [-123.12816828788911,49.27892695457111], //49.27892695457111, -123.12816828788911
+      zoom: 12
+    });
+    return () => {
+      map.remove();
+    };
+    }, []);
   //------------------------------------------------------------
   const [input, setInput] = useState("");
 
   //form
   const handleSubmit = async (event) => {
     event.preventDefault();
+    changeLoading('Loading...');
     try {
       const response = await fetch(`/scrapper?input=${input}`);
       const data = await response.json();
@@ -98,6 +72,8 @@ function SearchMapResults() {
   //------------------------------------------------------------
 
   return (
+    <>
+    <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
     <div className='pageContainer'>
       <div className='menuContainer'>
         <div className='filtersContainer '>
@@ -142,11 +118,11 @@ function SearchMapResults() {
           <div className='postListings'>
 
             {(backendData[0].price === undefined) ?
-              (<p>Try to search something!</p>)
+              (<p>{loadingTemplate}</p>)
               :
               (backendData.map((item, i) => (
-                <>
-                  <ListCard property={item} />
+                < >
+                  <ListCard toggleModal={toggleModal} setNewProperty={setNewProperty} property={item} />
                 </>
               ))
               )}
@@ -158,6 +134,7 @@ function SearchMapResults() {
       <div ref={mapContainer} style={{ height: "100vh" }} />
       </div>
     </div>
+    </>
   )
 }
 

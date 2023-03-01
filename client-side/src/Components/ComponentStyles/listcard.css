@@ -5,14 +5,7 @@
     border-top-left-radius: 35px;
     overflow: hidden;
     margin-top: 15px;
-    flex: 0 0 50%;
-}
-
-.listCard-container {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    overflow-y: scroll;
+    cursor: pointer;
 }
 
 .imageListContainer{
