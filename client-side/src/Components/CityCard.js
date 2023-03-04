@@ -1,13 +1,23 @@
 import { React } from "react";
 import './ComponentStyles/cityCards.css';
 
+
+
 const CityCard = (props) => {
 
+
+
+    const listStyle = {
+        backgroundColor: '#D9D9D9',
+        backgroundImage: `url(${props.city.thumbnail})`,
+    }
+
     return (
-        <a href={`/searchResults/${props.city}`} className="card-city">
-            <p className="card-city-title">{props.city}</p>
-        </a>
-        
+        <div className="cityCardContainer">
+            <a href={`/searchResults/${props.city.name}`} className="card-city" style={listStyle}>
+                <p className="card-city-title">{props.city.name}</p>
+            </a>
+        </div>
     )
 }
 

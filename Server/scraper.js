@@ -6,6 +6,9 @@ const parseTexts = require('./parseText');
 //cd Server
 //npm run dev
 
+  //todo
+    //make SQTF appear in front end, remove it from here
+
 const puppeteer = require('puppeteer');
 
 let gatheredLinks = [];

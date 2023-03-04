@@ -1,9 +1,12 @@
 .search {
-    background-color: #F0F0F0;
-    height: 494px;
+    background-image: url('../../Assets/banner_v2-4\ 1.png');
+    background-size: cover;
+    background-color: white;
+    height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: -1;
 }
 
 .search-form {
@@ -21,6 +24,17 @@
     margin-bottom: 20px;
 }
 
+.searchSlogan{
+    width: 55%;
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+
+    padding-bottom: 30px;
+
+}
+
 .search-input-group {
     width: 100%;
     position: relative;
@@ -33,11 +47,16 @@
     font-size: 18px;
     padding: 30px;
     outline: none;
-}
+    background: #F7F7F7;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.21);}
 
 .search-icon {
     position: absolute;
     right: -50px;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.card-city-h4{
+    font-weight: bold;
 }
