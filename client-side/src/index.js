@@ -8,7 +8,7 @@ import Header from './Components/Header';
 import Footer  from './Components/Footer';  
 import MainPage from './Pages/MainPage';
 import SavedListPage from './Pages/SavedLists';
-import SearchResults from './Pages/searchResults';
+import SearchResults from './Pages/SearchResults';
 
 import SearchMapResults from './Pages/SearchMapResults';
 

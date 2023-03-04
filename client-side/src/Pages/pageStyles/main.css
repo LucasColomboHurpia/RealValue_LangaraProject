@@ -47,6 +47,7 @@
     font-size: 18px;
     padding: 30px;
     outline: none;
+    box-sizing: border-box;
     background: #F7F7F7;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.21);}
 

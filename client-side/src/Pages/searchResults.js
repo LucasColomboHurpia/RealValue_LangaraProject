@@ -18,9 +18,8 @@ function SearchResults(props) {
     const [backendData, setBackendData] = useState([]);
     const [mapLongitude, setMapLongitude] = useState(-121.91599);
     const [mapLatitude, setMapLatitude] = useState(37.36765);
-    const [mapZoom, setMapZoom] = useState(10);
+    const [mapZoom, setMapZoom] = useState(12);
     const [map, setMap] = useState({});
-    
 
     const getScrapperData = async () => {
         try {      
@@ -104,6 +103,7 @@ function SearchResults(props) {
     const displayCards = () => {
         if(backendData && backendData.length !== 0) {
             return backendData.map((item, i) => (
+                
                 <ListCard property={item} />
             ))
         }
@@ -114,10 +114,53 @@ function SearchResults(props) {
 
     return (
 
-        <div>
-            <div style={{ flex: '0 0 50%' }}>
-                {displayCards()}
+        <div className='result'>
+            <div className='result-left'>
+                <div className='filters'>
+                    <p className='filters-title'>Filters</p>
+
+                    <select className='filters-select'>
+                        <option>Type</option>
+                    </select>
+
+                    <select className='filters-select'>
+                        <option>Zoning</option>
+                    </select>
+                </div>
+
+                <div className='result-card'>
+                    <form className='search-form' 
+                        // onSubmit={onSearch}
+                    >
+                        <div className='search-input-group'>
+                            <input
+                                className='search-input'
+                                id='searchQuery'
+                                // value={searchQuery}
+                                placeholder='Enter an address, neighbourhood, city, or ZIP code.'
+                                // onChange={e => setSearchQuery(e.target.value)}
+                            />
+                            <img className='search-icon' src='/icons/icon_search_outline.svg' />
+                        </div>
+                    </form>
+
+
+                    <div className='banner-info'>
+                        <div className='banner'>
+                            <span className='banner-item banner-active'>Listings</span>
+                            <span className='banner-item'>Saved</span>
+                        </div>
+
+                        <a href='#'>See saved lists</a>
+                    </div>
+                </div>
+
+                
+                <div className='listCard-container'>
+                    {displayCards()}
+                </div>
             </div>
+
             <div style={{ height: "100vh", width: "80%" }} ref={mapElement} className="mapDiv"></div>
         </div>
     )
