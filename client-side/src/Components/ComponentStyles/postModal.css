@@ -66,7 +66,7 @@
 }
 
 .infoSection3-postModal{
-    padding-top: 20px;
+    padding-top: 50px;
     display: grid;
     grid-template-columns: auto auto auto;
 }
@@ -98,23 +98,31 @@
 
 /* --------------------------------------- */
 
+.save-postModal{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows:35px;
+
+}
+
 .saveToList-postModal{
-    background-color: #dfdfdf;
+    background-color: #6617E2;
+    color: white;
     display: flex;
     cursor: pointer;
     align-items: center;
     width: fit-content;
-    padding: 15px;
-    padding-bottom: 7px;
-    padding-top: 7px;
-    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    transition: 0.4s;
 }
-.saveToList-icon-postModal{
-    padding-left: 30px;
+.saveToList-postModal:hover{
+    background-color: #7a3ae0;
 }
+
 .saveToList-Text-postModal{
     font-size: 0.8rem;
-    text-decoration: underline;
     font-weight: bold;
 }
 

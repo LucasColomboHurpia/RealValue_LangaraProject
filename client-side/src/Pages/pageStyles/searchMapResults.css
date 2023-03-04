@@ -1,14 +1,14 @@
 
 
 .pageContainer{
-    background-color: rgb(189, 189, 189);
+    background-color: white;
     display: grid;
-    grid-template-columns: 40vw auto;
+    grid-template-columns: 45vw auto;
     height: 100vh;
 }
 
 .menuContainer{
-    background-color: rgb(241, 241, 241);
+    background-color: white;
     overflow-y: scroll;
 }
 .menuContainer::-webkit-scrollbar {
@@ -16,7 +16,7 @@
   }
 
 .filtersContainer{
-    background-color: rgb(233, 232, 232);
+    background-color: rgb(247, 247, 247);
     height: 80px;
     display: grid;
     grid-template-columns: 20% 25% 25% 25%;
@@ -29,12 +29,15 @@
     border-radius: 10px;
     border: 0;
     margin-left: 10px;
-    background-color: rgb(209, 209, 209);
+    background-color: rgb(253, 253, 253);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 .FilterTitle{
     padding-left: 10px;
     font-weight: bold;
+
 
 }
 
@@ -44,6 +47,7 @@
     align-content: center;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 .searchBarForm{
     width: 95%;
@@ -72,6 +76,12 @@
     align-content: center;
     align-items: center;
     justify-content: center;
+}
+
+.searcTitle{
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 26px;
 }
 
 .toggleButtonContainer{
@@ -115,3 +125,35 @@
     display: grid;
     grid-template-columns: auto auto;
 }
+
+
+/* --------Loading Stuff--------------------------- */
+
+.loadContainer{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 55%;
+    left: 10%;
+
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    margin: auto;
+    border: 20px solid #EAF0F6;
+    border-radius: 50%;
+    border-top: 20px solid #FFAF08;
+    width: 200px;
+    height: 200px;
+    animation: spinner 4s linear infinite;
+  }
+  
+  @keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
