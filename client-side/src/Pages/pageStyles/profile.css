@@ -1,0 +1,56 @@
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .options-column {
+    flex-basis: 40%;
+  }
+  
+  .input-column {
+    flex-basis: 60%;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin: 0.5rem 0;
+    cursor: pointer;
+  }
+  
+  .form-group {
+    margin: 0.5rem 0;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+  }
+  
+  .button-group {
+    margin-top: 1rem;
+  }
+  
+  button {
+    margin-right: 0.5rem;
+    padding: 20px;
+}
+
+  

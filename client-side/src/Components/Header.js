@@ -16,7 +16,7 @@ function Header() {
             <a href="/savedLists">My List</a>
           </li>
           <li>
-            <a href="#">Profile</a>
+            <a href="/profile">Profile</a>
           </li>
         </ul>
       </nav>
