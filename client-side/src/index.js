@@ -10,6 +10,8 @@ import MainPage from './Pages/MainPage';
 import SavedListPage from './Pages/SavedLists';
 import SearchResults from './Pages/searchResults';
 import MyListPage from './Pages/MyListPage';
+import Profile from './Pages/profile';
+
 
 import SearchMapResults from './Pages/SearchMapResults';
 
@@ -28,6 +30,7 @@ root.render(
         <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
         <Route path="/savedLists" element={<SavedListPage />} />
         <Route path="mylist" element={<MyListPage/>} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<MainPage />} />
       </Routes>
     </Router>
