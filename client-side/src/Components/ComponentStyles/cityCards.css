@@ -1,22 +1,66 @@
 .card-city-section {
-    padding: 117px 120px;
+    padding: 30px 120px;
 
 }
 
-.card-city {
-    background-color: #D9D9D9;
-    height: 300px;
-    border-radius: 0px 15px 0px 15px;
+.cityCardContainer{
+    height: 270px;
+    border-radius: 0px 25px 0px 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
     text-decoration: none;
-    color: black;
+    color: white;
+
+    overflow: hidden;
+
+    object-fit:contain;
+    background-repeat: no-repeat;
+    filter: brightness(85%);
+
+    padding: 5px;
+
+    box-shadow: 1.9px 1.9px 5.7px rgba(0, 0, 0, 0.5);
+
+    transition: 0.5s;
+}
+.cityCardContainer:not(:last-child) {
+    margin-right: 30px;
+}
+.cityCardContainer:hover{
+    filter: brightness(100%);
+
+
+}
+
+.card-city {
+    height: 270px;
+    border-radius: 0px 25px 0px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    text-decoration: none;
+    color: white;
+
+    object-fit:contain;
+    background-repeat: no-repeat;
+
+    transition: 0.5s;
 }
 
 .card-city:not(:last-child) {
     margin-right: 20px;
+}
+.card-city:hover{
+    transform: scale(1.1);
+}
+
+
+
+.cardBackground{
+    position: absolute;
 }
 
 .card-city-title {
