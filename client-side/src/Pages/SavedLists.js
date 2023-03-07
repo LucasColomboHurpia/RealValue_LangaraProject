@@ -1,146 +1,78 @@
 import './pageStyles/savedLists.css';
 import React, { useState } from 'react';
+import objectSample from '../objectSample';
+import MyListCard from '../Components/MyListCard';
+import PostModal from '../Components/PostModal'
+
+console.log(objectSample)
 
 function SavedListPage() {
 
+  //------------------------------------------------------------
+  //MODAL
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => setIsOpen(!isOpen);
+  //------------------------------------------------------------
+  const [activeProperty, setProperty] = useState({});
+  function setNewProperty (Property) {
+    console.log(Property)
+    setProperty(Property)
+  };
+  //------------------------------------------------------------
+
   return (
     <div className='savedListsContainer'>
+    <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
       <div className='savedListTitle'>Saved Lists</div>
 
       <div className='ListContainer'>
 
         <div className='List'>
           <div className='listTitle'>My list
-            <div className='SeeAllButton'>See all</div></div>
+            <div className='SeeAllButton'>See all</div>
+            </div>
 
 
           <div className='cardContainer'>
-
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-            
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-
-          </div>
-
+          {objectSample.map((item) => (
+            <MyListCard property={item} toggleModal={toggleModal} setNewProperty={setNewProperty}/>
+            ))}
         </div>
 
-        <div className='List'>
-          <div className='listTitle'>My list
-            <div className='SeeAllButton'>See all</div></div>
+      </div>
+
+      <div className='List'>
+        <div className='listTitle'>My list
+          <div className='SeeAllButton'>See all</div></div>
 
 
-          <div className='cardContainer'>
+        <div className='cardContainer'>
 
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div className='List'>
-          <div className='listTitle'>My list
-            <div className='SeeAllButton'>See all</div></div>
-
-
-          <div className='cardContainer'>
-
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-            <div className='savedListCard'>
-              <div className='imageList'>
-                <div className='favoriteIcon'></div>
-              </div>
-              <div className='infoList'>
-                <div className='listPrice'>$500,000</div>
-                <div className='listArea'>Residential</div>
-                <div className='listAddress'>Vancouver, BC</div>
-              </div>
-            </div>
-
-          </div>
+        {objectSample.map((item) => (
+            <MyListCard property={item} toggleModal={toggleModal} setNewProperty={setNewProperty}/>
+          ))}
 
         </div>
 
       </div>
+
+      <div className='List'>
+        <div className='listTitle'>My list
+          <div className='SeeAllButton'>See all</div></div>
+
+
+        <div className='cardContainer'>
+
+        {objectSample.map((item) => (
+            <MyListCard property={item} toggleModal={toggleModal} setNewProperty={setNewProperty}/>
+            ))}
+
+        </div>
+
+      </div>
+
     </div>
+    </div >
   );
 }
 

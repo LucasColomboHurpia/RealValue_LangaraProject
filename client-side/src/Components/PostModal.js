@@ -39,7 +39,7 @@ function PostModal({ toggleModal, isOpen, property }) {
                     <div className='infoSection1-postModal'>{property.area} sqft</div>
                     <div className='infoSection2-postModal'>{property.adress1}, {property.adress2}</div>
                     <div className='map-postModal'>
-                        <div ref={mapContainer} style={{ height: "100%", width: '100%' }} />
+                        <div ref={mapContainer}  className='tomMap'/>
                     </div>
                     <div className='infoSection3-postModal'>
                         <div className='3info1-postModal'>

@@ -7,8 +7,10 @@ body{
     width: 85vw;
 
     margin-top: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 150px;
 }
+
+
 
 .List{
     margin-top: 50px;
@@ -51,25 +53,31 @@ margin-right: 30px;
 
 .cardContainer{
     display: flex;
-    justify-content: space-between;
     margin-top: 15px;
     min-width: 800px;
 
 }
 
 .savedListCard{
-    width: 32%;
+    width: 300px;
     height: 200px;
     border-top-right-radius: 35px;
     border-top-left-radius: 35px;
     overflow: hidden;
     min-width: 250px;
-
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    min-width: 300px;
+    margin-left: 15px;
 }
 
 .imageList{
     background-color: rgb(218, 214, 214);
     height: 70%;
+    overflow: hidden;
+}
+.myListImage{
+    object-fit: cover;
+    width: 100%;
 }
 
 .favoriteIcon{
@@ -80,13 +88,15 @@ margin-right: 30px;
 
 .infoList{
     font-size: small;
-    background-color:grey;
+    background-color:white;
     height: 30%;
     padding-left: 5%;
-    color: white;
+    color: black;
     padding-top: 5px;
     font-weight: bold;
+    z-index: 5;
 }
+
 .listPrice{
     padding-top: 1px;
 }
