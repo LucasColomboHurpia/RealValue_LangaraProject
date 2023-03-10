@@ -25,4 +25,16 @@ module.exports = {
         return query;
 
     },
+
+    parseRemax: function (text) {
+        let n = maxNumberOfChars;
+
+        let textForQuery = text + ' vancouver'
+        const outputString = textForQuery.replace(/\s/g, "+").substring(0, n);//removes spaces for + signs and limitis string to n
+
+        let query = `https://www.remax.ca/find-real-estate?address=${outputString}%2C+Vancouver%2C+BC%2C+Canada&pageNumber=1`
+
+        return query;
+
+    },
 };
