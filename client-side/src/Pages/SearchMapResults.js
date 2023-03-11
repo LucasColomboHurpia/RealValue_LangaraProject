@@ -7,11 +7,12 @@ import tomtom from '@tomtom-international/web-sdk-maps';
 
 import PostModal from '../Components/PostModal';
 import APIURL from '../constants/apiUrl';
+import LoadingSpin from '../Components/LoadingSpin';
 
 function SearchMapResults() {
   //------------------------------------------------------------
   //Loading Icon
-  const [loadingTemplate, setloading] = useState('Try to search something!');
+  const [loadingTemplate, setloading] = useState(false);
 
   //------------------------------------------------------------
   //MODAL
@@ -45,7 +46,7 @@ function SearchMapResults() {
 
     const getGeoCode = async (queries) => {
         const batchItems = {"batchItems": queries};
-        const geoCodeURL = `https://api.tomtom.com/search/2/batch.json?key=${process.env.REACT_APP_MAP_API_KEY}`;
+        const geoCodeURL = `https://api.tomtom.com/search/2/batch.json?key=SAs8GubigOjo4UwoTk7tG4sXMPosF8uU`;
         const response = await fetch(geoCodeURL, {
             method: "POST",
             body: JSON.stringify(batchItems),
@@ -57,6 +58,7 @@ function SearchMapResults() {
         const geo = data.batchItems.map(item => {
             return item.response.results[0].position
         });
+
         setGeoCodes(geo);
     }
 
@@ -83,7 +85,7 @@ function SearchMapResults() {
 
     useEffect(() => {
         setMap(tomtom.map({
-            key: process.env.REACT_APP_MAP_API_KEY,
+            key:'SAs8GubigOjo4UwoTk7tG4sXMPosF8uU',
             source: "vector",
             container: mapContainer.current,
             center: [mapLongitude, mapLatitude],
@@ -96,30 +98,29 @@ function SearchMapResults() {
     }, []);
 
     useEffect(() => {
-        const markers = [];
+      const markers = [];
 
-        if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
-            geoCodes.forEach(geoCode => {
-                const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map)
-                var popupOffsets = {
-                    top: [0, 0],
-                    bottom: [0, -70],
-                    "bottom-right": [0, -70],
-                    "bottom-left": [0, -70],
-                    left: [25, -35],
-                    right: [-25, -35],
-                }
-                new tomtom.Popup(popupOffsets);
-                
-                markers.push(marker)
-            })
-        }
+      if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
+        let n = 0;
+        geoCodes.forEach(geoCode => {
+          const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
+          const popupOffsets = {
+            top: [0, 0],
+            bottom: [0, -70],
+            "bottom-right": [0, -70],
+            "bottom-left": [0, -70],
+            left: [25, -35],
+            right: [-25, -35],
+          };
+          const popup = new tomtom.Popup(popupOffsets).setHTML(`<h2>${backendData[n].adress1}</h2><p>More Details</p>`);
+          marker.setPopup(popup);
 
-        return () => {
-            if(markers.length !==0 ) {
-                markers.forEach(marker => marker.remove());
-            }
-        }
+          markers.push(marker);
+
+          n++
+        });
+      }
+      
         
     }, [geoCodes]);
   //------------------------------------------------------------
@@ -128,7 +129,7 @@ function SearchMapResults() {
   //form
   const handleSubmit = async (event) => {
     event.preventDefault();
-    changeLoading('Loading...');
+    changeLoading(true);
     try {
       const response = await fetch(`${APIURL}/scrapper?input=${input}`);
         console.log(process.env.DEV_API_URL);
@@ -136,6 +137,7 @@ function SearchMapResults() {
       let dataResults = (data[Object.keys(data)[0]])
       console.log(dataResults)
       setBackendData(dataResults)
+      changeLoading(false);
     } catch (error) {
       console.log(error)
     }
@@ -147,6 +149,9 @@ function SearchMapResults() {
     <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
     <div className='pageContainer'>
       <div className='menuContainer'>
+
+        <LoadingSpin loadingTemplate={loadingTemplate}/>
+
         <div className='filtersContainer '>
           <div className='FilterTitle'>Filters</div>
           <div className='FilterType '>
@@ -180,16 +185,19 @@ function SearchMapResults() {
             </form>
           </div>
         </div>
-        <div className='toggleButtonContainer'>
-          <div className='toggleListings toggle'> Listing</div>
-          <div className='toggleSaved toggle'>Saved</div>
+
+        <div className='searcTitle'>
+          Search results 
+{/*           <div className='toggleListings toggle'> Listing</div>
+          <div className='toggleSaved toggle'>Saved</div> */}
         </div>
+        
         <div className='seeAllButton'>See all the Lists</div>
         <div className='listContainer'>
           <div className='postListings'>
 
             {(backendData.length === 0 ) ?
-              (<p>{loadingTemplate}</p>)
+              (<span></span>)
               :
               (backendData.map((item, i) => (
                 < >

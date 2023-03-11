@@ -8,7 +8,8 @@ import Header from './Components/Header';
 import Footer  from './Components/Footer';  
 import MainPage from './Pages/MainPage';
 import SavedListPage from './Pages/SavedLists';
-import SearchResults from './Pages/SearchResults';
+import SearchResults from './Pages/searchResults';
+import MyListPage from './Pages/MyListPage';
 
 import SearchMapResults from './Pages/SearchMapResults';
 
@@ -20,16 +21,13 @@ root.render(
   <>
 
     <Router>
-        <Header  /> 
-        
-        <Routes>
-            <Route path="/searchResults" element={<SearchMapResults />} />
-            <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
-            <Route path="/savedLists" element={<SavedListPage />} />
-            <Route path="/" element={<MainPage />} />
-        </Routes>
-
-      <Footer/>
+      <Routes>
+        <Route path="/searchMapResults" element={<SearchMapResults />} />
+        <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
+        <Route path="/savedLists" element={<SavedListPage />} />
+        <Route path="mylist" element={<MyListPage/>} />
+        <Route path="/" element={<MainPage />} />
+      </Routes>
     </Router>
 
   </>

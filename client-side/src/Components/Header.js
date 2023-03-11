@@ -13,7 +13,7 @@ function Header() {
       <nav className="navbar menuDesktop">
         <ul>
           <li>
-            <Link to="/searchResults">Search Properties </Link>
+            <a href="/searchMapResults">Search Properties </a>
           </li>
           <li>
             <Link to="/savedLists">My List</Link>

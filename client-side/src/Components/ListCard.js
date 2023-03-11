@@ -17,7 +17,7 @@ function ListCard(props) {
         </div>
         <div className='infoList'>
           <div className='listPrice'>{props.property.price}</div>
-          <div className='listArea'>{props.property.area}</div>
+          <div className='listArea'>{props.property.area} sqft</div>
           <div className='listAddress'>{props.property.adress1}</div>
         </div>
       </div>
