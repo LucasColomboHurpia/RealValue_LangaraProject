@@ -19,11 +19,12 @@ function PostModal({ toggleModal, isOpen, property }) {
         console.log(tomtom)
         let map = tomtom.map({
             key: "SAs8GubigOjo4UwoTk7tG4sXMPosF8uU",
-            source: "vector",
+            source: "raster",
             container: mapContainer.current,
             center: [-123.12816828788911, 49.27892695457111], //49.27892695457111, -123.12816828788911
-            zoom: 12
+            zoom: 11
         });
+        map.setStyle('tomtom://raster/1/satellite');
         return () => {
             map.remove();
         };
