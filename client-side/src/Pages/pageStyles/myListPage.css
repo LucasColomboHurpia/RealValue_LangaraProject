@@ -1,0 +1,176 @@
+.myListPageContainer{
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    overflow-x: hidden;
+}
+
+.myListPageTopSection{
+    padding: 15px;
+    height: 100px;
+}
+
+.myListPageTitle{
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.myListPageSearchBar{
+    background-color: #F5F5F5;
+    border: 0;
+    padding: 10px;
+    border-radius: 7px; 
+    width: 250px;
+    float: right;
+}
+
+.myListPageOptions{
+    display: flex;
+    flex-direction: row-reverse;
+
+    margin-top: 45px;
+    text-align: right;
+
+}
+
+
+.myListButton{
+    padding: 10px;
+    padding-left: 20px; padding-right: 20px;
+    border-radius: 10px; 
+    margin-left: 30px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    
+    transition: 0.3s;
+}
+
+.myListPageExportButton:hover{
+    background-color: rgb(70, 70, 70);
+}
+
+.ExcelExport{
+    position: absolute;
+    color: white;
+    background-color: #4B9D73;
+    padding: 5px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-8%,20%);
+
+    animation-name: slideIn;
+    animation-duration:1s;
+}
+
+@keyframes slideIn {
+    from { transform: translate(-8%,-25%); opacity: 0;}
+    to { opacity: 1;}
+  }
+
+.PDFExport{
+    position: absolute;
+    color: white;
+    background-color: #DD4C4A;
+    padding: 5px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-8%,130%);
+
+    animation-name: slideIn;
+    animation-duration:1s;
+}
+
+  .myListPageAnalyticsButton{
+    background-color: #6617E2;
+}
+
+.myListPageBottomSection{
+    padding: 20px;
+    margin-top: 25px;
+}
+
+/* ------------------------------------ */
+
+.ExportModal{
+    position: fixed;
+    height: 60%;
+    width: 60%;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    animation-name: slideModalConfirmation;
+    animation-duration:1s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes slideModalConfirmation {
+    from { margin-top: 100vh;}
+    to  { opacity: 1;}
+  }
+
+
+.ExportText{
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 70px;
+}
+
+.ExportModalButtonContainer{
+    display: flex;
+    width: 40%;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+.ExportModalButton{
+    padding: 15px;
+    padding-left: 35px; padding-right: 35px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    border: 2px solid #6617E2;
+    color: #6617E2;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.ExporSaveModal:hover{
+    transform: scale(1.1);
+}
+.ExportCancelModal:hover{
+    background-color: #6617E2;
+    color: white;
+}
+.ExporSaveModal{
+    background-color: #6617E2;
+    color: white;
+}
+
+.CloseModalExport{
+    color: black;
+    font-size: 3rem;
+    position: absolute;
+    transform: translate(1200%,-250%);
+    cursor: pointer;
+}
+.CloseModalExport:hover{
+    transform: translate(1200%,-250%) scale(1.2);
+}

@@ -1,4 +1,5 @@
 import './pageStyles/savedLists.css';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import objectSample from '../objectSample';
 import MyListCard from '../Components/MyListCard';
@@ -29,7 +30,7 @@ function SavedListPage() {
 
         <div className='List'>
           <div className='listTitle'>My list
-            <div className='SeeAllButton'>See all</div>
+            <div className='SeeAllButton'> <Link to="/mylist">See all</Link></div>
             </div>
 
 
