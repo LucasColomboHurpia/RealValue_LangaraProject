@@ -19,18 +19,18 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
 
-  <Header  /> 
-
     <Router>
-      <Routes>
-        <Route path="/searchResults" element={<SearchMapResults />} />
-        <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
-        <Route path="/savedLists" element={<SavedListPage />} />
-        <Route path="/" element={<MainPage />} />
-      </Routes>
+        <Header  /> 
+        
+        <Routes>
+            <Route path="/searchResults" element={<SearchMapResults />} />
+            <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
+            <Route path="/savedLists" element={<SavedListPage />} />
+            <Route path="/" element={<MainPage />} />
+        </Routes>
+
+      <Footer/>
     </Router>
-    
-    <Footer/>
 
   </>
 );

@@ -6,7 +6,7 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import tomtom from '@tomtom-international/web-sdk-maps';
 
 import PostModal from '../Components/PostModal';
-
+import APIURL from '../constants/apiUrl';
 
 function SearchMapResults() {
   //------------------------------------------------------------
@@ -26,6 +26,7 @@ function SearchMapResults() {
   const [mapLatitude, setMapLatitude] = useState(49.27892695457111);
   const [mapZoom, setMapZoom] = useState(13);
   const [map, setMap] = useState({});
+  
 
   const [activeProperty, setProperty] = useState({});
 
@@ -129,8 +130,9 @@ function SearchMapResults() {
     event.preventDefault();
     changeLoading('Loading...');
     try {
-      const response = await fetch(`/scrapper?input=${input}`);
-      const data = await response.json();
+      const response = await fetch(`${APIURL}/scrapper?input=${input}`);
+        console.log(process.env.DEV_API_URL);
+        const data = await response.json();
       let dataResults = (data[Object.keys(data)[0]])
       console.log(dataResults)
       setBackendData(dataResults)

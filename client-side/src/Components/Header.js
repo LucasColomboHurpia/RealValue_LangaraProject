@@ -1,25 +1,25 @@
 import './ComponentStyles/Header.css';
 import React, { useState } from 'react';
 import logo from '../Assets/logo.png'
-
+import { Link } from "react-router-dom";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(true);
   return (
     <div className="header">
       <span className='headerContainer'>
-      <div > <a href="/"> <img src={logo} /> </a></div>
+      <div > <Link to="/"> <img src={logo} /> </Link></div>
 
       <nav className="navbar menuDesktop">
         <ul>
           <li>
-            <a href="/searchResults">Search Properties </a>
+            <Link to="/searchResults">Search Properties </Link>
           </li>
           <li>
-            <a href="/savedLists">My List</a>
+            <Link to="/savedLists">My List</Link>
           </li>
           <li>
-            <a href="#">Profile</a>
+            <Link to="#">Profile</Link>
           </li>
         </ul>
       </nav>
