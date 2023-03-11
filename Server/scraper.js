@@ -18,7 +18,7 @@ const websites = [
     query: 'https://www.rew.ca/properties/search/results?initial_search_method=single_field&query=',
     inputParse: parseTexts.parseTextREW,
     active: true,
-    postLinks: { //XPATHS to post links
+    postLinks: { //XPATHS to post links //
       link1: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[1]/article/div/div[1]/a',
       link2: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[2]/article[1]/div/div[1]/a',
       link3: '/html/body/section/div[3]/div[2]/div[1]/section[1]/div[2]/article[2]/div/div[1]/a',

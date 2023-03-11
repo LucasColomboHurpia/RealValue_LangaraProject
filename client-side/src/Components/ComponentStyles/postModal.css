@@ -57,12 +57,14 @@
 }
 
 .map-postModal{
-    width: 100%;
+    width: 60%;
     height: 50%;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
-    background-color: #a9d1eb
-    ;
+    background-color: #a9d1eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
