@@ -1,0 +1,127 @@
+.statsModalContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    display: none;
+}
+
+.statsModal {
+    width: 97vw;
+    height: 98vh;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+       overflow: hidden;
+}
+
+.statsModalTitle{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+.statsModalInfoContainer{
+    display: grid;
+    grid-template-columns: 600px auto;
+}
+
+.statsModalsection1{
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+}
+
+.statsModalsection1, div{
+    margin: 5px;
+}
+
+.statsModalStatsSnippetsContainer{
+    width: 100%;
+    height: 120px;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+
+}
+
+.statsModalStatsSnippets{
+    background-color: #5A5A5A;
+    color: white;
+    padding: 2px;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: auto 30%;
+}
+
+.statsModalSnippetPrice{
+    font-weight: bold;
+}
+
+
+.statsModalSnippetTitle{
+    font-size: 0.6rem;
+}
+
+.statsModalSnippetPart2{
+    position: relative;
+    transform: translate(-70%, -3%);
+}
+
+.chartContainer{
+    width: 100%;
+    height: 200px;
+}
+
+.chartBarTitle{
+    font-weight: bold;
+}
+
+.statsModalPieChars{
+    width: 100%;
+    height: 100px;
+}
+
+.statsModalPieChartsTitle{
+    font-weight: bold;
+}
+
+
+.pieChartCircleGrid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    overflow: hidden;
+}
+
+.pieChartDesc{
+    font-size: 0.8rem;
+}
+
+.pieChartRender{
+   margin-top: -7px;
+}
+
+.pieChartCenterText {
+    font-size: 8px;
+  }
+
+  .text-pieChart{
+    transform: translateY(2%);
+    font-weight: bold;
+  }
+
+  .statsModalMapContainer{
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+  }
+
+  .tomMap{
+    height: 90%;
+    width: 98%;
+  }
