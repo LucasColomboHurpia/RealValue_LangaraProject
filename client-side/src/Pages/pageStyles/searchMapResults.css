@@ -157,3 +157,34 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+/* ------------------------------------------- */
+
+
+.analyticsToggle{
+    position: absolute;
+    left: 90%;
+    margin-top: 15px;
+    z-index: 990;
+    background: #6617E2;
+    color: white;
+    padding: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.analyticsToggle:hover{
+    background: #7d40df;
+}
+
+
+.analyiticIconPNG{
+    width: 17px;
+    margin-right: 5px;
+}
+
+.analyticsToggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

@@ -10,7 +10,7 @@ import tomtom from '@tomtom-international/web-sdk-maps';
 
 import './ComponentStyles/StatsModal.css'
 
-function StatsModal() {
+function StatsModal({ toggleStats, statsIsOpen }) {
   const ref = useRef();
 
   const dataBarChart = [
@@ -79,8 +79,8 @@ function StatsModal() {
     //------------------------------------------------------------
 
   return (
-    <div className='statsModalContainer'>
-                  <div className='closePostModal' >X</div>
+    <div className={statsIsOpen ? 'statsModalContainer' : 'hide'}>
+                  <div className='closePostModal' onClick={toggleStats} >X</div>
       <div className='statsModal'>
         <div className='statsModalTitle'>Insights for "Downtown, Vancouver" </div>
         <div className='statsModalInfoContainer'>
@@ -157,9 +157,7 @@ function StatsModal() {
                     </div>
                   </div>
                   <div className='pieCharCircle'>
-                    <div className='pieChartDesc'>Land to
-building
-ratio</div>
+                    <div className='pieChartDesc'>Land to building ratio</div>
                     <div className='pieChartRender'>
                     <PieChart data={dataPieChart2} id="pie-chart-2"   width={15} height={15} text={'4:3'}/>
                     </div>
@@ -171,7 +169,7 @@ ratio</div>
 
           <div className='statsModalsection2'>
             <div className='statsModalMapContainer'>
-            <div ref={mapContainer}  className='tomMap'/>
+            <div ref={mapContainer}  className='tomMapStatModal'/>
             </div>
           </div>
         </div>

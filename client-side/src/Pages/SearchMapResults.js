@@ -9,6 +9,8 @@ import PostModal from '../Components/PostModal';
 import LoadingSpin from '../Components/LoadingSpin';
 import StatsModal from '../Components/StatsModal'
 
+import analyticIcon from '../Assets/png-analytics-white.png'
+
 function SearchMapResults() {
   //------------------------------------------------------------
   //Loading Icon
@@ -23,8 +25,8 @@ function SearchMapResults() {
   //------------------------------------------------------------
   //MODAL STATS
   const [statsIsOpen, setStatIsOpen] = useState(false);
-  const toggleStats = () => setStatIsOpen(!isOpen);
-
+  const toggleStats = () => {setStatIsOpen(!statsIsOpen); console.log(statsIsOpen)
+}
   //------------------------------------------------------------
   //MAP
   const mapContainer = useRef();
@@ -215,6 +217,7 @@ function SearchMapResults() {
         </div>
       </div>
       <div className='mapContainer'>
+        <div className='analyticsToggle' onClick={toggleStats}><img src={analyticIcon} className='analyiticIconPNG'/> Analytics</div>
       <div ref={mapContainer} style={{ height: "100vh" }} />
       </div>
     </div>
