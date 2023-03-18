@@ -22,9 +22,8 @@ function PostModal({ toggleModal, isOpen, property }) {
             source: "raster",
             container: mapContainer.current,
             center: [-123.12816828788911, 49.27892695457111], //49.27892695457111, -123.12816828788911
-            zoom: 11
+            zoom: 10
         });
-        map.setStyle('tomtom://raster/1/satellite');
         return () => {
             map.remove();
         };
