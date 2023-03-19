@@ -7,6 +7,9 @@ import './pageStyles/searchMapResults.css';
 import PostModal from '../Components/PostModal';
 import ListCard from '../Components/ListCard'
 import LoadingSpin from '../Components/LoadingSpin';
+import StatsModal from '../Components/StatsModal'
+
+import analyticIcon from '../Assets/png-analytics-white.png'
 
 import APIURL from '../constants/apiUrl';
 
@@ -18,11 +21,18 @@ function SearchMapResults() {
   const [loadingTemplate, setloading] = useState(false);
   const [showZones, setShowZones] = useState(false);
 
+  const changeLoading = (arg) => setloading(arg);
 
   //------------------------------------------------------------
   //MODAL
   const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => setIsOpen(!isOpen);
 
+  //------------------------------------------------------------
+  //MODAL STATS
+  const [statsIsOpen, setStatIsOpen] = useState(false);
+  const toggleStats = () => {setStatIsOpen(!statsIsOpen); console.log(statsIsOpen)
+}
   //------------------------------------------------------------
   //MAP
   const mapContainer = useRef();
@@ -40,14 +50,13 @@ function SearchMapResults() {
   //DATA FROM BACK END
   const [backendData, setBackendData] = useState([]);
 
-  const toggleModal = () => setIsOpen(!isOpen);
+
 
   function setNewProperty (Property) {
     console.log(Property)
     setProperty(Property)
   };
 
-    const changeLoading = (arg) => setloading(arg);
 
     const getGeoCode = async (queries) => {
         const batchItems = {"batchItems": queries};
@@ -213,6 +222,7 @@ function SearchMapResults() {
   return (
     <>
     <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
+    <StatsModal toggleStats={toggleStats} statsIsOpen={statsIsOpen}/>
     <div className='pageContainer'>
       <div className='menuContainer'>
 

@@ -513,4 +513,33 @@ input#ios:checked + label:after {
 }
 .switch-flat:hover .flat-container {
   transform: translateY(-35px);
+/* ------------------------------------------- */
+
+
+.analyticsToggle{
+    position: absolute;
+    left: 90%;
+    margin-top: 15px;
+    z-index: 990;
+    background: #6617E2;
+    color: white;
+    padding: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.analyticsToggle:hover{
+    background: #7d40df;
+}
+
+
+.analyiticIconPNG{
+    width: 17px;
+    margin-right: 5px;
+}
+
+.analyticsToggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
