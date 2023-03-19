@@ -1,7 +1,8 @@
 import './ComponentStyles/Header.css';
 import React, { useState } from 'react';
-import logo from '../Assets/logo.png'
 import { Link } from "react-router-dom";
+
+import logo from '../Assets/logo.png'
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -13,7 +14,7 @@ function Header() {
       <nav className="navbar menuDesktop">
         <ul>
           <li>
-            <a href="/searchMapResults">Search Properties </a>
+            <Link to="/searchMapResults">Search Properties </Link>
           </li>
           <li>
             <Link to="/savedLists">My List</Link>
