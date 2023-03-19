@@ -1,18 +1,23 @@
-import './pageStyles/searchMapResults.css';
 import React, {useRef, useEffect, useState } from 'react'
-import ListCard from '../Components/ListCard'
-
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import tomtom from '@tomtom-international/web-sdk-maps';
 
+import './pageStyles/searchMapResults.css';
+
 import PostModal from '../Components/PostModal';
-import APIURL from '../constants/apiUrl';
+import ListCard from '../Components/ListCard'
 import LoadingSpin from '../Components/LoadingSpin';
+
+import APIURL from '../constants/apiUrl';
+
+import geodata from '../Data/zoning-districts-and-labels.json';
 
 function SearchMapResults() {
   //------------------------------------------------------------
   //Loading Icon
   const [loadingTemplate, setloading] = useState(false);
+  const [showZones, setShowZones] = useState(false);
+
 
   //------------------------------------------------------------
   //MODAL
@@ -42,7 +47,7 @@ function SearchMapResults() {
     setProperty(Property)
   };
 
-  const changeLoading = (arg) => setloading(arg);
+    const changeLoading = (arg) => setloading(arg);
 
     const getGeoCode = async (queries) => {
         const batchItems = {"batchItems": queries};
@@ -84,18 +89,77 @@ function SearchMapResults() {
     }, [geoCodes]);
 
     useEffect(() => {
-        setMap(tomtom.map({
+        const newMap = tomtom.map({
             key:'SAs8GubigOjo4UwoTk7tG4sXMPosF8uU',
             source: "vector",
             container: mapContainer.current,
             center: [mapLongitude, mapLatitude],
             zoom: 12
-        }))
+        });
+
+        console.log(geodata[0])
+        setMap(newMap)
         
         // return () => {
         //     map.remove();
         // };
     }, []);
+
+    useEffect(() => {
+
+        if(map && Object.keys(map).length !== 0) {
+            if(showZones) {
+                geodata.forEach((elm, index) => {
+                    let backgroundColor = "#db356c";
+                    let RTcolor = "#fee670";
+                    let RMcolor = "rgb(100, 131, 197)";
+                    let Ccolor = "rgb(245, 91, 105)";
+                    // RMcolor = "";
+        
+                    switch(elm.zoning_category) {
+                        case "RT": 
+                            backgroundColor = RTcolor;
+                            break;
+                        case "RM": 
+                            backgroundColor = RMcolor;
+                            break;
+                        case "C": 
+                            backgroundColor = Ccolor;
+                            break;
+                    }
+        
+                        map.addLayer({
+                            'id': `Keiks-${index}`,
+                            'type': 'fill',
+                            'source': {
+                                'type': 'geojson',
+                                'data': {
+                                    'type': 'Feature',
+                                    'geometry': {
+                                        'type': 'Polygon',
+                                        'coordinates': elm.geom.geometry.coordinates
+                                    }
+                                }
+                            },
+                            'layout': {},
+                            'paint': {
+                                'fill-color': backgroundColor,
+                                'fill-opacity': 0.5,
+                                'fill-outline-color': 'black'
+                            }
+                        }); 
+                    })
+            }
+            else {
+                geodata.forEach((elm, index) => {
+                    map.removeLayer({
+                        'id': `Keiks-${index}`
+                    })
+                })
+            }
+        }
+
+    }, [map, showZones]);
 
     useEffect(() => {
       const markers = [];
@@ -119,7 +183,9 @@ function SearchMapResults() {
 
           n++
         });
-      }
+        console .log(geoCodes)
+
+    }
       
         
     }, [geoCodes]);
@@ -209,8 +275,12 @@ function SearchMapResults() {
           </div>
         </div>
       </div>
-      <div className='mapContainer'>
-      <div ref={mapContainer} style={{ height: "100vh" }} />
+        <div className='mapContainer'>
+            <div className="switch-container switch-ios">
+                <input type="checkbox" name="ios" id="ios" value={showZones} onChange={() => setShowZones(!showZones)} />
+                <label for="ios"></label>
+            </div>
+        <div ref={mapContainer} style={{ height: "100vh" }} />
       </div>
     </div>
     </>
