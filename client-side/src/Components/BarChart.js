@@ -66,7 +66,7 @@ function ChartSection() {
     return (
 
 
-        <svg ref={ref} width={500} height={180}>
+        <svg ref={ref} width={520} height={200}>
             <style>
                 {`
             .bar {

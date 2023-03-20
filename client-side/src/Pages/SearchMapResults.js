@@ -63,7 +63,12 @@ function SearchMapResults() {
         });
         const data = await response.json();
         const geo = data.batchItems.map(item => {
-            return item.response.results[0].position
+          if((item.response.results[0])!=undefined){
+            console.log(item.response.results[0].position)
+            return item.response.results[0].position}
+            else{
+            return   console.log('please code jsut work aaaa')
+            }
         });
 
         setGeoCodes(geo);
@@ -73,6 +78,7 @@ function SearchMapResults() {
         if(backendData.length !== 0) {
             console.log(backendData)
             const queries = backendData.map((data) => {
+              console.log(`data is`,data.adress1)
                 const fullAddress = `${data.adress1} ${data.adress2}`;
                 const query = {"query": `/geocode/${fullAddress}.json`}
                 return query;
@@ -109,7 +115,10 @@ function SearchMapResults() {
 
       if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
         let n = 0;
-        geoCodes.forEach(geoCode => {
+        geoCodes.forEach(geoCode => { console.log('geocode is',geoCode)
+          if(geoCode!=undefined){
+            if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
+              console.log('geocode is',geoCode)
           const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
           const popupOffsets = {
             top: [0, 0],
@@ -124,8 +133,8 @@ function SearchMapResults() {
 
           markers.push(marker);
 
-          n++
-        });
+          n++}
+        }else{console.log('why is this not working')}});
       }
       
         
@@ -152,7 +161,7 @@ function SearchMapResults() {
 
   return (
     <>
-    <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
+    {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}
     <StatsModal toggleStats={toggleStats} statsIsOpen={statsIsOpen}/>
     <div className='pageContainer'>
       <div className='menuContainer'>

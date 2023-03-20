@@ -12,7 +12,7 @@ const LineChart = ({ data, chartId }) => {
 
     // Set up the D3 chart
     const margin = { top: 10, right: 10, bottom: 15, left: 20 };
-    const width = 120 - margin.left - margin.right;
+    const width = 130 - margin.left - margin.right;
     const height = 70 - margin.top - margin.bottom;
 
     const svg = d3.select(`#${chartId}`)
