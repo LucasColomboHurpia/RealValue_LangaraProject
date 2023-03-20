@@ -2,7 +2,6 @@
 
 .header {
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
     position: relative;
     width: 100vw;
@@ -16,7 +15,6 @@
 
     justify-content: space-between;
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
     overflow: visible;
 
   }
@@ -38,13 +36,15 @@
     display: flex;
   }
   
-  .navbar li {
-    margin: 0 10px;
+  .navbar li:not(:last-child) {
+    margin-right: 50px;
   }
   
   .navbar a {
     text-decoration: none;
     color: black;
+    font-size: 22px;
+    font-weight: 600;
   }
 
   .navbarMobile{
