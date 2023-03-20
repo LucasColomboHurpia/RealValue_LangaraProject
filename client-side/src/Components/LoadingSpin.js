@@ -8,7 +8,7 @@ function LoadingSpin({ loadingTemplate }) {
     }
 
     return (
-        <div className='loadContainer'><div class="loader"></div></div>
+        <div className='loadContainer'><div className="loader"></div></div>
     );
 }
 

@@ -50,7 +50,7 @@ function MyListPage() {
                 <div className='ExportText'>Export to Excel</div>
                 <div className='ExportModalButtonContainer'>
                     <div className='ExportModalButton ExportCancelModal' onClick={toggleconfirmExportn}>Cancel</div>
-                    <div className='ExportModalButton ExporSaveModal' onClick={() => exportToExcel(objectSample)}>Save</div>
+                    <div className='ExportModalButton ExporSaveModal' onClick={() => exportToExcel(objectSample)}>Export</div>
                 </div>
             </div>
             <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty} />
