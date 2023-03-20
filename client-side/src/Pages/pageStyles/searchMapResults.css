@@ -158,14 +158,6 @@
     100% { transform: rotate(360deg); }
   }
 
-/*** Import Fonts ***/
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300);
-/*** Variables ***/
-html, body {
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-}
-
 h2 {
   font-size: 30px;
   text-align: center;
@@ -513,6 +505,7 @@ input#ios:checked + label:after {
 }
 .switch-flat:hover .flat-container {
   transform: translateY(-35px);
+}
 /* ------------------------------------------- */
 
 
