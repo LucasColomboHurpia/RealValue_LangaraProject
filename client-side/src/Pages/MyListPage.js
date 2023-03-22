@@ -53,7 +53,7 @@ function MyListPage() {
                     <div className='ExportModalButton ExporSaveModal' onClick={() => exportToExcel(objectSample)}>Export</div>
                 </div>
             </div>
-            <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty} />
+            {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}
             <div className='myListPageTopSection'>
                 <div className='myListPageTitle'>List 1 <input className='myListPageSearchBar' placeholder='Search for a saved property'></input></div>
 

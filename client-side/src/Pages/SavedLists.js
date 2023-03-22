@@ -23,7 +23,8 @@ function SavedListPage() {
 
   return (
     <div className='savedListsContainer'>
-    <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
+          {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}
+
       <div className='savedListTitle'>Saved Lists</div>
 
       <div className='ListContainer'>
