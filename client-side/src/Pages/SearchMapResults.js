@@ -70,7 +70,12 @@ function SearchMapResults() {
         });
         const data = await response.json();
         const geo = data.batchItems.map(item => {
-            return item.response.results[0].position
+          if((item.response.results[0])!=undefined){
+            console.log(item.response.results[0].position)
+            return item.response.results[0].position}
+            else{
+            return   console.log('please code jsut work aaaa')
+            }
         });
 
         setGeoCodes(geo);
@@ -80,6 +85,7 @@ function SearchMapResults() {
         if(backendData.length !== 0) {
             console.log(backendData)
             const queries = backendData.map((data) => {
+              console.log(`data is`,data.adress1)
                 const fullAddress = `${data.adress1} ${data.adress2}`;
                 const query = {"query": `/geocode/${fullAddress}.json`}
                 return query;
@@ -173,29 +179,33 @@ function SearchMapResults() {
     useEffect(() => {
       const markers = [];
 
-      if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
-        let n = 0;
-        geoCodes.forEach(geoCode => {
-          const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
-          const popupOffsets = {
-            top: [0, 0],
-            bottom: [0, -70],
-            "bottom-right": [0, -70],
-            "bottom-left": [0, -70],
-            left: [25, -35],
-            right: [-25, -35],
-          };
-          const popup = new tomtom.Popup(popupOffsets).setHTML(`<h2>${backendData[n].adress1}</h2><p>More Details</p>`);
-          marker.setPopup(popup);
+        if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
+            let n = 0;
+            geoCodes.forEach(geoCode => { console.log('geocode is',geoCode)
+                if(geoCode!=undefined){
+                    if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
+                        console.log('geocode is',geoCode)
+                        const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
+                        const popupOffsets = {
+                            top: [0, 0],
+                            bottom: [0, -70],
+                            "bottom-right": [0, -70],
+                            "bottom-left": [0, -70],
+                            left: [25, -35],
+                            right: [-25, -35],
+                        };
+                        const popup = new tomtom.Popup(popupOffsets).setHTML(`<h2>${backendData[n].adress1}</h2><p>More Details</p>`);
+                        marker.setPopup(popup);
 
-          markers.push(marker);
+                        markers.push(marker);
 
-          n++
-        });
-        console .log(geoCodes)
+                        n++
+                    }
+                    console .log(geoCodes)
+                }
 
-    }
-      
+            })
+        }
         
     }, [geoCodes]);
   //------------------------------------------------------------
@@ -221,7 +231,7 @@ function SearchMapResults() {
 
   return (
     <>
-    <PostModal toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/>
+    {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}
     <StatsModal toggleStats={toggleStats} statsIsOpen={statsIsOpen}/>
     <div className='pageContainer'>
       <div className='menuContainer'>

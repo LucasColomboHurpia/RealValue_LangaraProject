@@ -130,7 +130,7 @@ function StatsModal({ toggleStats, statsIsOpen }) {
               {/* ------snippet--------- */}
               <div className='statsModalStatsSnippets'>
                 <div className='statsModalSnippetPart1'>
-                  <div className='statsModalSnippetTitle'>Yearly Sales Price Changee</div>
+                  <div className='statsModalSnippetTitle'>Yearly Sales Price Change</div>
                   <div className='statsModalSnippetPrice'>-0.47 %</div>
                 </div>
                 <div className='statsModalSnippetPart2'>
@@ -153,13 +153,13 @@ function StatsModal({ toggleStats, statsIsOpen }) {
                   <div className='pieCharCircle'>
                     <div className='pieChartDesc'>Capitalization Rate</div>
                     <div className='pieChartRender'>
-                      <PieChart data={dataPieChart1} id="pie-chart-1" width={15} height={15} text={'70%'} />
+                      <PieChart data={dataPieChart1} id="pie-chart-1" width={15} height={15} text={'70%'} ></PieChart>
                     </div>
                   </div>
                   <div className='pieCharCircle'>
                     <div className='pieChartDesc'>Land to building ratio</div>
                     <div className='pieChartRender'>
-                    <PieChart data={dataPieChart2} id="pie-chart-2"   width={15} height={15} text={'4:3'}/>
+                    <PieChart data={dataPieChart2} id="pie-chart-2"   width={15} height={15} text={'4:3'}></PieChart>
                     </div>
                   </div>
                 </div>
