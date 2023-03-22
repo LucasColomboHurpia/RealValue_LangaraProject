@@ -22,33 +22,44 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      <div className="options-column">
-        <ul>
-          <li>Account Information</li>
-          <li>My Lists</li>
-          <li>Logout</li>
-        </ul>
+      <div className="left">
+        <h1 className="name">Jane Doe</h1>
+        <div className="links">
+          <ul>
+            <li>
+              <a href="#" className="account-info">
+              Account Information <i className="fas fa-angle-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="my-lists">
+              My Lists <i className="fas fa-angle-right"></i>
+               </a>
+            </li>
+            <li className="logout">
+              <a href="#">
+              <i className="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+        
       </div>
-      <div className="input-column">
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" value={name} onChange={handleNameChange} />
+      <div className="right">
+        <div className="input-field">
+          <input type="text" placeholder="Jane Doe" />
+          <i className="fas fa-edit"></i>
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" value={email} onChange={handleEmailChange} />
+        <div className="input-field">
+          <input type="email" placeholder="jdoe@email.com" />
+          <i className="fas fa-edit"></i>
+          <a href="#" className="change-password">
+            Change Password
+          </a>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">New Password</label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
-        </div>
-        <div className="button-group">
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+        <div className="buttons">
+          <button className="cancel">Cancel</button>
+          <button className="save">Save</button>
         </div>
       </div>
     </div>
