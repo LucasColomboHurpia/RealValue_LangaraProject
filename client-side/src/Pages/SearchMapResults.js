@@ -290,6 +290,8 @@ function SearchMapResults() {
                 <input type="checkbox" name="ios" id="ios" value={showZones} onChange={() => setShowZones(!showZones)} />
                 <label for="ios"></label>
             </div>
+            
+            <div className='analyticsToggle' onClick={toggleStats}><img src={analyticIcon} className='analyiticIconPNG'/> Analytics</div>
         <div ref={mapContainer} style={{ height: "100vh" }} />
       </div>
     </div>
