@@ -9,7 +9,6 @@ import Footer  from './Components/Footer';
 import MainPage from './Pages/MainPage';
 import SavedListPage from './Pages/SavedLists';
 import SearchResults from './Pages/searchResults';
-import MyListPage from './Pages/MyListPage';
 import Profile from './Pages/profile';
 import Login from './Pages/Login';
 
@@ -30,7 +29,6 @@ root.render(
         <Route path="/searchMapResults" element={<SearchMapResults />} />
         <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
         <Route path="/savedLists" element={<SavedListPage />} />
-        <Route path="mylist" element={<MyListPage/>} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<MainPage />} />
