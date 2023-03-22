@@ -1,10 +1,22 @@
 body {
   margin: 0;
   overflow-x: hidden;
+  font-family: 'Poppins', 'Courier New', Courier, monospace;
 }
-*{
+
+* {
   margin: 0;
 }
-.test{
+
+.test {
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  color: #fee670;
+}
+
+.container {
+    max-width: 1480px;
+    padding: 0 30px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
 }

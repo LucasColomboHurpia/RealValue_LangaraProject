@@ -1,6 +1,5 @@
   footer {
     background-color: gray;
-    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -26,7 +25,7 @@
     color: black;
   }
 
-  ul li {
+  .links ul li {
     font-size: large;
     list-style: none;
     text-decoration: none;

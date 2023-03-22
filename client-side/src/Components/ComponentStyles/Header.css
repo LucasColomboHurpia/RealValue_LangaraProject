@@ -2,7 +2,6 @@
 
 .header {
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
     position: relative;
     width: 100vw;
@@ -12,11 +11,10 @@
   .headerContainer{
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 35px 0;
 
     justify-content: space-between;
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
     overflow: visible;
 
   }
@@ -38,13 +36,30 @@
     display: flex;
   }
   
-  .navbar li {
-    margin: 0 10px;
-  }
+    .navbar li:not(:last-child) {
+        margin-right: 50px;
+    }
+
+    .navbar li:hover {
+        transition: all .2s ease-in;
+        transform: translateY(-3px);
+    }
+
+    .navbar li:active {
+        transform: translateY(0px);
+    }
+
   
   .navbar a {
     text-decoration: none;
     color: black;
+    font-size: 22px;
+    font-weight: 600;
+    transition: all .2s ease-in;
+  }
+
+  .navbar a:hover {
+    color: #6617E2;
   }
 
   .navbarMobile{
