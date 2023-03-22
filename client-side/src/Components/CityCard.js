@@ -1,7 +1,6 @@
 import { React } from "react";
 import './ComponentStyles/cityCards.css';
-
-
+import { Link } from "react-router-dom";
 
 const CityCard = (props) => {
 
@@ -14,9 +13,9 @@ const CityCard = (props) => {
 
     return (
         <div className="cityCardContainer">
-            <a href={`/searchResults/${props.city.name}`} className="card-city" style={listStyle}>
+            <Link to={`/searchResults/${props.city.name}`} className="card-city" style={listStyle}>
                 <p className="card-city-title">{props.city.name}</p>
-            </a>
+            </Link>
         </div>
     )
 }

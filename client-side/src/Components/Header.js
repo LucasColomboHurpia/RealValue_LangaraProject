@@ -1,14 +1,16 @@
 import './ComponentStyles/Header.css';
 import React, { useState } from 'react';
-import logo from '../Assets/logo.png'
+import { Link } from "react-router-dom";
 
+import logo from '../Assets/logo.png'
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(true);
   return (
-    <div className="header">
-      <span className='headerContainer'>
-      <div > <a href="/"> <img src={logo} /> </a></div>
+    <div className='header'>
+        <div className='container'>
+            <span className='headerContainer'>
+            <div > <Link to="/"> <img src={logo} /> </Link></div>
 
       <nav className="navbar menuDesktop">
         <ul>
@@ -27,10 +29,11 @@ function Header() {
         </ul>
       </nav>
 
-      <div className='navbarMobile'>
-        Mobile Menu
-      </div>
-      </span>
+            <div className='navbarMobile'>
+                Mobile Menu
+            </div>
+            </span>
+            </div>
     </div>
   );
 }

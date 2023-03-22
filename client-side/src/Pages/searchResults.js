@@ -8,9 +8,9 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import './pageStyles/searchResults.css';
 
 import ListCard from '../Components/ListCard';
+import APIURL from '../constants/apiUrl';
 
 function SearchResults(props) {
-    console.log(process.env.REACT_APP_API_KEY)
     const mapElement = useRef();
     let { searchQuery } = useParams();
 
@@ -23,7 +23,7 @@ function SearchResults(props) {
 
     const getScrapperData = async () => {
         try {      
-            const response = await fetch(`/scrapper?input=${searchQuery}`);
+            const response = await fetch(`${APIURL}/scrapper?input=${searchQuery}`);
             const data = await response.json();
             setBackendData(data.query)
         } catch (error) {
@@ -73,8 +73,9 @@ function SearchResults(props) {
                 key: process.env.REACT_APP_MAP_API_KEY,
                 container: mapElement.current,
                 center: [geoCodes[0].lon, geoCodes[0].lat],
-                zoom: mapZoom
+                zoom: mapZoom,
               });
+              
               setMap(map);
               return () => map.remove();
         }
