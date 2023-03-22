@@ -267,7 +267,7 @@ function SearchMapResults() {
           <div className='searchBarContainer'>
             <form className='searchBarForm' onSubmit={handleSubmit}>
               <input className='searchBar' type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder='Enter an address, neighbourhood, city, or ZIP code.' />
-              <input className='searchBarSubmit' type='submit' value='Go'></input>
+              <img className='searchBarIcon' src='/icons/icon_search_outline.svg' />
             </form>
           </div>
         </div>
@@ -296,14 +296,24 @@ function SearchMapResults() {
         </div>
       </div>
         <div className='mapContainer'>
-            <div className="switch-container switch-ios">
-                <input type="checkbox" name="ios" id="ios" value={showZones} onChange={() => setShowZones(!showZones)} />
-                <label for="ios"></label>
+
+            <div className="map-options">
+                <label className="switch">
+                    <input type="checkbox" id="togBtn" value={showZones} onChange={() => setShowZones(!showZones)} />
+                    <div className="slider round">
+                        <span className="on">Zoning on</span>
+                        <span className="off">Zoning off</span>
+                    </div>
+                </label>
+                
+                <div className='analyticsToggle' onClick={toggleStats}>
+                    <img src={analyticIcon} className='analyiticIconPNG'/>
+                    <span classNmae="analyticsToggleText">Analytics</span>
+                </div>
             </div>
-            
-            <div className='analyticsToggle' onClick={toggleStats}><img src={analyticIcon} className='analyiticIconPNG'/> Analytics</div>
-        <div ref={mapContainer} style={{ height: "100vh" }} />
-      </div>
+
+            <div ref={mapContainer} style={{ height: "100vh" }} />
+        </div>
     </div>
     </>
   )
