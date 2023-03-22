@@ -91,7 +91,7 @@
 
 .search {
     background-color: #F0F0F0;
-    height: 494px;
+    height: 694px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -112,7 +112,7 @@
     margin-bottom: 20px;
 }
 
-.search-input-group {
+/* .search-input-group {
     width: 100%;
     position: relative;
 }
@@ -126,13 +126,13 @@
     outline: none;
     background-color: #F5F3F3;
     box-sizing: border-box;
-}
+} */
 
-.search-icon {
+/* .search-icon {
     position: absolute;
     right: -12px;
     top: 50%;
     transform: translate(-50%, -50%);
     height: 51px;
     width: 51px;
-}
+} */

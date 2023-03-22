@@ -172,7 +172,7 @@ h2 {
   -webkit-animation: hue 60s infinite linear;
 }
 
-p {
+.pageContainer p {
   margin: 0;
   position: relative;
   font-size: 40px;

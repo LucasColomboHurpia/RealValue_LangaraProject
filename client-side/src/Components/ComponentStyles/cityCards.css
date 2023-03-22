@@ -1,29 +1,22 @@
 .card-city-section {
-    padding: 30px 120px;
-
+    margin-bottom: 120px;
 }
 
 .cityCardContainer{
     height: 270px;
-    border-radius: 0px 25px 0px 25px;
+    border-radius: 8px 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
+    flex: 1 1 29%;
     text-decoration: none;
     color: white;
-
     overflow: hidden;
-
-    object-fit:contain;
-    background-repeat: no-repeat;
     filter: brightness(85%);
-
-    padding: 5px;
-
-    box-shadow: 1.9px 1.9px 5.7px rgba(0, 0, 0, 0.5);
-
+    padding: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: 0.5s;
+    margin-top: 30px;
 }
 .cityCardContainer:not(:last-child) {
     margin-right: 30px;
@@ -36,28 +29,25 @@
 
 .card-city {
     height: 270px;
-    border-radius: 0px 25px 0px 25px;
+    border-radius: 8px 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
     text-decoration: none;
     color: white;
-
-    object-fit:contain;
-    background-repeat: no-repeat;
-
+    background-size: cover;
+    background-position: center;
     transition: 0.5s;
 }
 
 .card-city:not(:last-child) {
     margin-right: 20px;
 }
+
 .card-city:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
-
-
 
 .cardBackground{
     position: absolute;
@@ -72,9 +62,27 @@
 .card-city-list {
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-city-h4 {
     font-size: 35px;
     font-weight: 400;
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width:1024px) {
+    /* .card-city-list {
+        flex-direction: column;
+    }
+
+    .cityCardContainer {
+        max-width: 80%;
+    }
+    
+    .cityCardContainer:not(:last-child) {
+        margin-right: 0px;
+        margin-bottom: 20px;
+    } */
 }
