@@ -11,9 +11,10 @@ import SavedListPage from './Pages/SavedLists';
 import SearchResults from './Pages/searchResults';
 import MyListPage from './Pages/MyListPage';
 import Profile from './Pages/profile';
-
+import Login from './Pages/Login';
 
 import SearchMapResults from './Pages/SearchMapResults';
+// import { Login } from '@mui/icons-material';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -31,7 +32,9 @@ root.render(
         <Route path="/savedLists" element={<SavedListPage />} />
         <Route path="mylist" element={<MyListPage/>} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<MainPage />} />
+        
       </Routes>
     </Router>
     
