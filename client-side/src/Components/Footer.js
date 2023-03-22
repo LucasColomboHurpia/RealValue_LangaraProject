@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer>
        <div className="logo">
-        <img src="logo.png" alt="Logo" />
+       <div > <a href="/">[LOGO]</a></div>
       </div>
       
       <ul className="links">

@@ -1,0 +1,194 @@
+/* Default styles */
+.profile-container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  height: 80vh;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.left {
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+.name {
+  margin: 0 0 20px;
+  margin-top: 3rem;
+  padding-left: 4.5rem;
+}
+
+.links {
+  margin: 0 0 20px;
+}
+
+.links a {
+  display: block;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.account-info  {
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+  text-align: left;
+  padding-top: 4rem;
+  font-weight: lighter;
+  font-weight: 400;
+}
+
+.my-lists {
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+  width: 30rem;
+  text-align: left;
+  font-weight: lighter;
+  font-weight: 400;
+}
+
+.logout {
+  padding: 15px;
+  text-align: left;
+  font-weight: lighter;
+  font-weight: 400;
+}
+
+.account-info:hover  {
+  font-weight: bold;
+}
+
+.my-lists:hover {
+  font-weight: bold;
+}
+
+.logout:hover {
+  font-weight: bold;
+}
+
+
+.right {
+  padding: 25px;
+  margin-top: 11.5rem;
+  margin-left: 5rem;
+  width: 50%;
+}
+
+.input-field {
+  margin-bottom: 20px;
+  position: relative;
+  
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.input-field i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #ccc;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.change-password {
+  display: block;
+  margin-top: 4rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #888888;
+  font-weight: 400;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  margin-top: 5rem;
+  width: 80%;
+}
+
+.cancel,
+.save {
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  width: 45%;
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+.cancel {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F1F1F6;
+  border: 2px solid #6617E2;
+  text-align: center;
+  color: #6617E2;
+}
+
+.save {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #6617E2;
+  color: #fff;
+  border: none;
+}
+
+/* .cancel:hover {
+  background-color: #6617E2;
+}
+
+.save:hover {
+  background-color: #6617E2;
+} */
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .profile-container {
+    grid-template-columns: 1fr;
+  }
+
+  .left,
+  .right {
+    padding: 20px;
+  }
+
+  .links a {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .logout {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .input-field input {
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  .input-field i {
+    right: 15px;
+  }
+
+  .change-password {
+    font-size: 14px;
+  }
+
+  .cancel,
+  .save {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+}

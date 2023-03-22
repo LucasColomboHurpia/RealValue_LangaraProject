@@ -12,19 +12,22 @@ function Header() {
             <span className='headerContainer'>
             <div > <Link to="/"> <img src={logo} /> </Link></div>
 
-            <nav className="navbar menuDesktop">
-                <ul>
-                <li>
-                    <Link to="/searchMapResults">Search </Link>
-                </li>
-                <li>
-                    <Link to="/savedLists">My Lists</Link>
-                </li>
-                <li>
-                    <Link to="#">Profile</Link>
-                </li>
-                </ul>
-            </nav>
+      <nav className="navbar menuDesktop">
+        <ul>
+          <li>
+            <a href="/searchMapResults">Search Properties </a>
+          </li>
+          <li>
+            <a href="/savedLists">My List</a>
+          </li>
+          <li>
+            <a href="/profile">Profile</a>
+          </li>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+        </ul>
+      </nav>
 
             <div className='navbarMobile'>
                 Mobile Menu
