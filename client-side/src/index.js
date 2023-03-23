@@ -20,9 +20,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
 
-  <Header  /> 
+
 
     <Router>
+    <Header  /> 
       <Routes>
         <Route path="/searchMapResults" element={<SearchMapResults />} />
         <Route path="/searchResults/:searchQuery" element={<SearchResults />} />

@@ -1,32 +1,36 @@
 import './ComponentStyles/Header.css';
 import React, { useState } from 'react';
-import logo from '../Assets/logo.png'
-
+import { Link } from 'react-router-dom';
+import logo from '../Assets/logo.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(true);
   return (
     <div className="header">
       <span className='headerContainer'>
-      <div > <a href="/"> <img src={logo} /> </a></div>
+        <div>
+          <Link to="/">
+            <img src={logo} />
+          </Link>
+        </div>
 
-      <nav className="navbar menuDesktop">
-        <ul>
-          <li>
-            <a href="/searchMapResults">Search Properties </a>
-          </li>
-          <li>
-            <a href="/savedLists">My List</a>
-          </li>
-          <li>
-            <a href="#">Profile</a>
-          </li>
-        </ul>
-      </nav>
+        <nav className="navbar menuDesktop">
+          <ul>
+            <li>
+              <Link to="/searchMapResults">Search Properties</Link>
+            </li>
+            <li>
+              <Link to="/savedLists">My List</Link>
+            </li>
+            <li>
+              <Link to="#">Profile</Link>
+            </li>
+          </ul>
+        </nav>
 
-      <div className='navbarMobile'>
-        Mobile Menu
-      </div>
+        <div className='navbarMobile'>
+          Mobile Menu
+        </div>
       </span>
     </div>
   );

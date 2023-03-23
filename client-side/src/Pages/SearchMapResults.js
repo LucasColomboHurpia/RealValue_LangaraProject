@@ -162,7 +162,8 @@ function SearchMapResults() {
   return (
     <>
     {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}
-    <StatsModal toggleStats={toggleStats} statsIsOpen={statsIsOpen}/>
+    {statsIsOpen ? <StatsModal  toggleStats={toggleStats} statsIsOpen={statsIsOpen} property={activeProperty}/> : null}
+
     <div className='pageContainer'>
       <div className='menuContainer'>
 
