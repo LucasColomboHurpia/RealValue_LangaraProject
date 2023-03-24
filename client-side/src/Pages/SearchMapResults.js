@@ -1,20 +1,26 @@
-import './pageStyles/searchMapResults.css';
 import React, {useRef, useEffect, useState } from 'react'
-import ListCard from '../Components/ListCard'
-
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import tomtom from '@tomtom-international/web-sdk-maps';
 
+import './pageStyles/searchMapResults.css';
+
 import PostModal from '../Components/PostModal';
+import ListCard from '../Components/ListCard'
 import LoadingSpin from '../Components/LoadingSpin';
 import StatsModal from '../Components/StatsModal'
 
 import analyticIcon from '../Assets/png-analytics-white.png'
 
+import APIURL from '../constants/apiUrl';
+
+import geodata from '../Data/zoning-districts-and-labels.json';
+
 function SearchMapResults() {
   //------------------------------------------------------------
   //Loading Icon
   const [loadingTemplate, setloading] = useState(false);
+  const [showZones, setShowZones] = useState(false);
+
   const changeLoading = (arg) => setloading(arg);
 
   //------------------------------------------------------------
@@ -36,6 +42,7 @@ function SearchMapResults() {
   const [mapLatitude, setMapLatitude] = useState(49.27892695457111);
   const [mapZoom, setMapZoom] = useState(13);
   const [map, setMap] = useState({});
+  
 
   const [activeProperty, setProperty] = useState({});
 
@@ -97,13 +104,16 @@ function SearchMapResults() {
     }, [geoCodes]);
 
     useEffect(() => {
-        setMap(tomtom.map({
+        const newMap = tomtom.map({
             key:'SAs8GubigOjo4UwoTk7tG4sXMPosF8uU',
             source: "vector",
             container: mapContainer.current,
             center: [mapLongitude, mapLatitude],
             zoom: 12
-        }))
+        });
+
+        console.log(geodata[0])
+        setMap(newMap)
         
         // return () => {
         //     map.remove();
@@ -111,32 +121,91 @@ function SearchMapResults() {
     }, []);
 
     useEffect(() => {
+
+        if(map && Object.keys(map).length !== 0) {
+            if(showZones) {
+                geodata.forEach((elm, index) => {
+                    let backgroundColor = "#db356c";
+                    let RTcolor = "#fee670";
+                    let RMcolor = "rgb(100, 131, 197)";
+                    let Ccolor = "rgb(245, 91, 105)";
+                    // RMcolor = "";
+        
+                    switch(elm.zoning_category) {
+                        case "RT": 
+                            backgroundColor = RTcolor;
+                            break;
+                        case "RM": 
+                            backgroundColor = RMcolor;
+                            break;
+                        case "C": 
+                            backgroundColor = Ccolor;
+                            break;
+                    }
+        
+                        map.addLayer({
+                            'id': `Keiks-${index}`,
+                            'type': 'fill',
+                            'source': {
+                                'type': 'geojson',
+                                'data': {
+                                    'type': 'Feature',
+                                    'geometry': {
+                                        'type': 'Polygon',
+                                        'coordinates': elm.geom.geometry.coordinates
+                                    }
+                                }
+                            },
+                            'layout': {},
+                            'paint': {
+                                'fill-color': backgroundColor,
+                                'fill-opacity': 0.5,
+                                'fill-outline-color': 'black'
+                            }
+                        }); 
+                    })
+            }
+            else {
+                geodata.forEach((elm, index) => {
+                    map.removeLayer({
+                        'id': `Keiks-${index}`
+                    })
+                })
+            }
+        }
+
+    }, [map, showZones]);
+
+    useEffect(() => {
       const markers = [];
 
-      if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
-        let n = 0;
-        geoCodes.forEach(geoCode => { console.log('geocode is',geoCode)
-          if(geoCode!=undefined){
-            if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
-              console.log('geocode is',geoCode)
-          const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
-          const popupOffsets = {
-            top: [0, 0],
-            bottom: [0, -70],
-            "bottom-right": [0, -70],
-            "bottom-left": [0, -70],
-            left: [25, -35],
-            right: [-25, -35],
-          };
-          const popup = new tomtom.Popup(popupOffsets).setHTML(`<h2>${backendData[n].adress1}</h2><p>More Details</p>`);
-          marker.setPopup(popup);
+        if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
+            let n = 0;
+            geoCodes.forEach(geoCode => { console.log('geocode is',geoCode)
+                if(geoCode!=undefined){
+                    if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
+                        console.log('geocode is',geoCode)
+                        const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
+                        const popupOffsets = {
+                            top: [0, 0],
+                            bottom: [0, -70],
+                            "bottom-right": [0, -70],
+                            "bottom-left": [0, -70],
+                            left: [25, -35],
+                            right: [-25, -35],
+                        };
+                        const popup = new tomtom.Popup(popupOffsets).setHTML(`<h2>${backendData[n].adress1}</h2><p>More Details</p>`);
+                        marker.setPopup(popup);
 
-          markers.push(marker);
+                        markers.push(marker);
 
-          n++}
-        }else{console.log('why is this not working')}});
-      }
-      
+                        n++
+                    }
+                    console .log(geoCodes)
+                }
+
+            })
+        }
         
     }, [geoCodes]);
   //------------------------------------------------------------
@@ -147,8 +216,9 @@ function SearchMapResults() {
     event.preventDefault();
     changeLoading(true);
     try {
-      const response = await fetch(`/scrapper?input=${input}`);
-      const data = await response.json();
+      const response = await fetch(`${APIURL}/scrapper?input=${input}`);
+        console.log(process.env.DEV_API_URL);
+        const data = await response.json();
       let dataResults = (data[Object.keys(data)[0]])
       console.log(dataResults)
       setBackendData(dataResults)
@@ -198,7 +268,7 @@ function SearchMapResults() {
           <div className='searchBarContainer'>
             <form className='searchBarForm' onSubmit={handleSubmit}>
               <input className='searchBar' type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder='Enter an address, neighbourhood, city, or ZIP code.' />
-              <input className='searchBarSubmit' type='submit' value='Go'></input>
+              <img className='searchBarIcon' src='/icons/icon_search_outline.svg' />
             </form>
           </div>
         </div>
@@ -226,10 +296,25 @@ function SearchMapResults() {
           </div>
         </div>
       </div>
-      <div className='mapContainer'>
-        <div className='analyticsToggle' onClick={toggleStats}><img src={analyticIcon} className='analyiticIconPNG'/> Analytics</div>
-      <div ref={mapContainer} style={{ height: "100vh" }} />
-      </div>
+        <div className='mapContainer'>
+
+            <div className="map-options">
+                <label className="switch">
+                    <input type="checkbox" id="togBtn" value={showZones} onChange={() => setShowZones(!showZones)} />
+                    <div className="slider round">
+                        <span className="on">Zoning on</span>
+                        <span className="off">Zoning off</span>
+                    </div>
+                </label>
+                
+                <div className='analyticsToggle' onClick={toggleStats}>
+                    <img src={analyticIcon} className='analyiticIconPNG'/>
+                    <span classNmae="analyticsToggleText">Analytics</span>
+                </div>
+            </div>
+
+            <div ref={mapContainer} style={{ height: "100vh" }} />
+        </div>
     </div>
     </>
   )

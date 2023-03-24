@@ -1,12 +1,14 @@
 .search {
     background-image: url('../../Assets/banner_v2-4\ 1.png');
     background-size: cover;
+    background-position: center;
     background-color: white;
     height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: -1;
+    margin-bottom: 70px;
 }
 
 .search-form {
@@ -25,7 +27,7 @@
 }
 
 .searchSlogan{
-    width: 55%;
+    width: 60%;
 
     font-weight: 400;
     font-size: 18px;
@@ -42,22 +44,74 @@
 
 .search-input {
     width: 100%;
+    height: 96px;
     border: none;
     border-radius: 15px;
     font-size: 18px;
-    padding: 30px;
+    padding: 38px 58px;
     outline: none;
     box-sizing: border-box;
     background: #F7F7F7;
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.21);}
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.21);
+}
+
+.search-input::placeholder {
+    color: #AAAAAA;
+    font-weight: 500;
+}
 
 .search-icon {
     position: absolute;
-    right: -50px;
+    left: 30px;
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    fill: #AAAAAA;
 }
 
 .card-city-h4{
     font-weight: bold;
+}
+
+.search-right {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translate(0%, -50%);
+    display: flex;
+}
+
+.search-input-btn,
+.search-input-btn:link 
+.search-input-btn:visited
+{
+    text-decoration: none;
+    background-color: #6617E2;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-family: 'Poppins', 'Courier New', Courier, monospace;
+    height: 56px;
+    width: 136px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.search-filter {
+    padding: 0 20px;
+    border-left: 2px solid #DBDBDB;
+    display: flex;
+    align-self: center;
+    margin-right: 20px;
+}
+
+.search-filter p {
+    font-size: 18px;
+    color: #636363;
+    font-weight: 500;
+}
+
+@media screen and (max-width:1024px) {
+    
 }

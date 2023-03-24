@@ -8,10 +8,13 @@ import Header from './Components/Header';
 import Footer  from './Components/Footer';  
 import MainPage from './Pages/MainPage';
 import SavedListPage from './Pages/SavedLists';
-import SearchResults from './Pages/searchResults';
+import Profile from './Pages/profile';
+import Login from './Pages/Login';
+import SearchResults from './Pages/SearchResults';
 import MyListPage from './Pages/MyListPage';
 
 import SearchMapResults from './Pages/SearchMapResults';
+// import { Login } from '@mui/icons-material';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -32,8 +35,6 @@ root.render(
         <Route path="/" element={<MainPage />} />
       </Routes>
     </Router>
-    
-    <Footer/>
 
   </>
 );

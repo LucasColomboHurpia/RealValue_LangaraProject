@@ -1,27 +1,28 @@
 import './ComponentStyles/Footer.css';
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 function Footer() {
     const [menuOpen, setMenuOpen] = useState(true);
   return (
     <footer>
        <div className="logo">
-        <img src="logo.png" alt="Logo" />
+       <div > <a href="/">[LOGO]</a></div>
       </div>
       
       <ul className="links">
         <li>
-            <a href="/about">About Us</a>
+            <Link to="/about">About Us</Link>
             <p className='about-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
         </li>
         <li>
-            <a href="/contact">Contact Us</a>
+            <Link to="/contact">Contact Us</Link>
             <p className='contact-text'>Phone: 778-123-4567</p>
             <p className='contact-text'>Email: info@realvalue.com</p>
         </li>
         <li>
-             <a href="/terms" className='tc'>Terms and Conditions</a><br/>
-             <a href="/privacy" className='pp'>Privacy Policy</a>
+             <Link to="/terms" className='tc'>Terms and Conditions</Link><br/>
+             <Link to="/privacy" className='pp'>Privacy Policy</Link>
         </li>
       </ul><br/>
       <p className="copy">

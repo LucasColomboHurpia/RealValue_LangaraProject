@@ -47,6 +47,7 @@ function MainPage() {
                     <label className='search-label' htmlFor='searchQuery'>Welcome to RealValue</label>
                     <div className='searchSlogan'>The website  for real estate appraisers that helps cutting down complex research processes to just a few minutes!</div>
                     <div className='search-input-group'>
+                        <img className='search-icon' src='/icons/icon_search_outline.svg' />
                         <input
                             className='search-input'
                             id='searchQuery'
@@ -54,15 +55,22 @@ function MainPage() {
                             placeholder='Enter an address, neighbourhood, city, or ZIP code.'
                             onChange={e => setSearchQuery(e.target.value)}
                         />
-                        <img className='search-icon' src='/icons/icon_search_outline.svg' />
+                        <div className='search-right'>
+                            <div className='search-filter'>
+                                <p>Advanced filters</p>
+                            </div>
+                            <input type="submit" className="search-input-btn" value="Search" />
+                        </div>
                     </div>
                 </form>
             </section>
 
             <section className='card-city-section'>
-                <h4 className='card-city-h4'>Search by City</h4>
-                <div className='card-city-list'>
-                    {displayCities()}
+                <div className='container'>
+                    <h4 className='card-city-h4'>Search by City</h4>
+                    <div className='card-city-list'>
+                        {displayCities()}
+                    </div>
                 </div>
             </section>
         </>
