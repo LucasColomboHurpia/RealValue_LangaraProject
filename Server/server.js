@@ -91,7 +91,7 @@ app.get("/scrapper", async (req, res) => { //just for texting, on localhost/api
           adress2: 'Vancouver, BC, V6M 2W2',
           area: '1265',
           link: 'https://www.rew.ca/properties/4851649/6150-oak-street-vancouver-bc?search_params%5Bquery%5D=oakridge+vancouver',
-          type: 'Townhouse',
+          type: 'Townhome',
           age: 'N/A',
           ratio: 1265
         },
@@ -102,7 +102,7 @@ app.get("/scrapper", async (req, res) => { //just for texting, on localhost/api
           adress2: 'Vancouver, BC, V5Y 2V7',
           area: '3880',
           link: 'https://www.rew.ca/properties/4930959/441-w-44th-avenue-vancouver-bc?search_params%5Bquery%5D=oakridge+vancouver',
-          type: 'House',
+          type: 'Townhome',
           age: 'N/A',
           ratio: 3880
         },
@@ -135,7 +135,7 @@ app.get("/scrapper", async (req, res) => { //just for texting, on localhost/api
           adress2: 'Vancouver, BC, V5Y 2X3',
           area: '2938',
           link: 'https://www.rew.ca/properties/4915183/282-286-w-46th-avenue-vancouver-bc?search_params%5Bquery%5D=oakridge+vancouver',
-          type: 'Townhouse',
+          type: 'Townhome',
           age: 'N/A',
           ratio: 2938
         }
