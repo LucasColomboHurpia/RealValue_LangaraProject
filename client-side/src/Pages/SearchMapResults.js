@@ -53,11 +53,50 @@ function SearchMapResults() {
   const [backendData, setBackendData] = useState([]);
   const [layerIDs, setLayerIDs] = useState([]);
 
-  function setNewProperty (Property) {
-    console.log(Property)
-    setProperty(Property)
-  };
+    function setNewProperty (Property) {
+        console.log(Property)
+        setProperty(Property)
+    };
 
+    const createMarker = (icon, position, color, popupItem) => {
+        const markerElement = document.createElement('div');
+        markerElement.className = 'marker';
+
+        const markerContentElement = document.createElement('div');
+        markerContentElement.className = 'marker-content';
+        markerContentElement.style.backgroundColor = color;
+        markerElement.appendChild(markerContentElement);
+
+        const iconElement = document.createElement('div');
+        iconElement.className = 'marker-icon';
+        // iconElement.style.backgroundImage ='url(https://api.tomtom.com/maps-sdk-for-web/cdn/static/' + icon + ')';
+        iconElement.style.backgroundImage ='url(http://localhost:3000/Assets/map-pin.svg)';
+        markerContentElement.appendChild(iconElement);
+
+        const popupOffsets = {
+            top: [0, 0],
+            bottom: [0, -70],
+            "bottom-right": [0, -70],
+            "bottom-left": [0, -70],
+            left: [25, -35],
+            right: [-25, -35],
+        };
+
+        const popup = new tomtom.Popup(popupOffsets).setHTML(`
+            <div onclick="">
+                <img class="mappop-img" src="${popupItem.image}"/>
+                <h4 class="mappop-price">${popupItem.price}</h4>
+                <p class="mappop-area">${popupItem.area} sqft</p>
+                <p class="mappop-address">${popupItem.adress1}</p>
+            </div>
+        `);
+
+        // add marker to map
+        new tomtom.Marker({element: markerElement, anchor: 'bottom'})
+            .setLngLat(position)
+            .setPopup(popup)
+            .addTo(map);
+    }
 
     const getGeoCode = async (queries) => {
         const batchItems = {"batchItems": queries};
@@ -121,29 +160,7 @@ function SearchMapResults() {
                     if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
                         console.log('geocode is',geoCode)
                         
-                        const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
-                        
-                        const popupOffsets = {
-                            top: [0, 0],
-                            bottom: [0, -70],
-                            "bottom-right": [0, -70],
-                            "bottom-left": [0, -70],
-                            left: [25, -35],
-                            right: [-25, -35],
-                        };
-
-                        const popup = new tomtom.Popup(popupOffsets).setHTML(`
-                            <div onclick="">
-                                <img class="mappop-img" src="${backendData[index].image}"/>
-                                <h4 class="mappop-price">${backendData[index].price}</h4>
-                                <p class="mappop-area">${backendData[index].area} sqft</p>
-                                <p class="mappop-address">${backendData[index].adress1}</p>
-                            </div>
-                        `);
-                        
-                        marker.setPopup(popup);
-
-                        markers.push(marker);
+                        createMarker('accident.colors-white.svg', [geoCode.lon, geoCode.lat], '#5327c3', backendData[index]);
                     }
                     console .log(geoCodes)
                 }
