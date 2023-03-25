@@ -1,5 +1,6 @@
 import './pageStyles/profile.css';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const [name, setName] = useState('');
@@ -28,22 +29,24 @@ const Profile = () => {
           <ul>
             <li>
               <a href="#" className="account-info">
-              Account Information <i className="fas fa-angle-right"></i>
+                Account Information <i className="fas fa-angle-right"></i>
               </a>
             </li>
             <li>
-              <a href="#" className="my-lists">
-              My Lists <i className="fas fa-angle-right"></i>
-               </a>
+              <div className="my-lists">
+                <Link to="/savedLists">
+                  My Lists <i className="fas fa-angle-right"></i>
+                </Link>
+              </div>
             </li>
             <li className="logout">
               <a href="#">
-              <i className="fas fa-sign-out-alt"></i> Logout
+                <i className="fas fa-sign-out-alt"></i> Logout
               </a>
             </li>
           </ul>
         </div>
-        
+
       </div>
       <div className="right">
         <div className="input-field">

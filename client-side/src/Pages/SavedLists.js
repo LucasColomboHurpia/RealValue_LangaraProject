@@ -21,6 +21,7 @@ function SavedListPage() {
   };
   //------------------------------------------------------------
 
+
   return (
     <div className='savedListsContainer'>
           {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}

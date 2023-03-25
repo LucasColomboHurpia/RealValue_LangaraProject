@@ -1,19 +1,14 @@
 import './ComponentStyles/Header.css';
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-
-import logo from '../Assets/logo.png'
+import { Link } from 'react-router-dom';
+import logo from '../Assets/logo.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(true);
   return (
-    <div className='header'>
-        <div className='container'>
-            <span className='headerContainer'>
-            <div > <Link to="/"> <img src={logo} /> </Link></div>
     <div className="header">
       <span className='headerContainer'>
-        <div>
+        <div className='logoHeader'>
           <Link to="/">
             <img src={logo} />
           </Link>
@@ -28,16 +23,15 @@ function Header() {
               <Link to="/savedLists">My List</Link>
             </li>
             <li>
-              <Link to="#">Profile</Link>
+              <Link to="/profile">Profile</Link>
             </li>
           </ul>
         </nav>
 
-              <div className='navbarMobile'>
-                  Mobile Menu
-              </div>
-            </span>
-            </div>
+        <div className='navbarMobile'>
+          Mobile Menu
+        </div>
+      </span>
     </div>
   );
 }
