@@ -1,4 +1,5 @@
 import React, {useRef, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import tomtom from '@tomtom-international/web-sdk-maps';
 
@@ -232,7 +233,8 @@ function SearchMapResults() {
   return (
     <>
     {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}
-    <StatsModal toggleStats={toggleStats} statsIsOpen={statsIsOpen}/>
+    {statsIsOpen ? <StatsModal  toggleStats={toggleStats} statsIsOpen={statsIsOpen} property={activeProperty}/> : null}
+
     <div className='pageContainer'>
       <div className='menuContainer'>
 
@@ -278,7 +280,7 @@ function SearchMapResults() {
           <div className='toggleSaved toggle'>Saved</div> */}
         </div>
         
-        <div className='seeAllButton'>See all the Lists</div>
+        <div className='seeAllButton'><Link to="/savedLists">See all the Lists</Link></div>
         <div className='listContainer'>
           <div className='postListings'>
 
