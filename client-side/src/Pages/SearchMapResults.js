@@ -8,7 +8,6 @@ import PostModal from '../Components/PostModal';
 import ListCard from '../Components/ListCard'
 import LoadingSpin from '../Components/LoadingSpin';
 import StatsModal from '../Components/StatsModal';
-import MapPopUp from '../Components/MapPopUp';
 
 import analyticIcon from '../Assets/png-analytics-white.png'
 
@@ -169,7 +168,7 @@ function SearchMapResults() {
                 });
                 setLayerIDs([])
             }
-            
+
             if(showZones) {
                 geodata.forEach((elm, index) => {
                     let backgroundColor = "#db356c";
