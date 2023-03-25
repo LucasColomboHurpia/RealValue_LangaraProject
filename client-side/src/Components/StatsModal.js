@@ -79,7 +79,7 @@ function StatsModal({ toggleStats, statsIsOpen }) {
     //------------------------------------------------------------
 
   return (
-    <div className={statsIsOpen ? 'statsModalContainer' : 'hide'}>
+    <div className='statsModalContainer'>
                   <div className='closePostModal' onClick={toggleStats} >X</div>
       <div className='statsModal'>
         <div className='statsModalTitle'>Insights for "Downtown, Vancouver" </div>

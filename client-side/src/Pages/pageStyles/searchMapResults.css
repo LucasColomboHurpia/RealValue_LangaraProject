@@ -231,7 +231,7 @@
     position: relative;
     display: inline-block;
     width: 210px;
-    height: 56px;
+    height: 47px;
   }
   
   .switch input {display:none;}
@@ -325,7 +325,7 @@
     align-items: center;
     position: absolute;
     z-index: 1;
-    padding: 40px;
+    padding: 12px;
     box-sizing: border-box;
 }
 
@@ -334,10 +334,10 @@
     display: block;
     background: #6617E2;
     color: white;
-    padding: 13px;
+    padding: 3px;
     border-radius: 14px;
-    width: 176px;
-    height: 56px;
+    width: 155px;
+    height: 47px;
     box-sizing: border-box;
     cursor: pointer;
 }
