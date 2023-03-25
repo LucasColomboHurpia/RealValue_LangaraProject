@@ -8,7 +8,7 @@ import './pageStyles/searchMapResults.css';
 import PostModal from '../Components/PostModal';
 import ListCard from '../Components/ListCard'
 import LoadingSpin from '../Components/LoadingSpin';
-import StatsModal from '../Components/StatsModal'
+import StatsModal from '../Components/StatsModal';
 
 import analyticIcon from '../Assets/png-analytics-white.png'
 
@@ -41,8 +41,10 @@ function SearchMapResults() {
   const [geoCodes, setGeoCodes] = useState([]);
   const [mapLongitude, setMapLongitude] = useState(-123.12816828788911);
   const [mapLatitude, setMapLatitude] = useState(49.27892695457111);
-  const [mapZoom, setMapZoom] = useState(13);
+  const [mapZoom, setMapZoom] = useState(12);
   const [map, setMap] = useState({});
+  const [filterByType, setFilterByType] = useState();
+  const [filterByZone, setFilterByZone] = useState("Single Detached House");
   
 
   const [activeProperty, setProperty] = useState({});
@@ -50,14 +52,52 @@ function SearchMapResults() {
   //------------------------------------------------------------
   //DATA FROM BACK END
   const [backendData, setBackendData] = useState([]);
+  const [layerIDs, setLayerIDs] = useState([]);
 
+    function setNewProperty (Property) {
+        console.log(Property)
+        setProperty(Property)
+    };
 
+    const createMarker = (icon, position, color, popupItem) => {
+        const markerElement = document.createElement('div');
+        markerElement.className = 'marker';
 
-  function setNewProperty (Property) {
-    console.log(Property)
-    setProperty(Property)
-  };
+        const markerContentElement = document.createElement('div');
+        markerContentElement.className = 'marker-content';
+        markerContentElement.style.backgroundColor = color;
+        markerElement.appendChild(markerContentElement);
 
+        const iconElement = document.createElement('div');
+        iconElement.className = 'marker-icon';
+        // iconElement.style.backgroundImage ='url(https://api.tomtom.com/maps-sdk-for-web/cdn/static/' + icon + ')';
+        iconElement.style.backgroundImage ='url(http://localhost:3000/Assets/map-pin.svg)';
+        markerContentElement.appendChild(iconElement);
+
+        const popupOffsets = {
+            top: [0, 0],
+            bottom: [0, -70],
+            "bottom-right": [0, -70],
+            "bottom-left": [0, -70],
+            left: [25, -35],
+            right: [-25, -35],
+        };
+
+        const popup = new tomtom.Popup(popupOffsets).setHTML(`
+            <div onclick="">
+                <img class="mappop-img" src="${popupItem.image}"/>
+                <h4 class="mappop-price">${popupItem.price}</h4>
+                <p class="mappop-area">${popupItem.area} sqft</p>
+                <p class="mappop-address">${popupItem.adress1}</p>
+            </div>
+        `);
+
+        // add marker to map
+        new tomtom.Marker({element: markerElement, anchor: 'bottom'})
+            .setLngLat(position)
+            .setPopup(popup)
+            .addTo(map);
+    }
 
     const getGeoCode = async (queries) => {
         const batchItems = {"batchItems": queries};
@@ -83,6 +123,22 @@ function SearchMapResults() {
     }
 
     useEffect(() => {
+        const newMap = tomtom.map({
+            key:'SAs8GubigOjo4UwoTk7tG4sXMPosF8uU',
+            source: "vector",
+            container: mapContainer.current,
+            center: [mapLongitude, mapLatitude],
+            zoom: mapZoom
+        });
+
+        setMap(newMap)
+        
+        // return () => {
+        //     map.remove();
+        // };
+    }, []);
+
+    useEffect(() => {
         if(backendData.length !== 0) {
             console.log(backendData)
             const queries = backendData.map((data) => {
@@ -97,33 +153,40 @@ function SearchMapResults() {
     }, [backendData]);
 
     useEffect(() => {
-        if(geoCodes && geoCodes.length !== 0) {
-            console.log(geoCodes[0].lon)
+      const markers = [];
+
+        if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
+            geoCodes.forEach((geoCode, index) => { console.log('geocode is',geoCode)
+                if(geoCode!=undefined){
+                    if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
+                        console.log('geocode is',geoCode)
+                        
+                        createMarker('accident.colors-white.svg', [geoCode.lon, geoCode.lat], '#5327c3', backendData[index]);
+                    }
+                    console .log(geoCodes)
+                }
+
+            })
+
             map.setCenter({lon: geoCodes[0].lon, lat: geoCodes[0].lat});
-            console.log(map)
         }
+        
     }, [geoCodes]);
 
     useEffect(() => {
-        const newMap = tomtom.map({
-            key:'SAs8GubigOjo4UwoTk7tG4sXMPosF8uU',
-            source: "vector",
-            container: mapContainer.current,
-            center: [mapLongitude, mapLatitude],
-            zoom: 12
-        });
-
-        console.log(geodata[0])
-        setMap(newMap)
-        
-        // return () => {
-        //     map.remove();
-        // };
-    }, []);
-
-    useEffect(() => {
+        console.log(layerIDs);
+        const ids = [];
 
         if(map && Object.keys(map).length !== 0) {
+            if(layerIDs && layerIDs.length !==0) {
+                layerIDs.forEach(id => {
+                    console.log(id)
+                    map.removeLayer(id)
+                    map.removeSource(id)
+                });
+                setLayerIDs([])
+            }
+
             if(showZones) {
                 geodata.forEach((elm, index) => {
                     let backgroundColor = "#db356c";
@@ -136,7 +199,7 @@ function SearchMapResults() {
                         case "RT": 
                             backgroundColor = RTcolor;
                             break;
-                        case "RM": 
+                        case "RS": 
                             backgroundColor = RMcolor;
                             break;
                         case "C": 
@@ -144,8 +207,11 @@ function SearchMapResults() {
                             break;
                     }
         
+                    if(elm.zoning_classification === filterByZone) {
+                        const layerId = `layer-${index}`;
+                        ids.push(layerId);
                         map.addLayer({
-                            'id': `Keiks-${index}`,
+                            'id': layerId,
                             'type': 'fill',
                             'source': {
                                 'type': 'geojson',
@@ -164,51 +230,17 @@ function SearchMapResults() {
                                 'fill-outline-color': 'black'
                             }
                         }); 
-                    })
-            }
-            else {
-                geodata.forEach((elm, index) => {
-                    map.removeLayer({
-                        'id': `Keiks-${index}`
-                    })
-                })
-            }
-        }
-
-    }, [map, showZones]);
-
-    useEffect(() => {
-      const markers = [];
-
-        if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
-            let n = 0;
-            geoCodes.forEach(geoCode => { console.log('geocode is',geoCode)
-                if(geoCode!=undefined){
-                    if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
-                        console.log('geocode is',geoCode)
-                        const marker = new tomtom.Marker().setLngLat([geoCode.lon, geoCode.lat]).addTo(map);
-                        const popupOffsets = {
-                            top: [0, 0],
-                            bottom: [0, -70],
-                            "bottom-right": [0, -70],
-                            "bottom-left": [0, -70],
-                            left: [25, -35],
-                            right: [-25, -35],
-                        };
-                        const popup = new tomtom.Popup(popupOffsets).setHTML(`<h2>${backendData[n].adress1}</h2><p>More Details</p>`);
-                        marker.setPopup(popup);
-
-                        markers.push(marker);
-
-                        n++
                     }
-                    console .log(geoCodes)
-                }
 
-            })
+                })
+
+                setLayerIDs(ids);
+            }
+            
         }
-        
-    }, [geoCodes]);
+
+    }, [map, filterByZone, showZones]);
+
   //------------------------------------------------------------
   const [input, setInput] = useState("");
 
@@ -253,14 +285,18 @@ function SearchMapResults() {
               </select>
             </form>
           </div>
-          <div className='FilterZoning '>
+          <div className='FilterZoning'>
             <form>
-              <select name="Zoning" id="Zoning" className='FilterDropdown'>
-                <option value="Zoning">Zoning</option>
-                <option value="Zone1">Zone1</option>
-                <option value="Zone2">Zone2</option>
-                <option value="Zone3">Zone3</option>
-                <option value="Zone4">Zone4</option>
+              <select name="Zoning" id="Zoning" onChange={(e) => setFilterByZone(e.target.value)} className='FilterDropdown'>
+                <option value="Single Detached House">Single Detached House</option>
+                <option value="Multiple Dwelling">Multiple Dwelling</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Duplex">Duplex</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Comprehensive Development">Comprehensive Development</option>
+                <option value="Limited Agriculture">Limited Agriculture</option>
+                <option value="Historical Area">Historical Area</option>
+                <option value="Other">Other</option>
               </select>
             </form>
           </div>
@@ -301,7 +337,7 @@ function SearchMapResults() {
 
             <div className="map-options">
                 <label className="switch">
-                    <input type="checkbox" id="togBtn" value={showZones} onChange={() => setShowZones(!showZones)} />
+                    <input type="checkbox" id="togBtn" value={showZones} onChange={() => setShowZones(!showZones) } />
                     <div className="slider round">
                         <span className="on">Zoning on</span>
                         <span className="off">Zoning off</span>

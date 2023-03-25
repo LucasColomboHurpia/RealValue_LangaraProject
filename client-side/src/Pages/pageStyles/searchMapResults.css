@@ -170,7 +170,7 @@
     100% { transform: rotate(360deg); }
   }
 
-h2 {
+/* h2 {
   font-size: 30px;
   text-align: center;
   text-transform: uppercase;
@@ -182,9 +182,9 @@ h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-animation: hue 60s infinite linear;
-}
+} */
 
-.pageContainer p {
+/* .pageContainer p {
   margin: 0;
   position: relative;
   font-size: 40px;
@@ -196,7 +196,7 @@ h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-animation: hue 60s infinite linear;
-}
+} */
 
 .button-row-container {
   width: 250px;
@@ -359,4 +359,60 @@ h2 {
 
 .analyticsToggleText {
     font-size: 18px;
+}
+
+.mappop-img {
+    max-width: 100%;
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.mappop-price {
+    font-size: 18px;
+    color: black
+}
+
+
+/* tomtom map override default css */
+
+.mapboxgl-popup-content {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.mapboxgl-popup-close-button {
+    right: 15px;
+    top: 15px;
+    background-color: #6617E2;
+    color: #ffffff;
+    border-radius: 40px;
+    width: 20px;
+    height: 20px;
+}
+
+.mapboxgl-popup-close-button:hover {
+    background-color: #6617E2;
+}
+
+.marker-icon {
+    width: 10px;
+    height: 10px;
+}
+
+.marker {
+    height: 30px;
+    width: 30px;
+}
+.marker-content {
+    background: #c30b82;
+    border-radius: 50% 50% 50% 0;
+    height: 30px;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+    position: absolute;
+    top: 50%;
+    transform: rotate(-45deg);
+    width: 30px;
+    cursor: pointer;
 }
