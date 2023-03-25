@@ -16,11 +16,13 @@ function SavedListPage() {
   //------------------------------------------------------------
   const [activeProperty, setProperty] = useState({});
   function setNewProperty (Property) {
-    console.log(Property)
     setProperty(Property)
   };
   //------------------------------------------------------------
 
+
+  const myLists = JSON.parse(localStorage.getItem('myLists')) 
+  console.log(myLists)
 
   return (
     <div className='savedListsContainer'>
@@ -30,49 +32,21 @@ function SavedListPage() {
 
       <div className='ListContainer'>
 
+      {myLists.map((item, index) => (
         <div className='List'>
-          <div className='listTitle'>My list
+          <div className='listTitle'>{item.name}
             <div className='SeeAllButton'> <Link to="/mylist">See all</Link></div>
             </div>
-
-
           <div className='cardContainer'>
-          {objectSample.map((item) => (
+          {item.list.map((item) => (
             <MyListCard property={item} toggleModal={toggleModal} setNewProperty={setNewProperty}/>
             ))}
         </div>
 
       </div>
-
-      <div className='List'>
-        <div className='listTitle'>My list
-          <div className='SeeAllButton'>See all</div></div>
+     ))}
 
 
-        <div className='cardContainer'>
-
-        {objectSample.map((item) => (
-            <MyListCard property={item} toggleModal={toggleModal} setNewProperty={setNewProperty}/>
-          ))}
-
-        </div>
-
-      </div>
-
-      <div className='List'>
-        <div className='listTitle'>My list
-          <div className='SeeAllButton'>See all</div></div>
-
-
-        <div className='cardContainer'>
-
-        {objectSample.map((item) => (
-            <MyListCard property={item} toggleModal={toggleModal} setNewProperty={setNewProperty}/>
-            ))}
-
-        </div>
-
-      </div>
 
     </div>
     </div >

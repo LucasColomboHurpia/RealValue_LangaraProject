@@ -16,7 +16,7 @@ import APIURL from '../constants/apiUrl';
 
 import geodata from '../Data/zoning-districts-and-labels.json';
 
-function SearchMapResults() {
+function SearchMapResults({createNewList, updateList}) {
   //------------------------------------------------------------
   //Loading Icon
   const [loadingTemplate, setloading] = useState(false);
@@ -285,6 +285,7 @@ function SearchMapResults() {
   //form
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log('clicked')
     changeLoading(true);
     try {
       const response = await fetch(`${APIURL}/scrapper?input=${input}`);
@@ -302,7 +303,7 @@ function SearchMapResults() {
 
   return (
     <>
-    {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty}/> : null}
+    {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty} createNewList={createNewList} updateList={updateList}/> : null}
     {statsIsOpen ? <StatsModal  toggleStats={toggleStats} statsIsOpen={statsIsOpen} property={activeProperty}/> : null}
 
     <div className='pageContainer'>
@@ -342,9 +343,9 @@ function SearchMapResults() {
         </div>
         <div className='searchListingContainer'>
           <div className='searchBarContainer'>
-            <form className='searchBarForm' onSubmit={handleSubmit}>
+            <form className='searchBarForm' >
               <input className='searchBar' type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder='Enter an address, neighbourhood, city, or ZIP code.' />
-              <img className='searchBarIcon' src='/icons/icon_search_outline.svg' />
+              <img className='searchBarIcon' src='/icons/icon_search_outline.svg' onClick={handleSubmit}/>
             </form>
           </div>
         </div>

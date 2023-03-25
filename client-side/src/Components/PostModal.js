@@ -6,9 +6,6 @@ import tomtom from '@tomtom-international/web-sdk-maps';
 
 import saveListPng from '../Assets/png-save-white.png'
 import saveListPngOpen from '../Assets/png-save-grey02.png'
-/* 
-const databaseLists = localStorage.getItem('myLists');
-console.log(databaseLists) */
 
 class PostModal extends Component {
 
@@ -17,8 +14,14 @@ class PostModal extends Component {
         this.mapContainerModal = React.createRef();
         this.handleResize = this.handleResize.bind(this);
         this.toggleElement = this.toggleElement.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        const myLists = JSON.parse(localStorage.getItem('myLists')) || [];
         this.state = {
-            showElement: false
+            showElement: false,
+            myLists,
+            inputText: '',
+            checkedItems: [],
         };
     }
 
@@ -32,19 +35,15 @@ class PostModal extends Component {
         });
 
         this.map = map;
-
-        // Trigger a map resize
-        this.handleResize();
-
-        // Add the event listener to window resize
-        window.addEventListener('resize', this.handleResize);
     }
 
     componentWillUnmount() {
         // Remove the event listener for window resize
         window.removeEventListener('resize', this.handleResize);
+
         this.map.remove();
     }
+
 
     handleResize() {
         if (this.map) {
@@ -53,16 +52,39 @@ class PostModal extends Component {
     }
 
 
+    handleInputChange(event) {
+        this.setState({ inputText: event.target.value });
+        console.log(event.target.value)
+    }
 
-    
+    handleCreateList = () => {
+        this.setState({ inputText: '' });
+
+        this.props.createNewList(this.state.inputText);
+        const myLists = JSON.parse(localStorage.getItem('myLists')) || [];
+        this.setState({ myLists });
+    }
+
+    handleUpdate() {
+        const selectedItems = this.state.checkedItems.map(index => this.state.myLists[index]);
+        console.log(selectedItems);
+        if (selectedItems.length > 0) {
+            selectedItems.forEach(item => {
+                console.log(item.id);
+                console.log(this.props.property)
+                this.props.updateList(item.id, this.props.property);
+            });
+        }
+    }
+
     toggleElement() {
         this.setState(prevState => ({ showElement: !prevState.showElement }));
     }
 
 
     render() {
-        const { toggleModal, isOpen, property } = this.props;
-        const { showElement } = this.state;
+        const { toggleModal, isOpen, property, createNewList, updateList } = this.props;
+        const { showElement, myLists, inputText } = this.state;
 
 
 
@@ -109,29 +131,42 @@ class PostModal extends Component {
                                 <div className='saveToList-Text-postModal'>Save to list </div>
                             </div>
                             {showElement && (
-                            <div className='saveListPoup-Container'> 
-                                <div className='AddListContainer'>
-                                    <input className='saveListInput' placeholder='Add List...'></input>
-                                    <div className='AddListPlusButton'>+</div>
-                                </div>
-                                <div className='OptionListsContainer'>
+                                <div className='saveListPoup-Container'>
+                                    <div className='AddListContainer'>
+                                        <input className='saveListInput'
+                                            placeholder='Add List...'
+                                            value={inputText}
+                                            onChange={this.handleInputChange}></input>
+                                        <div className='AddListPlusButton' onClick={this.handleCreateList}>+</div>
+                                    </div>
+                                    <div className='OptionListsContainer'>
 
-                                    <div className='OptionListItem'>
-                                        <div className='checkBoxOptList'><input type={'checkbox'}></input></div>
-                                        <div className='ListNameOptList'>Name</div>
+                                        {myLists.map((item, index) => (
+                                            <div className='OptionListItem' key={index}>
+                                                <div className='checkBoxOptList'>
+                                                    <input
+                                                        type={'checkbox'}
+                                                        onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                this.setState((prevState) => ({
+                                                                    checkedItems: [...prevState.checkedItems, index],
+                                                                }));
+                                                            } else {
+                                                                this.setState((prevState) => ({
+                                                                    checkedItems: prevState.checkedItems.filter(
+                                                                        (i) => i !== index
+                                                                    ),
+                                                                }));
+                                                            }
+                                                        }}
+                                                    ></input>
+                                                </div>
+                                                <div className='ListNameOptList'>{item.name}</div>
+                                            </div>
+                                        ))}
+                                        <div className='SaveToListButton' onClick={this.handleUpdate}>Save</div>
                                     </div>
-                                    <div className='OptionListItem'>
-                                        <div className='checkBoxOptList'><input type={'checkbox'}></input></div>
-                                        <div className='ListNameOptList'>Name</div>
-                                    </div>
-                                    <div className='OptionListItem'>
-                                        <div className='checkBoxOptList'><input type={'checkbox'}></input></div>
-                                        <div className='ListNameOptList'>Name</div>
-                                    </div>
-
-                                    <div className='SaveToListButton'>Save</div>
-                                </div>
-                             </div>)}
+                                </div>)}
                         </div>
 
                         <div className='mainImage-postModal'>
