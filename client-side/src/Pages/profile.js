@@ -1,5 +1,5 @@
 import './pageStyles/profile.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Profile = () => {
   const [name, setName] = useState('');
@@ -19,6 +19,16 @@ const Profile = () => {
   const handleCancel = () => {
     // handle cancel logic here
   };
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if(isLoggedIn) {
+        const authUser = JSON.parse(localStorage.getItem("authUser"));
+        setName(authUser.name)
+        setEmail(authUser.email)
+    }
+  }, [])
 
   return (
     <div className="profile-container">
@@ -47,11 +57,11 @@ const Profile = () => {
       </div>
       <div className="right">
         <div className="input-field">
-          <input type="text" placeholder="Jane Doe" />
+          <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Jane Doe" />
           <i className="fas fa-edit"></i>
         </div>
         <div className="input-field">
-          <input type="email" placeholder="jdoe@email.com" />
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="jdoe@email.com" />
           <i className="fas fa-edit"></i>
           <a href="#" className="change-password">
             Change Password
