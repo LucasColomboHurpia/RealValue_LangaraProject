@@ -15,16 +15,16 @@ function Header() {
       <nav className="navbar menuDesktop">
         <ul>
           <li>
-            <a href="/searchMapResults">Search Properties </a>
+            <Link to="/searchMapResults">Search Properties </Link>
           </li>
           <li>
-            <a href="/savedLists">My List</a>
+            <Link to="/savedLists">My List</Link>
           </li>
           <li>
-            <a href="/profile">Profile</a>
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
-            <a href="/login">Login</a>
+            <Link to="/login">Login</Link>
           </li>
         </ul>
       </nav>
