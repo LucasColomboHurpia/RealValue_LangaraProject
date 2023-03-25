@@ -394,3 +394,25 @@
 .mapboxgl-popup-close-button:hover {
     background-color: #6617E2;
 }
+
+.marker-icon {
+    width: 10px;
+    height: 10px;
+}
+
+.marker {
+    height: 30px;
+    width: 30px;
+}
+.marker-content {
+    background: #c30b82;
+    border-radius: 50% 50% 50% 0;
+    height: 30px;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+    position: absolute;
+    top: 50%;
+    transform: rotate(-45deg);
+    width: 30px;
+    cursor: pointer;
+}
