@@ -10,6 +10,16 @@ import thumbnail3 from '../Assets/pexels-photo-2389474.png'
 function MainPage() {
     const history = useNavigate();
 
+    useEffect(() => {
+        // if(localStorage.getItem("isLoggedIn")) {
+        //     if(localStorage.getItem("setReloadMain") === true) {
+        //         console.log(true)
+        //         localStorage.setItem("setReloadMain", false);
+        //         window.location.reload();
+        //     }
+        // }
+      }, [])
+
     const cities = [
         {
             name: 'Vancouver',

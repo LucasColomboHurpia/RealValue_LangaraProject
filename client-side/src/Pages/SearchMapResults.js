@@ -52,7 +52,9 @@ function SearchMapResults() {
   //------------------------------------------------------------
   //DATA FROM BACK END
   const [backendData, setBackendData] = useState([]);
+  const [renderedData, setRenderedData] = useState([]);
   const [layerIDs, setLayerIDs] = useState([]);
+  const [markers, setMarkers] = useState([]);
 
     function setNewProperty (Property) {
         console.log(Property)
@@ -70,7 +72,6 @@ function SearchMapResults() {
 
         const iconElement = document.createElement('div');
         iconElement.className = 'marker-icon';
-        // iconElement.style.backgroundImage ='url(https://api.tomtom.com/maps-sdk-for-web/cdn/static/' + icon + ')';
         iconElement.style.backgroundImage ='url(http://localhost:3000/Assets/map-pin.svg)';
         markerContentElement.appendChild(iconElement);
 
@@ -93,10 +94,12 @@ function SearchMapResults() {
         `);
 
         // add marker to map
-        new tomtom.Marker({element: markerElement, anchor: 'bottom'})
+        const marker = new tomtom.Marker({element: markerElement, anchor: 'bottom'})
             .setLngLat(position)
             .setPopup(popup)
             .addTo(map);
+        
+        return marker;
     }
 
     const getGeoCode = async (queries) => {
@@ -139,9 +142,9 @@ function SearchMapResults() {
     }, []);
 
     useEffect(() => {
-        if(backendData.length !== 0) {
-            console.log(backendData)
-            const queries = backendData.map((data) => {
+        if(renderedData.length !== 0) {
+            console.log(JSON.stringify(renderedData))
+            const queries = renderedData.map((data) => {
               console.log(`data is`,data.adress1)
                 const fullAddress = `${data.adress1} ${data.adress2}`;
                 const query = {"query": `/geocode/${fullAddress}.json`}
@@ -150,20 +153,31 @@ function SearchMapResults() {
 
             getGeoCode(queries);
         }
-    }, [backendData]);
+    }, [renderedData]);
 
     useEffect(() => {
-      const markers = [];
-
         if(map && Object.keys(map).length !== 0 && geoCodes.length !== 0) {
+
+            if(markers && markers.length !==0) {
+                markers.forEach(marker => {
+                    marker.remove();
+                });
+                
+                setMarkers([])
+            }
+
+            const createdMarkers = [];
+
             geoCodes.forEach((geoCode, index) => { console.log('geocode is',geoCode)
                 if(geoCode!=undefined){
                     if(geoCode.lat>0){console.log('geocode lat is',geoCode.lat)
                         console.log('geocode is',geoCode)
                         
-                        createMarker('accident.colors-white.svg', [geoCode.lon, geoCode.lat], '#5327c3', backendData[index]);
+                        const newMarker = createMarker('accident.colors-white.svg', [geoCode.lon, geoCode.lat], '#5327c3', renderedData[index]);
+                        createdMarkers.push(newMarker);
                     }
-                    console .log(geoCodes)
+
+                    setMarkers(createdMarkers);
                 }
 
             })
@@ -174,7 +188,6 @@ function SearchMapResults() {
     }, [geoCodes]);
 
     useEffect(() => {
-        console.log(layerIDs);
         const ids = [];
 
         if(map && Object.keys(map).length !== 0) {
@@ -241,6 +254,31 @@ function SearchMapResults() {
 
     }, [map, filterByZone, showZones]);
 
+    useEffect(() => {
+        if(map && Object.keys(map).length !== 0) {
+            if(filterByType) {
+                const filteredRenderedData = backendData.filter(data => {
+                    if(filterByType === "Type") {
+                        return data;
+                    }
+
+                    if(filterByType === "other") {
+                        if(data.type !== "Single Family" && data.type !== "Condo" && data.type !== "Townhome" ) {
+                            console.log(data)
+                            return data;
+                        }
+                    }
+
+                    if(data.type === filterByType) {
+                        return data
+                    }
+                });
+
+                setRenderedData(filteredRenderedData);
+            }
+        }
+    }, [map, filterByType])
+
   //------------------------------------------------------------
   const [input, setInput] = useState("");
 
@@ -253,8 +291,8 @@ function SearchMapResults() {
         console.log(process.env.DEV_API_URL);
         const data = await response.json();
       let dataResults = (data[Object.keys(data)[0]])
-      console.log(dataResults)
-      setBackendData(dataResults)
+      setBackendData(dataResults);
+      setRenderedData(dataResults);
       changeLoading(false);
     } catch (error) {
       console.log(error)
@@ -276,18 +314,19 @@ function SearchMapResults() {
           <div className='FilterTitle'>Filters</div>
           <div className='FilterType '>
             <form >
-              <select name="Types" id="Types" className='FilterDropdown'>
+              <select name="Types" id="Types" onChange={e => setFilterByType(e.target.value)} className='FilterDropdown'>
                 <option value="Type">Type</option>
-                <option value="Residential">Residential</option>
-                <option value="Commercial">Commercial</option>
-                <option value="Storage">Storage</option>
-                <option value="Land">Land</option>
+                <option value="Single Family">Single Family</option>
+                <option value="Condo">Condo</option>
+                <option value="Townhome">Townhome</option>
+                {/* <option value="other">other</option> */}
               </select>
             </form>
           </div>
           <div className='FilterZoning'>
             <form>
               <select name="Zoning" id="Zoning" onChange={(e) => setFilterByZone(e.target.value)} className='FilterDropdown'>
+                <option value="Zoning">Zoning</option>
                 <option value="Single Detached House">Single Detached House</option>
                 <option value="Multiple Dwelling">Multiple Dwelling</option>
                 <option value="Industrial">Industrial</option>
@@ -320,10 +359,10 @@ function SearchMapResults() {
         <div className='listContainer'>
           <div className='postListings'>
 
-            {(backendData.length === 0 ) ?
+            {(renderedData.length === 0 ) ?
               (<span></span>)
               :
-              (backendData.map((item, i) => (
+              (renderedData.map((item, i) => (
                 < >
                   <ListCard toggleModal={toggleModal} setNewProperty={setNewProperty} property={item} />
                 </>
