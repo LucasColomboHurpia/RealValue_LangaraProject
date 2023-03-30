@@ -26,7 +26,7 @@ function SearchMapResults({createNewList, updateList}) {
 
   //------------------------------------------------------------
   //MODAL
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggleModal = () => setIsOpen(!isOpen);
 
   //------------------------------------------------------------

@@ -3,7 +3,7 @@
 }
 
 .postModalContainer {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -104,6 +104,12 @@
 .sourceLink-postModal{
     padding-top: 15px;
     display: block;
+    display: flex;
+    align-items: center;
+}
+.souceLink-icon-postModal1{
+    margin-right: 5px;
+    width: 18px;
 }
 
 .infoTitle-postModal{
@@ -279,4 +285,106 @@
 
 .hide{
     display: none;
+}
+
+@media (max-width:750px) {
+    .postModal {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        display: grid;
+        grid-template-columns:  auto;
+        grid-template-rows: 60% auto;
+
+        overflow: hidden;
+    }
+    .infoSection-postModal{
+        grid-row: 2;
+    }
+
+/*     ------------------------   */
+
+.pictureSection-postModal{
+    display: grid;
+    padding: 0px;
+    grid-template-columns: auto;
+    grid-template-rows: 90% 10%;
+}
+.mainImage-postModal{
+    width: 100%;
+    border-radius: 0%;        
+    grid-row: 1;
+
+}
+.imgPostModal{
+    border-radius: 0%;
+}
+
+.saveListPoup-Container{
+    margin-left: 53%;
+}
+
+.save-postModal{
+    transform: translateY(-20px);
+}
+
+/*     ------------------------   */
+
+.infoSection-postModal {
+    background: white;
+    overflow-y: visible;
+    overflow-x: hidden;
+    padding-top: 5%;
+    padding-bottom: 3%;
+    padding-left: 5%;
+    padding-right: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.infoSection3-postModal{
+    display: grid;
+    grid-template-columns: auto ;
+    grid-template-rows: auto auto auto auto;
+    margin-bottom: 2%;
+}
+
+/*     ------------------------   */
+
+.map-postModal{
+    width: 100%;
+    height: fit-content;
+
+    margin-top: 10px;
+
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    transform: scale(1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.tomMap{
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    height: 170px;
+    width: 100%;
+    z-index: 99;
+    overflow: hidden;
+}
+
+/*     ------------------------   */
+
+.closePostModal{
+    font-family: sans-serif;
+    position: absolute;
+    cursor: pointer;
+    left: 90%;
+    top: 2%;
+    font-size: x-large;
+}
 }
