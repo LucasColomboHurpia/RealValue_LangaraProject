@@ -6,6 +6,7 @@ import tomtom from '@tomtom-international/web-sdk-maps';
 
 import saveListPng from '../Assets/png-save-white.png'
 import saveListPngOpen from '../Assets/png-save-grey02.png'
+import websiteIcon from '../Assets/png-website-darkgrey.png'
 
 class PostModal extends Component {
 
@@ -33,6 +34,8 @@ class PostModal extends Component {
             center: [-123.12816828788911, 49.27892695457111],
             zoom: 12,
         });
+
+        // Geocode the address
 
         this.map = map;
     }
@@ -125,7 +128,7 @@ class PostModal extends Component {
                     </div>
                     <div className='pictureSection-postModal'>
                         <div className='save-postModal'>
-                            <div className='sourceLink-postModal'><a href={property.link}>Go to Website</a></div>
+                            <div className='sourceLink-postModal'><a href={property.link} className='sourceLink-postModal'><img className='souceLink-icon-postModal1' src={websiteIcon}></img><span>Go to Website</span></a></div>
                             <div className='saveToList-postModal' onClick={this.toggleElement}>
                                 <div className='saveToList-icon-postModal1'> <img src={saveListPng}></img> </div>
                                 <div className='saveToList-Text-postModal'>Save to list </div>

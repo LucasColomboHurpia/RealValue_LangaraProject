@@ -417,3 +417,11 @@
     width: 30px;
     cursor: pointer;
 }
+
+@media (max-width:750px) {
+    .pageContainer{
+        background-color: white;
+        display: grid;
+        grid-template-columns: 45vw auto;
+    }
+}
