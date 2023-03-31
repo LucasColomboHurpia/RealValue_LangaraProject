@@ -92,7 +92,7 @@ function StatsModal({ toggleStats, statsIsOpen }) {
               <div className='statsModalStatsSnippets'>
                 <div className='statsModalSnippetPart1'>
                   <div className='statsModalSnippetTitle'>Average Sold Price</div>
-                  <div className='statsModalSnippetPrice'>$ 4.829</div>
+                  <div className='statsModalSnippetPrice'>$ 4.829<span style={{ fontSize: '0.6rem' }}>/sqm</span> </div>
                 </div>
                 <div className='statsModalSnippetPart2'>
                   <div id="line-chart-1">

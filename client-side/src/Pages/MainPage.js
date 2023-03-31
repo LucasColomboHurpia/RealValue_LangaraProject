@@ -44,7 +44,26 @@ function MainPage() {
             )
         })
     }
+///--------------Placeholder magic-------------------------------------------------
+    const [placeholderText, setPlaceholderText] = useState('');
+  
+    useEffect(() => {
+      function handleResize() {
+        const isSmallScreen = window.innerWidth <= 768;
+        setPlaceholderText(isSmallScreen ? 'Enter an address' : 'Enter an address, neighbourhood, city, or ZIP code');
+      }
+  
+      // Call the function once to set the initial placeholder text
+      handleResize();
+  
+      // Add an event listener to detect window resize and update the placeholder text accordingly
+      window.addEventListener('resize', handleResize);
+  
+      // Remove the event listener on component unmount to prevent memory leaks
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
+///----------------------------------------------------------------------------------
     const onSearch = (e) => {
         e.preventDefault();
         history(`/searchResults/${searchQuery}`)
@@ -62,7 +81,7 @@ function MainPage() {
                             className='search-input'
                             id='searchQuery'
                             value={searchQuery}
-                            placeholder='Enter an address, neighbourhood, city, or ZIP code.'
+                            placeholder={placeholderText}
                             onChange={e => setSearchQuery(e.target.value)}
                         />
                         <div className='search-right'>

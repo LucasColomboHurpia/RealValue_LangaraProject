@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 
 function MyListCard(props) {
-    console.log(props)
-
     const handleClick = () => {
       props.setNewProperty(props.property);
       props.toggleModal();

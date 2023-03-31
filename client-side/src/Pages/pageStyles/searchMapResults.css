@@ -61,6 +61,7 @@
     position: relative;
     width: 100%;
     display: flex;
+    cursor: pointer;
 }
 
 .searchBar{
@@ -442,3 +443,11 @@
         height: 100vh;
     }
 }
+
+/* @media (max-width:750px) {
+    .pageContainer{
+        background-color: white;
+        display: grid;
+        grid-template-columns: 45vw auto;
+    }
+} */
