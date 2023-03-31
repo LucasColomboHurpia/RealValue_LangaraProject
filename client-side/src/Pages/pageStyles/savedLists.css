@@ -104,3 +104,10 @@ margin-right: 30px;
     font-weight:normal;
     font-size: smaller;
 }
+
+@media (max-width:750px) {
+    .ListContainer{
+        margin-left: -20px;
+    
+    }
+}

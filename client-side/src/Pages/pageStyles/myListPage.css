@@ -46,6 +46,10 @@
     transition: 0.3s;
 }
 
+.myListPageAnalyticsButton{
+    display: none;
+}
+
 .myListPageExportButton:hover{
     background-color: rgb(70, 70, 70);
 }
@@ -174,3 +178,103 @@
 .CloseModalExport:hover{
     transform: translate(1200%,-250%) scale(1.2);
 }
+
+@media (max-width:750px) {
+    .myListPageItemContainer{
+        grid-template-columns:auto !important;
+    }
+
+    .myListItemRemove{
+        display: none;
+    }
+
+    .myListPageSearchBar{
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .myListPageExportButton{
+        position: fixed;
+        left: 72%;
+        top: 89%;
+        border-radius: 50%;
+        padding: 0;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        z-index: 998;
+    }
+
+    .ExcelExport{
+        position: absolute;
+        color: white;
+        background-color: #4B9D73;
+        padding: 5px;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(0%,-110%);
+    
+        animation-name: slideIn;
+        animation-duration:1s;
+    }
+
+    
+.PDFExport{
+    position: absolute;
+    color: white;
+    background-color: #DD4C4A;
+    padding: 5px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0%,-212%);
+
+    animation-name: slideIn;
+    animation-duration:1s;
+}
+    
+    @keyframes slideIn {
+        from { transform: translate(-8%,-25%); opacity: 0;}
+        to { opacity: 1;}
+      }
+
+
+      .ExportModal{
+        position: fixed;
+        height: 95%;
+        width: 95%;
+        z-index: 999;
+        border-radius: 25px;
+        background-color: white;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+        top: 3.5%;
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+        animation-name: slideModalConfirmation;
+        animation-duration:1s;
+        animation-timing-function: ease-out;
+    }
+
+    .ExportModalButtonContainer{
+        transform: translateX(-50%);
+    }
+    }
