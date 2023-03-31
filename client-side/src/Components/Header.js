@@ -22,42 +22,44 @@ function Header() {
 
   return (
     <div className="header">
-      <span className='headerContainer'>
-        <div className='logoHeader'>
-          <Link to="/">
-            <img src={logo} />
-          </Link>
-        </div>
+      <div className="container">
+        <span className='headerContainer'>
+            <div className='logoHeader'>
+            <Link to="/">
+                <img src={logo} />
+            </Link>
+            </div>
 
-      <nav className="navbar menuDesktop">
-        <ul>
-          {userAuthenticated &&
-            <>
-                <li>
-                    <Link to="/searchMapResults">Search Properties </Link>
-                </li>
-                <li>
-                    <Link to="/savedLists">My List</Link>
-                </li>
-                <li>
-                    <Link to="/profile">Profile</Link>
-                </li>
-            </>
-          }
-            {!userAuthenticated &&
+        <nav className="navbar menuDesktop">
+            <ul>
+            {userAuthenticated &&
                 <>
                     <li>
-                        <Link to="/login">Login</Link>
+                        <Link to="/searchMapResults">Search Properties </Link>
+                    </li>
+                    <li>
+                        <Link to="/savedLists">My List</Link>
+                    </li>
+                    <li>
+                        <Link to="/profile">Profile</Link>
                     </li>
                 </>
             }
-        </ul>
-      </nav>
+                {!userAuthenticated &&
+                    <>
+                        <li>
+                            <Link to="/login">Login</Link>
+                        </li>
+                    </>
+                }
+            </ul>
+        </nav>
 
-        <div className='navbarMobile'>
-          Mobile Menu
-        </div>
-      </span>
+            <div className='navbarMobile'>
+            Mobile Menu
+            </div>
+        </span>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ import MainPage from './Pages/MainPage';
 import SavedListPage from './Pages/SavedLists';
 import Profile from './Pages/profile';
 import Login from './Pages/Login';
-import SearchResults from './Pages/searchResults';
+import SearchResults from './Pages/SearchResults';
 import MyListPage from './Pages/MyListPage';
 
 import SearchMapResults from './Pages/SearchMapResults';
