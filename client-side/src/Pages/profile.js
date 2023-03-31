@@ -1,5 +1,13 @@
 import './pageStyles/profile.css';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+import accountLogo from '../Assets/png-profile-icon-white.png';  
+import saveLogo from '../Assets/png-save-white.png';
+import logoutLogo from '../Assets/png-logout-white.png';  
+import next from '../Assets/Vector.png';
+import editIcon from '../Assets/png-edit-icon2.png';
+
 
 const Profile = () => {
   const [name, setName] = useState('');
@@ -38,19 +46,22 @@ const Profile = () => {
           <ul>
             <li>
               <a href="#" className="account-info">
-                Account Information <i className="fas fa-angle-right"></i>
+              <img src={accountLogo} alt="account-info"/>
+                Account Information <img src={next} alt="next"className='nextIcon'/>
               </a>
             </li>
             <li>
               <div className="my-lists">
                 <Link to="/savedLists">
-                  My Lists <i className="fas fa-angle-right"></i>
+                <img src={saveLogo} alt="My List"/>
+                  My Lists <img src={next} alt="next" className='nextIcon'/>
                 </Link>
               </div>
             </li>
             <li className="logout">
               <a href="#">
-                <i className="fas fa-sign-out-alt"></i> Logout
+              <img src={logoutLogo} alt="Logout"/>
+                Logout <img src={next} alt="next" className='nextIcon'/>
               </a>
             </li>
           </ul>
@@ -60,11 +71,11 @@ const Profile = () => {
       <div className="right">
         <div className="input-field">
           <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Jane Doe" />
-          <i className="fas fa-edit"></i>
+          {/* <img src={editIcon} alt="editIcon"/> */}
         </div>
         <div className="input-field">
           <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="jdoe@email.com" />
-          <i className="fas fa-edit"></i>
+          {/* <img src={editIcon} alt="editIcon"/> */}
           <a href="#" className="change-password">
             Change Password
           </a>
