@@ -22,6 +22,15 @@ function SavedListPage() {
 
 
   const myLists = JSON.parse(localStorage.getItem('myLists')) 
+  if (!myLists) {
+    let sampleList = [{
+      id: 0,
+      name: 'Example List',
+      list: objectSample
+    }]
+    localStorage.setItem('myLists', JSON.stringify(sampleList));
+    myLists = sampleList;
+  }
 
   return (
     <div className='savedListsContainer'>
