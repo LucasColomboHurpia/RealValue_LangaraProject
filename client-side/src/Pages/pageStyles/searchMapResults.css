@@ -418,10 +418,36 @@
     cursor: pointer;
 }
 
-@media (max-width:750px) {
+/* ////////////////////////////////// */
+
+@media screen and (max-width: 1024px) {
+    .pageContainer {
+        grid-template-columns: 100% 100%;
+        grid-template-areas: "mapContainer" "menuContainer";
+    }
+
+    .mapContainer {
+        grid-area: mapContainer;
+    }
+
+    .menuContainer{
+        grid-area: menuContainer;
+    }
+
+    .menuContainer {
+        z-index: 100000;
+        position: absolute;
+        transform: translate(-50%, 0%);
+        left: 50%;
+        bottom: -52%;
+        height: 100vh;
+    }
+}
+
+/* @media (max-width:750px) {
     .pageContainer{
         background-color: white;
         display: grid;
         grid-template-columns: 45vw auto;
     }
-}
+} */
