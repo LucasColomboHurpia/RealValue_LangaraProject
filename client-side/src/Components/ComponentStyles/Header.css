@@ -19,11 +19,11 @@
     width: 100%;
   }
 
-  .logoHeader{
+  .logoHeaderContainer{
     padding-left: 20px;
   }
 
-  .header img {
+  .logoHeader {
     width: 200px;
     height: 100%;
   }
@@ -66,18 +66,21 @@
     color: #6617E2;
   }
 
-  .navbarMobile{
+  .menuIcon {
+    width: 32px;
+    height: 32px;
     display: none;
-
   }
 
   @media (max-width: 768px) {
-    .navbarMobile {
-      display: flex;
-    }
     .menuDesktop{
         display: none;
     }
+
+    .headerContainer {
+        justify-content: center;
+    }
+
     .header_mobile {
         display: flex;
         align-items: center;
@@ -111,5 +114,23 @@
         display: flex;
       }
             
-      
+      .menuIcon {
+        display: block;
+        position: absolute;
+        left: 5%;
+      }
+
+        .logoHeader {
+            max-width: 179px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .navbar a {
+            font-size: 18px;
+        }
+
+        .navbar ul {
+            flex-direction: column;
+        }
   }
