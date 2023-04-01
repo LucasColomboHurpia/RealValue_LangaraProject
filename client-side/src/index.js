@@ -28,7 +28,7 @@ const App = () => {
 
     if (localStorage.length === 0) { newId = 0 }
     else {
-      newId = ((JSON.parse(localStorage.getItem('myLists'))).length) + 1
+      newId = (Math.random()*999999999)
     }
 
     let newListObject = {
@@ -70,7 +70,7 @@ const App = () => {
   };
 
   //--------------------
-/*   localStorage.clear()
+   localStorage.clear()
 
 
   let sampleList = [{
@@ -78,7 +78,7 @@ const App = () => {
     name: 'Example List',
     list: objectSample
   }]
-  localStorage.setItem('myLists', JSON.stringify(sampleList)); */
+  localStorage.setItem('myLists', JSON.stringify(sampleList)); 
 
   //--------------------
 
