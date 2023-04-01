@@ -69,8 +69,10 @@ const App = () => {
     setMyLists(existingList);
   };
 
+
   //--------------------
-   localStorage.clear()
+
+/*   localStorage.clear()
 
 
   let sampleList = [{
@@ -78,7 +80,7 @@ const App = () => {
     name: 'Example List',
     list: objectSample
   }]
-  localStorage.setItem('myLists', JSON.stringify(sampleList)); 
+  localStorage.setItem('myLists', JSON.stringify(sampleList)); */
 
   //--------------------
 
