@@ -28,7 +28,7 @@ const App = () => {
 
     if (localStorage.length === 0) { newId = 0 }
     else {
-      newId = ((JSON.parse(localStorage.getItem('myLists'))).length) + 1
+      newId = (Math.random()*999999999)
     }
 
     let newListObject = {

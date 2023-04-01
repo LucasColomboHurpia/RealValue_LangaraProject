@@ -22,7 +22,6 @@ function SavedListPage() {
 
 
   const myLists = JSON.parse(localStorage.getItem('myLists')) 
-  console.log(myLists)
 
   return (
     <div className='savedListsContainer'>
@@ -31,6 +30,7 @@ function SavedListPage() {
       <div className='savedListTitle'>Saved Lists</div>
 
       <div className='ListContainer'>
+
 
       {myLists.map((item, index) => (
         <div className='List'>
