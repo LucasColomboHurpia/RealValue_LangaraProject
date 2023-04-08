@@ -2,33 +2,57 @@ import './ComponentStyles/Footer.css';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
+import logo from '../Assets/png-logo2-small.png';
+import facebookLogo from '../Assets/fb.png';
+import instagramLogo from '../Assets/ig.png';
+import twitterLogo from '../Assets/twitter.png';
+import linkedinLogo from '../Assets/in.png';
+
 function Footer() {
     const [menuOpen, setMenuOpen] = useState(true);
   return (
-    <footer>
-       <div className="logo">
-       <div > <a href="/">[LOGO]</a></div>
+       <div className="footer-container">
+        <div className="column">
+          <div className="row logo">
+            <Link to="/">
+            <img src={logo} alt="Logo" />
+          </Link>
+          </div>
+        </div>
+      <div className="column">
+        <div className="row">
+          <h4>About us</h4><br/>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
+        </div>
       </div>
-      
-      <ul className="links">
-        <li>
-            <Link to="/about">About Us</Link>
-            <p className='about-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-        </li>
-        <li>
-            <Link to="/contact">Contact Us</Link>
-            <p className='contact-text'>Phone: 778-123-4567</p>
-            <p className='contact-text'>Email: info@realvalue.com</p>
-        </li>
-        <li>
-             <Link to="/terms" className='tc'>Terms and Conditions</Link><br/>
-             <Link to="/privacy" className='pp'>Privacy Policy</Link>
-        </li>
-      </ul><br/>
-      <p className="copy">
-        © 2023 Quasars. All rights reserved.
-      </p>
-    </footer>
+      <div className="column">
+        <div className="row">
+          <h4>Contact us</h4>
+        </div>
+          <p>Phone: 778-123-4567</p>
+        <div className="row">
+          <p>Email: info@realvalue.com</p>
+        </div>
+        <div className="row">
+          <img src={facebookLogo} alt="Facebook" className='fb'/>
+          <img src={instagramLogo} alt="Instagram" className='in' />
+          <img src={twitterLogo} alt="Twitter" className='twitter'/>
+          <img src={linkedinLogo} alt="LinkedIn" className='in' />
+        </div>
+      </div>
+      <div className="column">
+        <div className="row">
+          <h4>Terms and Conditions</h4>
+        </div>
+        <div className="row">
+          <h4>Privacy Policy</h4>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <p>Copyright</p>
+      </div>
+    </div>
+  
   );
 }
 
