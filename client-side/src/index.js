@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -22,67 +23,22 @@ import { local } from 'd3';
 const App = () => {
   const [myLists, setMyLists] = useState([]);
 
-  const createNewList = (newListName) => {
+  const createNewList = async (newListName) => {
 
-    let newId = 0
-
-    if (localStorage.length === 0) { newId = 0 }
-    else {
-      newId = (Math.random()*999999999)
-    }
-
-    let newListObject = {
-      id: newId,
-      name: newListName,
-      list: []
-    }
-
-    let existingList = []
-
-    console.log(newListObject)
-    if (localStorage.length != 0) {
-      existingList = JSON.parse(localStorage.getItem('myLists'))
-      console.log(existingList)
-    }
-
-
-    existingList.push(newListObject)
-
-    localStorage.setItem('myLists', JSON.stringify(existingList));
+    const response = await axios.post('/api/v1/lists', { name: newListName })
+    const newList = response.data.data;
+    const existingList = [...myLists, newList];
+    console.log(existingList);
     setMyLists(existingList);
   };
 
-  const updateList = (id, property) => {
-
-    let existingList = JSON.parse(localStorage.getItem('myLists'))
-
-    existingList.forEach(item => {
-      if (item.id == id) {
-        item.list.push(property)
-      }
-    });
-
-      console.log(property)
-      console.log(existingList)
-
-    localStorage.setItem('myLists', JSON.stringify(existingList));
+  const updateList = async (listId, property) => {
+    const response = await axios.patch(`/api/v1/lists/${listId}`, {property })
+    const newList = response.data.data;
+    const existingList = [...myLists, newList];
+    console.log(existingList);
     setMyLists(existingList);
   };
-
-
-  //--------------------
-
-/*   localStorage.clear()
-
-
-  let sampleList = [{
-    id: 0,
-    name: 'Example List',
-    list: objectSample
-  }]
-  localStorage.setItem('myLists', JSON.stringify(sampleList)); */
-
-  //--------------------
 
   return (
     <>
@@ -90,7 +46,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/searchMapResults" element={<SearchMapResults createNewList={createNewList} updateList={updateList} />} />
-          <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
+          <Route path="/searchMapResults/:searchQuery" element={<SearchMapResults createNewList={createNewList} updateList={updateList} />} />} />
           <Route path="/savedLists" element={<SavedListPage />} />
           <Route path="/mylist" element={<MyListPage />} />
           <Route path="/profile" element={<Profile />} />

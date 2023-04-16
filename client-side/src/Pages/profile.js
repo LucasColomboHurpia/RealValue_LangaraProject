@@ -37,19 +37,17 @@ const Profile = () => {
         <h1 className="name">Jane Doe</h1>
         <div className="links">
           <ul>
-            <li>
-              <a href="#" className="account-info">
+            <li className="account-info">
+              <a href="#">
                 Account Information <i className="fas fa-angle-right"></i>
               </a>
             </li>
-            <li>
-              <div className="my-lists">
+            <li className="account-info">
                 <Link to="/savedLists">
                   My Lists <i className="fas fa-angle-right"></i>
                 </Link>
-              </div>
             </li>
-            <li className="logout">
+            <li className="account-info logout">
               <a href="#">
                 <i className="fas fa-sign-out-alt"></i> Logout
               </a>

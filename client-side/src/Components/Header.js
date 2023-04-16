@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from '../Assets/logo.png';
+import cross from '../Assets/Cross.svg';
 import menuIcon from '../Assets/menuIcon.svg';
 
 function Header() {
@@ -19,6 +20,17 @@ function Header() {
   }, [])
 
   useEffect(() => {
+    window.addEventListener('resize', function () {
+        if(document.documentElement.clientWidth >= 767 ){
+            setMenuOpen(true)
+        }
+        else {
+            setMenuOpen(false)
+        }
+    });
+  }, [])
+
+  useEffect(() => {
     if(localStorage.getItem("isLoggedIn")) setUserAuthenticated(true)
   }, [userAuthenticated])
 
@@ -27,13 +39,19 @@ function Header() {
     history.push('/login');
   }
 
+  const navAaway = () => {
+    if(document.documentElement.clientWidth <= 767){
+        setMenuOpen(false)
+    }
+  }
+
   return (
     <div className="header">
       <div className="container">
         <span className='headerContainer'>
 
             <>
-                <img className="menuIcon" onClick={() => setMenuOpen(!menuOpen)} src={menuIcon} />
+                <img className="menuIcon" onClick={() => setMenuOpen(true)} src={menuIcon} />
             </>
 
             <div className='logoHeaderContainer'>
@@ -42,29 +60,30 @@ function Header() {
                 </Link>
             </div>
 
-            <nav style={{ display: menuOpen ? 'block' : 'none' }} className="navbar menuDesktop">
+            <nav style={{ display: menuOpen ? 'flex' : 'none' }} className="navbar menuDesktop">
+                <img className="closeIcon" onClick={() => setMenuOpen(false)} src={cross} />
                 <ul>
                     {userAuthenticated &&
                         <>
                             <li>
-                                <Link to="/searchMapResults">Search</Link>
+                                <Link onClick={navAaway} to="/searchMapResults">Search</Link>
                             </li>
                             <li>
-                                <Link to="/savedLists">My Lists</Link>
+                                <Link onClick={navAaway} to="/savedLists">My Lists</Link>
                             </li>
                             <li>
-                                <Link to="/profile">Profile</Link>
+                                <Link onClick={navAaway} to="/profile">Profile</Link>
                             </li>
 
                             <li>
-                                <Link onClick={logout} to="/login">Logout</Link>
+                                <Link onClick={() => {setMenuOpen(false); logout()}} to="/login">Logout</Link>
                             </li>
                         </>
                     }
                     {!userAuthenticated &&
                         <>
                             <li>
-                                <Link to="/login">Login</Link>
+                                <Link onClick={navAaway} to="/login">Login</Link>
                             </li>
                         </>
                     }

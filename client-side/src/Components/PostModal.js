@@ -7,6 +7,7 @@ import tomtom from '@tomtom-international/web-sdk-maps';
 import saveListPng from '../Assets/png-save-white.png'
 import saveListPngOpen from '../Assets/png-save-grey02.png'
 import websiteIcon from '../Assets/png-website-darkgrey.png'
+import axios from 'axios';
 
 class PostModal extends Component {
 
@@ -17,7 +18,7 @@ class PostModal extends Component {
         this.toggleElement = this.toggleElement.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
-        const myLists = JSON.parse(localStorage.getItem('myLists')) || [];
+        const myLists = [];
         this.state = {
             showElement: false,
             myLists,
@@ -26,7 +27,17 @@ class PostModal extends Component {
         };
     }
 
-    componentDidMount() {
+    getLists = async () => {
+        const response = await axios.get('/api/v1/lists');
+        this.setState({myLists: response.data.data})
+    }
+
+    getLists = async () => {
+        const response = await axios.get('/api/v1/lists');
+        this.setState({myLists: response.data.data})
+    }
+
+    async componentDidMount() {
         const map = tomtom.map({
             key: 'SAs8GubigOjo4UwoTk7tG4sXMPosF8uU',
             source: 'raster',
@@ -34,6 +45,8 @@ class PostModal extends Component {
             center: [-123.12816828788911, 49.27892695457111],
             zoom: 12,
         });
+
+        await this.getLists();
 
         // Geocode the address
 
@@ -61,11 +74,8 @@ class PostModal extends Component {
     }
 
     handleCreateList = () => {
-        this.setState({ inputText: '' });
-
         this.props.createNewList(this.state.inputText);
-        const myLists = JSON.parse(localStorage.getItem('myLists')) || [];
-        this.setState({ myLists });
+        this.setState({ inputText: '' });
     }
 
     handleUpdate() {
@@ -73,9 +83,9 @@ class PostModal extends Component {
         console.log(selectedItems);
         if (selectedItems.length > 0) {
             selectedItems.forEach(item => {
-                console.log(item.id);
+                console.log(item._id);
                 console.log(this.props.property)
-                this.props.updateList(item.id, this.props.property);
+                this.props.updateList(item._id, this.props.property);
             });
         }
     }
