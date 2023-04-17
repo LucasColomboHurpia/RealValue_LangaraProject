@@ -66,7 +66,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<MainPage />} />
         </Routes>
-
+        <Footer />
       </Router>
     </>
   );

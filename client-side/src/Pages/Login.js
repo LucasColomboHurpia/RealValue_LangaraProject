@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import facebookLogo from '../Assets/icons8-facebook-f-30.png';
+import googleLogo from '../Assets/icons8-google-24.png';
+
 import axios from 'axios';
 
 import APIURL from '../constants/apiUrl';
@@ -76,10 +80,10 @@ const LoginPage = () => {
             <div className="separator">or continue with</div>
             <div className="social-btns">
             <button className="google-btn">
-                <i className="fa fa-google"></i> Google
+            <img src={googleLogo} alt="Google" className='google'/> Google
             </button>
             <button className="facebook-btn">
-                <i className="fa fa-facebook"></i> Facebook
+            <img src={facebookLogo} alt="Facebook" className='fbook'/> Facebook
             </button>
             </div>
             <div className="signup-link">

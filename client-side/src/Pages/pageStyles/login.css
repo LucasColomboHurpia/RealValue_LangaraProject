@@ -3,7 +3,7 @@
     display: flex;
     height: 70vh;
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
+    font: Poppins;
     background-image: url('../../../public/Assets/login-background.jpg');
     background-repeat: no-repeat;
     background-position: bottom;
@@ -43,12 +43,11 @@
   }
   
   .input-group input {
-    
     padding: 10px 15px;
     border: none;
     border-radius: 10px;
     background-color: #F5F5F5;
-    font-family: Arial, Helvetica, sans-serif;
+    font: Poppins;
     font-weight: lighter;
     padding: 15px;
     padding-left: 30px;
@@ -95,7 +94,7 @@
     align-items: center;
     padding: 15px 25px;
     background-color: #6617E2;
-    font-family: Arial, Helvetica, sans-serif;
+    font: Poppins;
     font-weight: lighter;
     color: #fff;
     border: none;
@@ -107,7 +106,7 @@
   }
   
   .separator {
-    font-family: Arial, Helvetica, sans-serif;
+    font: Poppins;
     font-size: 18px;
     margin: 10px auto;
     width: 80%;
@@ -116,7 +115,7 @@
   }
   
   .social-btns {
-    font-family: Arial, Helvetica, sans-serif;
+    font: Poppins;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -145,6 +144,10 @@
     margin-right: 10px;
   }
   
+   .google, .fbook {
+    padding-right: 20px;
+  }
+
   .signup-link {
     font-size: 15px;
     text-align: center;
