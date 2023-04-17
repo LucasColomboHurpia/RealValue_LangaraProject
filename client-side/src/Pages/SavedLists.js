@@ -1,9 +1,10 @@
 import './pageStyles/savedLists.css';
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import objectSample from '../objectSample';
 import MyListCard from '../Components/MyListCard';
 import PostModal from '../Components/PostModal'
+import axios from 'axios';
 
 console.log(objectSample)
 
@@ -11,6 +12,7 @@ function SavedListPage() {
 
   //------------------------------------------------------------
   //MODAL
+  const [myLists, setMyLists] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
   //------------------------------------------------------------
@@ -20,17 +22,20 @@ function SavedListPage() {
   };
   //------------------------------------------------------------
 
+    async function getLists() {
+        const response = await axios.get('/api/v1/lists');
+        let sampleList = [{
+            id: 0,
+            name: 'Example List',
+            properties: objectSample
+        }]
+        console.log([...sampleList, ...response.data.data])
+        setMyLists([...sampleList, ...response.data.data]);
+    }
 
-  const myLists = JSON.parse(localStorage.getItem('myLists')) 
-  if (!myLists) {
-    let sampleList = [{
-      id: 0,
-      name: 'Example List',
-      list: objectSample
-    }]
-    localStorage.setItem('myLists', JSON.stringify(sampleList));
-    myLists = sampleList;
-  }
+    useEffect(() => {
+        getLists();
+    }, [])
 
   return (
     <div className='savedListsContainer'>
@@ -47,7 +52,7 @@ function SavedListPage() {
             <div className='SeeAllButton'> <Link to="/mylist">See all</Link></div>
             </div>
           <div className='cardContainer'>
-          {item.list.map((item) => (
+          {item.properties && item.properties.map((item) => (
             <MyListCard property={item} toggleModal={toggleModal} setNewProperty={setNewProperty}/>
             ))}
         </div>

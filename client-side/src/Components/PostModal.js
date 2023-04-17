@@ -7,6 +7,7 @@ import tomtom from '@tomtom-international/web-sdk-maps';
 import saveListPng from '../Assets/png-save-white.png'
 import saveListPngOpen from '../Assets/png-save-grey02.png'
 import websiteIcon from '../Assets/png-website-darkgrey.png'
+import axios from 'axios';
 
 class PostModal extends Component {
 
@@ -17,16 +18,14 @@ class PostModal extends Component {
         this.toggleElement = this.toggleElement.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
-        const myLists = JSON.parse(localStorage.getItem('myLists')) || [];
         this.state = {
             showElement: false,
-            myLists,
             inputText: '',
             checkedItems: [],
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const map = tomtom.map({
             key: 'SAs8GubigOjo4UwoTk7tG4sXMPosF8uU',
             source: 'raster',
@@ -61,23 +60,12 @@ class PostModal extends Component {
     }
 
     handleCreateList = () => {
-        this.setState({ inputText: '' });
-
         this.props.createNewList(this.state.inputText);
-        const myLists = JSON.parse(localStorage.getItem('myLists')) || [];
-        this.setState({ myLists });
+        this.setState({ inputText: '' });
     }
 
-    handleUpdate() {
-        const selectedItems = this.state.checkedItems.map(index => this.state.myLists[index]);
-        console.log(selectedItems);
-        if (selectedItems.length > 0) {
-            selectedItems.forEach(item => {
-                console.log(item.id);
-                console.log(this.props.property)
-                this.props.updateList(item.id, this.props.property);
-            });
-        }
+    handleUpdate(e) {
+        this.props.updateList(this.state.checkedItems, this.props.property);
     }
 
     toggleElement() {
@@ -87,7 +75,8 @@ class PostModal extends Component {
 
     render() {
         const { toggleModal, isOpen, property, createNewList, updateList } = this.props;
-        const { showElement, myLists, inputText } = this.state;
+        const { showElement, inputText } = this.state;
+        const { myLists } = this.props;
 
 
 
@@ -152,7 +141,7 @@ class PostModal extends Component {
                                                         onChange={(e) => {
                                                             if (e.target.checked) {
                                                                 this.setState((prevState) => ({
-                                                                    checkedItems: [...prevState.checkedItems, index],
+                                                                    checkedItems: [...prevState.checkedItems, item.id],
                                                                 }));
                                                             } else {
                                                                 this.setState((prevState) => ({

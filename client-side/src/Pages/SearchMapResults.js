@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import tomtom from '@tomtom-international/web-sdk-maps';
 
@@ -16,9 +16,11 @@ import APIURL from '../constants/apiUrl';
 
 import geodata from '../Data/zoning-districts-and-labels.json';
 
-function SearchMapResults({createNewList, updateList}) {
+function SearchMapResults({createNewList, updateList, myLists}) {
   //------------------------------------------------------------
   //Loading Icon
+  let { searchQuery } = useParams();
+
   const [loadingTemplate, setloading] = useState(false);
   const [showZones, setShowZones] = useState(false);
 
@@ -140,6 +142,13 @@ function SearchMapResults({createNewList, updateList}) {
         //     map.remove();
         // };
     }, []);
+
+    useEffect(() => {
+        if(searchQuery) {
+            setInput(searchQuery);
+            getPropertiesBySearch();
+        }
+    }, [])
 
     useEffect(() => {
         if(renderedData.length !== 0) {
@@ -283,9 +292,13 @@ function SearchMapResults({createNewList, updateList}) {
   const [input, setInput] = useState("");
 
   //form
-  const handleSubmit = async (event) => {
+  const handleSubmit =  (event) => {
     event.preventDefault();
     console.log('clicked')
+    getPropertiesBySearch()
+  };
+
+  const getPropertiesBySearch = async () => {
     changeLoading(true);
     try {
       const response = await fetch(`${APIURL}/scrapper?input=${input}`);
@@ -298,12 +311,12 @@ function SearchMapResults({createNewList, updateList}) {
     } catch (error) {
       console.log(error)
     }
-  };
+  }
   //------------------------------------------------------------
 
   return (
     <>
-    {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty} createNewList={createNewList} updateList={updateList}/> : null}
+    {isOpen ? <PostModal myLists={myLists}  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty} createNewList={createNewList} updateList={updateList}/> : null}
     {statsIsOpen ? <StatsModal  toggleStats={toggleStats} statsIsOpen={statsIsOpen} property={activeProperty}/> : null}
 
     <div className='pageContainer'>
@@ -343,7 +356,7 @@ function SearchMapResults({createNewList, updateList}) {
         </div>
         <div className='searchListingContainer'>
           <div className='searchBarContainer'>
-            <form className='searchBarForm' >
+            <form className='searchBarForm' id='searchBarForm' onSubmit={handleSubmit}>
               <input className='searchBar' type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder='Enter an address, neighbourhood, city, or ZIP code.' />
               <img className='searchBarIcon' src='/icons/icon_search_outline.svg' onClick={handleSubmit}/>
             </form>

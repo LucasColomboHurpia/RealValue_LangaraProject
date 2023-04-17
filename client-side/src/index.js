@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -22,75 +23,43 @@ import { local } from 'd3';
 const App = () => {
   const [myLists, setMyLists] = useState([]);
 
-  const createNewList = (newListName) => {
-
-    let newId = 0
-
-    if (localStorage.length === 0) { newId = 0 }
-    else {
-      newId = (Math.random()*999999999)
+    const getLists = async () => {
+        const response = await axios.get('/api/v1/lists');
+        setMyLists(response.data.data);
     }
 
-    let newListObject = {
-      id: newId,
-      name: newListName,
-      list: []
-    }
+    useEffect(() => {
+        getLists()
+    }, [])
 
-    let existingList = []
-
-    console.log(newListObject)
-    if (localStorage.length != 0) {
-      existingList = JSON.parse(localStorage.getItem('myLists'))
-      console.log(existingList)
-    }
-
-
-    existingList.push(newListObject)
-
-    localStorage.setItem('myLists', JSON.stringify(existingList));
+  const createNewList = async (newListName) => {
+    const token = localStorage.getItem('token');
+    const response = await axios.post('/api/v1/lists', { name: newListName }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    const newList = response.data.data;
+    const existingList = [...myLists, newList];
+    console.log(existingList);
     setMyLists(existingList);
   };
 
-  const updateList = (id, property) => {
-
-    let existingList = JSON.parse(localStorage.getItem('myLists'))
-
-    existingList.forEach(item => {
-      if (item.id == id) {
-        item.list.push(property)
-      }
-    });
-
-      console.log(property)
-      console.log(existingList)
-
-    localStorage.setItem('myLists', JSON.stringify(existingList));
+  const updateList = async (listIds, property) => {
+    const response = await axios.post(`/api/v1/lists/${listIds[0]}/properties`, { property })
+    const newList = response.data.data;
+    const existingList = [...myLists, newList];
+    console.log(existingList);
     setMyLists(existingList);
   };
-
-
-  //--------------------
-
-/*   localStorage.clear()
-
-
-  let sampleList = [{
-    id: 0,
-    name: 'Example List',
-    list: objectSample
-  }]
-  localStorage.setItem('myLists', JSON.stringify(sampleList)); */
-
-  //--------------------
 
   return (
     <>
       <Router>
         <Header />
         <Routes>
-          <Route path="/searchMapResults" element={<SearchMapResults createNewList={createNewList} updateList={updateList} />} />
-          <Route path="/searchResults/:searchQuery" element={<SearchResults />} />
+          <Route path="/searchMapResults" element={<SearchMapResults myLists={myLists} setMyLists={setMyLists} createNewList={createNewList} updateList={updateList} />} />
+          <Route path="/searchMapResults/:searchQuery" element={<SearchMapResults myLists={myLists} setMyLists={setMyLists} createNewList={createNewList} updateList={updateList} />} />} />
           <Route path="/savedLists" element={<SavedListPage />} />
           <Route path="/mylist" element={<MyListPage />} />
           <Route path="/profile" element={<Profile />} />

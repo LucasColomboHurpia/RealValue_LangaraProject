@@ -8,17 +8,8 @@ import thumbnail2 from '../Assets/pexels-photo-302769.png'
 import thumbnail3 from '../Assets/pexels-photo-2389474.png'
 
 function MainPage() {
+    const [searchQuery, setSearchQuery] = useState('')
     const history = useNavigate();
-
-    useEffect(() => {
-        // if(localStorage.getItem("isLoggedIn")) {
-        //     if(localStorage.getItem("setReloadMain") === true) {
-        //         console.log(true)
-        //         localStorage.setItem("setReloadMain", false);
-        //         window.location.reload();
-        //     }
-        // }
-      }, [])
 
     const cities = [
         {
@@ -34,8 +25,6 @@ function MainPage() {
             thumbnail: thumbnail3
         },
     ];
-
-    const [searchQuery, setSearchQuery] = useState('');
 
     const displayCities = () => {
         return cities.map(city => {
@@ -66,7 +55,7 @@ function MainPage() {
 ///----------------------------------------------------------------------------------
     const onSearch = (e) => {
         e.preventDefault();
-        history(`/searchResults/${searchQuery}`)
+        history(`/searchMapResults/${searchQuery}`)
     }
 
     return (

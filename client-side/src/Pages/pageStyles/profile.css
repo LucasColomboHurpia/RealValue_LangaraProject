@@ -26,8 +26,10 @@
 }
 
 .links {
-  margin: 0 0 20px;
-  text-decoration:none;
+    width: 100%;
+    margin: 0 0 20px;
+    margin: 0 0 20px;
+    text-decoration:none;
 }
 
 .links a {
@@ -47,6 +49,7 @@ ul img {
 }
 
 .account-info  {
+
   border-bottom: 2px solid #8E8E8E;
   padding: 15px;
   text-align: left;
@@ -57,6 +60,12 @@ ul img {
   font-weight: 700;
   line-height: 33px;
   letter-spacing: 0em;
+  
+      border-bottom: 1px solid #ccc;
+    text-align: left;
+    padding-top: 20px;
+    font-weight: lighter;
+    font-weight: 400;
 
 }
 

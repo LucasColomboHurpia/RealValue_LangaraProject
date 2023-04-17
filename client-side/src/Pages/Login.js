@@ -34,23 +34,20 @@ const LoginPage = () => {
         }
 
         if(email && password) {
-            // const response = await axios.post(`${APIURL}/api/v1/auth/login`, {
-            //     email, password
-            // })
-            // console.log(response)
+            const response = await axios.post(`/api/v1/auth/login`, {
+                email, password
+            });
 
-            // if(response && response.status==="success") {
-            // }
-
-            const user = {
-                name: "President Kenechukwu Obika",
-                email: testEmail,
+            if(response && response.data.status==="success") {
+                const user = response.data.data.user
+                const token = response.data.token
+    
+                localStorage.setItem("isLoggedIn", true)
+                localStorage.setItem("setReloadMain", true)
+                localStorage.setItem("authUser", JSON.stringify(user));
+                localStorage.setItem("token", token);
+                window.location.href = "/";
             }
-
-            localStorage.setItem("isLoggedIn", true)
-            localStorage.setItem("setReloadMain", true)
-            localStorage.setItem("authUser", JSON.stringify(user));
-            window.location.href = "/";
         }
     }
 

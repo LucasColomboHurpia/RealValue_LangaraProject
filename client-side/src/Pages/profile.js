@@ -34,7 +34,7 @@ const Profile = () => {
 
     if(isLoggedIn) {
         const authUser = JSON.parse(localStorage.getItem("authUser"));
-        setName(authUser.name)
+        setName(authUser.fullName)
         setEmail(authUser.email)
     }
   }, [])
@@ -45,21 +45,18 @@ const Profile = () => {
         <h1 className="name">Jane Doe</h1>
         <div className="links">
           <ul>
-            <li>
-              <a href="#" className="account-info">
-              <img src={accountLogo} alt="account-info"/>
-                Account Information <img src={next} alt="next"className='nextIcon'/>
+            <li className="account-info">
+              <a href="#">
+                Account Information <i className="fas fa-angle-right"></i>
               </a>
             </li>
-            <li>
-              <div className="my-lists">
+            <li className="account-info">
                 <Link to="/savedLists">
                 <img src={saveLogo} alt="My List"/>
                   My Lists <img src={next} alt="next" className='nextIcon'/>
                 </Link>
-              </div>
             </li>
-            <li className="logout">
+            <li className="account-info logout">
               <a href="#">
               <img src={logoutLogo} alt="Logout"/>
                 Logout <img src={next} alt="next" className='nextIcon'/>
