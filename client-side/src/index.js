@@ -23,17 +23,30 @@ import { local } from 'd3';
 const App = () => {
   const [myLists, setMyLists] = useState([]);
 
-  const createNewList = async (newListName) => {
+    const getLists = async () => {
+        const response = await axios.get('/api/v1/lists');
+        setMyLists(response.data.data);
+    }
 
-    const response = await axios.post('/api/v1/lists', { name: newListName })
+    useEffect(() => {
+        getLists()
+    }, [])
+
+  const createNewList = async (newListName) => {
+    const token = localStorage.getItem('token');
+    const response = await axios.post('/api/v1/lists', { name: newListName }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
     const newList = response.data.data;
     const existingList = [...myLists, newList];
     console.log(existingList);
     setMyLists(existingList);
   };
 
-  const updateList = async (listId, property) => {
-    const response = await axios.patch(`/api/v1/lists/${listId}`, {property })
+  const updateList = async (listIds, property) => {
+    const response = await axios.post(`/api/v1/lists/${listIds[0]}/properties`, { property })
     const newList = response.data.data;
     const existingList = [...myLists, newList];
     console.log(existingList);
@@ -45,8 +58,8 @@ const App = () => {
       <Router>
         <Header />
         <Routes>
-          <Route path="/searchMapResults" element={<SearchMapResults createNewList={createNewList} updateList={updateList} />} />
-          <Route path="/searchMapResults/:searchQuery" element={<SearchMapResults createNewList={createNewList} updateList={updateList} />} />} />
+          <Route path="/searchMapResults" element={<SearchMapResults myLists={myLists} setMyLists={setMyLists} createNewList={createNewList} updateList={updateList} />} />
+          <Route path="/searchMapResults/:searchQuery" element={<SearchMapResults myLists={myLists} setMyLists={setMyLists} createNewList={createNewList} updateList={updateList} />} />} />
           <Route path="/savedLists" element={<SavedListPage />} />
           <Route path="/mylist" element={<MyListPage />} />
           <Route path="/profile" element={<Profile />} />

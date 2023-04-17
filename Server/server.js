@@ -12,16 +12,21 @@ dotenv.config();
 app.use(cors());
 app.options('*', cors());
 
-const PORT = process.env.PORT; 
+const PORT = process.env.PORT;
+
+let DB = process.env.DEV_DB_URI
+
+if(process.env.NODE_ENV === "production") {
+    DB = process.env.PROD_DB_URI.replace(
+        '<password>',
+        process.env.PROD_DB_PASSWORD
+    ); 
+}
 
 app.listen(PORT, () => { 
     console.log(`server started on port ${PORT}`);
 
     try {
-        const DB = process.env.DB_URI.replace(
-          '<password>',
-          process.env.DB_PASSWORD
-        );
 
         console.log(DB)
         

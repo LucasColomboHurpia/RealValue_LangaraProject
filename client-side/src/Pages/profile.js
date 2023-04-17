@@ -26,7 +26,7 @@ const Profile = () => {
 
     if(isLoggedIn) {
         const authUser = JSON.parse(localStorage.getItem("authUser"));
-        setName(authUser.name)
+        setName(authUser.fullName)
         setEmail(authUser.email)
     }
   }, [])

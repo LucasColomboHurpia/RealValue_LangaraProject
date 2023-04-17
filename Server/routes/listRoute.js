@@ -1,12 +1,13 @@
 const express = require('express');
 const ListController = require('../controllers/ListController');
+const authController = require('../controllers/authController');
 const propertyRoute = require('./propertyRoute');
 
 const router = express.Router();
 
 router.route('/')
 .get(ListController.getAllLists)
-.post(ListController.createList)
+.post(authController.protect, ListController.createList)
 
 router.route('/:id')
 .get(ListController.getOneList)

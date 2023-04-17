@@ -1,3 +1,4 @@
+const List = require('../models/List');
 const Property = require('../models/Property');
 
 exports.getAllProperties = async (req, res, next) => {
@@ -17,22 +18,34 @@ exports.getAllProperties = async (req, res, next) => {
 
 exports.addPropertyToList = async (req, res, next) => {
     try {
-        const { list, type, images, price, address, city, province } = req.body;
+        const { type, image, price, adress1, adress2, area, link, ratio, age } = req.body.property;
+        
         const property = await Property.create({
-            list,
+            list: req.params.id,
             type,
-            images,
+            image,
             price,
-            address,
-            city,
-            province
+            adress1,
+            adress2,
+            area,
+            link,
+            ratio,
+            age
         });
+
+        const list = await List.findById(req.params.id);
+        list.properties = [...list.properties, property._id];
+        await list.save();
+
+        console.log("List")
+        console.log(list)
         
         return res.status(201).json({
             status: "success",
             data: property
         })
     } catch (error) {
+        // console.log(error)
         return res.status(404).json({
             status: "success",
             message: "Could not create property"

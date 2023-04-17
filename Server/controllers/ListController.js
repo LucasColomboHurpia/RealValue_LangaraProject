@@ -18,12 +18,16 @@ exports.getAllLists = async (req, res, next) => {
 
 exports.createList = async (req, res, next) => {
     try {
-        const list = await List.create(req.body);
+        const list = await List.create({
+            name: req.body.name,
+            user: req.user.id
+        });
         return res.status(201).json({
             status: "success",
             data: list
         })
     } catch (error) {
+        console.log(error)
         return res.status(404).json({
             status: "success",
             message: "Could not create list"
@@ -55,9 +59,10 @@ exports.updateList = async (req, res, next) => {
                 listId: list.id
             });
 
-            list.properties = [...list.properties, property];
+            list.properties = [...list.properties, property._id];
+            await list.save();
         }
-        
+
         return res.status(200).json({
             status: "success",
             data: list

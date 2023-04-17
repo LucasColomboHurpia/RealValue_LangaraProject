@@ -16,7 +16,7 @@ import APIURL from '../constants/apiUrl';
 
 import geodata from '../Data/zoning-districts-and-labels.json';
 
-function SearchMapResults({createNewList, updateList}) {
+function SearchMapResults({createNewList, updateList, myLists}) {
   //------------------------------------------------------------
   //Loading Icon
   let { searchQuery } = useParams();
@@ -316,7 +316,7 @@ function SearchMapResults({createNewList, updateList}) {
 
   return (
     <>
-    {isOpen ? <PostModal  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty} createNewList={createNewList} updateList={updateList}/> : null}
+    {isOpen ? <PostModal myLists={myLists}  toggleModal={toggleModal} isOpen={isOpen} property={activeProperty} createNewList={createNewList} updateList={updateList}/> : null}
     {statsIsOpen ? <StatsModal  toggleStats={toggleStats} statsIsOpen={statsIsOpen} property={activeProperty}/> : null}
 
     <div className='pageContainer'>

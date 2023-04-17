@@ -3,31 +3,46 @@ const mongoose = require('mongoose');
 const propertySchema = new mongoose.Schema({    
     type: {
         type: String,
-        enum: ['residential', 'commercial'],
+        // enum: ['residential', 'commercial'],
         required: true,
         lowerCase: true
     },
-    images: {
-        type: Array,
+    image: {
+        type: String,
         required: [true, 'Please provide at least one image'],
     },
     price: {
-        type: Number,
+        type: String,
         required: [true, 'Please provide a price for this property']
     },
-    address: {
+    adress1: {
         type: String,
-        required: [true, 'Please provide a address for this property'],
+        rquired: [true, 'Please provide address1 for this property'],
         lowerCase: true
     },
-    city: {
+    adress2: {
         type: String,
-        required: [true, 'Please provide a city for this property'],
+        required: [true, 'Please provide address2 for this property'],
         lowerCase: true
     },
-    province: {
+    area: {
         type: String,
-        required: [true, 'Please provide a province for this property'],
+        required: [true, 'Please provide an area for this property'],
+        lowerCase: true
+    },
+    link: {
+        type: String,
+        required: [true, 'Please provide a link for this property'],
+        lowerCase: true
+    },
+    ratio: {
+        type: String,
+        required: [true, 'Please provide a ratio for this property'],
+        lowerCase: true
+    },
+    age: {
+        type: String,
+        required: [true, 'Please provide an age for this property'],
         lowerCase: true
     },
     list: {

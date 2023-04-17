@@ -24,22 +24,18 @@ function SavedListPage() {
 
     async function getLists() {
         const response = await axios.get('/api/v1/lists');
-        setMyLists(response.data.data);
+        let sampleList = [{
+            id: 0,
+            name: 'Example List',
+            properties: objectSample
+        }]
+        console.log([...sampleList, ...response.data.data])
+        setMyLists([...sampleList, ...response.data.data]);
     }
 
     useEffect(() => {
         getLists();
     }, [])
-
-  if (!myLists) {
-    let sampleList = [{
-      id: 0,
-      name: 'Example List',
-      list: objectSample
-    }]
-    localStorage.setItem('myLists', JSON.stringify(sampleList));
-    myLists = sampleList;
-  }
 
   return (
     <div className='savedListsContainer'>

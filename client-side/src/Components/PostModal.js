@@ -18,23 +18,11 @@ class PostModal extends Component {
         this.toggleElement = this.toggleElement.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
-        const myLists = [];
         this.state = {
             showElement: false,
-            myLists,
             inputText: '',
             checkedItems: [],
         };
-    }
-
-    getLists = async () => {
-        const response = await axios.get('/api/v1/lists');
-        this.setState({myLists: response.data.data})
-    }
-
-    getLists = async () => {
-        const response = await axios.get('/api/v1/lists');
-        this.setState({myLists: response.data.data})
     }
 
     async componentDidMount() {
@@ -45,8 +33,6 @@ class PostModal extends Component {
             center: [-123.12816828788911, 49.27892695457111],
             zoom: 12,
         });
-
-        await this.getLists();
 
         // Geocode the address
 
@@ -78,16 +64,8 @@ class PostModal extends Component {
         this.setState({ inputText: '' });
     }
 
-    handleUpdate() {
-        const selectedItems = this.state.checkedItems.map(index => this.state.myLists[index]);
-        console.log(selectedItems);
-        if (selectedItems.length > 0) {
-            selectedItems.forEach(item => {
-                console.log(item._id);
-                console.log(this.props.property)
-                this.props.updateList(item._id, this.props.property);
-            });
-        }
+    handleUpdate(e) {
+        this.props.updateList(this.state.checkedItems, this.props.property);
     }
 
     toggleElement() {
@@ -97,7 +75,8 @@ class PostModal extends Component {
 
     render() {
         const { toggleModal, isOpen, property, createNewList, updateList } = this.props;
-        const { showElement, myLists, inputText } = this.state;
+        const { showElement, inputText } = this.state;
+        const { myLists } = this.props;
 
 
 
@@ -162,7 +141,7 @@ class PostModal extends Component {
                                                         onChange={(e) => {
                                                             if (e.target.checked) {
                                                                 this.setState((prevState) => ({
-                                                                    checkedItems: [...prevState.checkedItems, index],
+                                                                    checkedItems: [...prevState.checkedItems, item.id],
                                                                 }));
                                                             } else {
                                                                 this.setState((prevState) => ({
